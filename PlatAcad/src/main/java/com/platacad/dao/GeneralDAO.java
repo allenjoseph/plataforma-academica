@@ -14,11 +14,13 @@ import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author allen
  */
+@Repository
 public class GeneralDAO extends HibernateDaoSupport {
 
     @Autowired
@@ -31,9 +33,9 @@ public class GeneralDAO extends HibernateDaoSupport {
                 .add(Restrictions.eq("idUsuarioFk.idUsuarioPk", usuarioId))
                 .list();
         
-        List<String> idcursos = new ArrayList<String>();
+        List idcursos = new ArrayList<Integer>();
         for(Matricula m : matriculas){
-            idcursos.add(m.getIdCursoFk().getIdCursoPk().toString());
+            idcursos.add(m.getIdCursoFk().getIdCursoPk());
         }
 
         List cursos = getSession().createCriteria(Curso.class)

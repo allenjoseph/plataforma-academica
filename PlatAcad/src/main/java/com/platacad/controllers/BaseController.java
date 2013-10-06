@@ -4,6 +4,7 @@
  */
 package com.platacad.controllers;
 
+import com.platacad.services.GeneralService;
 import com.platacad.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +20,14 @@ public class BaseController {
     
     @Autowired
     UsuarioService usuarioService;
+    @Autowired
+    GeneralService generalService;    
     
     @RequestMapping("inicio.html")
     public ModelAndView home(){
         ModelAndView model = new ModelAndView("home");
         model.addObject("user", usuarioService.getUsuario("0512013001"));
+        model.addObject("cursos", generalService.getCursos("0512013001"));
         return model;
     }
 }

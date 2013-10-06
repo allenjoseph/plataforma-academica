@@ -4,6 +4,8 @@
  */
 package com.platacad.to;
 
+import com.platacad.enums.TipoCursoEnum;
+
 /**
  *
  * @author allen
@@ -12,7 +14,7 @@ public class CursoTO {
     
     private String nombre;
     private int creditos;
-    private TipoTO tipo;
+    private TipoCursoEnum tipo;
 
     public CursoTO() {
     }
@@ -33,11 +35,11 @@ public class CursoTO {
         this.creditos = creditos;
     }
 
-    public TipoTO getTipo() {
+    public TipoCursoEnum getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoTO tipo) {
+    public void setTipo(TipoCursoEnum tipo) {
         this.tipo = tipo;
     }
     
