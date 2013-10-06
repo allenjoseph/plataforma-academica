@@ -6,6 +6,7 @@ package com.platacad.business;
 
 import com.platacad.dao.GeneralDAO;
 import com.platacad.entities.Curso;
+import com.platacad.helpers.ConverterToTO;
 import com.platacad.to.CursoTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class GeneralBusiness {
 
     public List<CursoTO> getCursos(String usuarioId) {
          List<Curso> cursos = generalDAO.getCursos(usuarioId);
-         return null;
+         List<CursoTO> listaCursoTO = ConverterToTO.convertListaCursoTO(cursos);
+         return listaCursoTO;
     }
     
     

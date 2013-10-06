@@ -4,8 +4,14 @@
  */
 package com.platacad.helpers;
 
+import com.platacad.entities.Curso;
 import com.platacad.entities.Usuario;
+import com.platacad.enums.TipoCursoEnum;
+import com.platacad.to.CursoTO;
 import com.platacad.to.UsuarioTO;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,5 +27,17 @@ public class ConverterToTO {
         to.setRol(user.getIdRolFk().getDescripcion());
         to.setRolId(user.getIdRolFk().getIdRoPk());
         return to;
+    }
+
+    public static List<CursoTO> convertListaCursoTO(List<Curso> cursos) {
+        List<CursoTO> listaCursoTO = new ArrayList<CursoTO>();        
+        for(Curso c : cursos){
+            CursoTO cursoTO = new CursoTO();
+            cursoTO.setNombre(c.getNombre());
+            cursoTO.setCreditos(c.getCreditos());
+            cursoTO.setTipo(TipoCursoEnum.obtenerEnum(c.getTipo().getIdTiposPk()));
+            listaCursoTO.add(cursoTO);
+        }
+        return listaCursoTO;
     }
 }

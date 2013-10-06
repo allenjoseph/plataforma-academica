@@ -24,6 +24,7 @@
     <properties>
         <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
         <hibernate.maven.plugin.version>3.6.10.Final</hibernate.maven.plugin.version>
+        <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
     </properties>
 
     <dependencies>
