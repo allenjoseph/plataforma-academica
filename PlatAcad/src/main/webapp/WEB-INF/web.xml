@@ -36,10 +36,4 @@
         </session-timeout>
     </session-config>
     
-    <jsp-config>
-        <taglib>
-            <taglib-uri>http://www.springframework.org/tags/form</taglib-uri>
-            <taglib-location>tld/spring-form.tld</taglib-location>
-        </taglib>
-    </jsp-config>
 </web-app>

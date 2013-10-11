@@ -4,17 +4,21 @@
  */
 package com.platacad.to;
 
+import java.io.Serializable;
+
+import com.platacad.entities.Auditoria;
+
 /**
  *
  * @author allen
  */
-public class UsuarioTO {
+public class UsuarioTO extends Auditoria implements Serializable {
 
     private String codigo;
     private String nombre;
     private String nombreCompleto;
     
-    private int rolId;
+    private Integer rolId;
     private String rol;
 
     public UsuarioTO() {
@@ -44,11 +48,11 @@ public class UsuarioTO {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public int getRolId() {
+    public Integer getRolId() {
         return rolId;
     }
 
-    public void setRolId(int rolId) {
+    public void setRolId(Integer rolId) {
         this.rolId = rolId;
     }
 

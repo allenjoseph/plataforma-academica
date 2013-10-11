@@ -4,16 +4,19 @@
  */
 package com.platacad.to;
 
+import java.io.Serializable;
+
+import com.platacad.entities.Auditoria;
 import com.platacad.enums.TipoCursoEnum;
 
 /**
  *
  * @author allen
  */
-public class CursoTO {
+public class CursoTO extends Auditoria implements Serializable {
     
     private String nombre;
-    private int creditos;
+    private Integer creditos;
     private TipoCursoEnum tipo;
 
     public CursoTO() {
@@ -27,11 +30,11 @@ public class CursoTO {
         this.nombre = nombre;
     }
 
-    public int getCreditos() {
+    public Integer getCreditos() {
         return creditos;
     }
 
-    public void setCreditos(int creditos) {
+    public void setCreditos(Integer creditos) {
         this.creditos = creditos;
     }
 
