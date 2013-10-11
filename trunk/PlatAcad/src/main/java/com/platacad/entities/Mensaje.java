@@ -5,8 +5,10 @@
 package com.platacad.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -27,21 +29,29 @@ import javax.persistence.Table;
     @NamedQuery(name = "Mensaje.findByMensaje", query = "SELECT m FROM Mensaje m WHERE m.mensaje = :mensaje")})
 public class Mensaje implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @Column(name = "id_mensaje_pk", nullable = false)
     private Integer idMensajePk;
+    
     @Column(name = "mensaje", length = 255)
     private String mensaje;
+    
     @JoinColumn(name = "id_curso_destino_fk", referencedColumnName = "id_curso_pk")
     @ManyToOne
     private Curso idCursoDestinoFk;
+    
     @JoinColumn(name = "id_usuario_destino_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioDestinoFk;
+    
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
+    
+    @Embedded
+    protected Auditoria auditoria;
 
     public Mensaje() {
     }
@@ -90,7 +100,15 @@ public class Mensaje implements Serializable {
         this.idUsuarioFk = idUsuarioFk;
     }
 
-    @Override
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
+
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idMensajePk != null ? idMensajePk.hashCode() : 0);

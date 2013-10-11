@@ -8,21 +8,26 @@
 <html lang="es">
     <jsp:include page="template/head.jsp"/>
     <body>
-        <div class="container">
-            <jsp:include page="template/header.jsp"/>            
+        <div class="container">            
+            <jsp:include page="template/navbar.jsp"/>            
             <div class="row">
                 <div class="col-md-8" id="main">
-                    <div>
-                        <c:out value="${user.nombreCompleto}"/>  
+                    <div>                        
+                        <jsp:include page="template/user.jsp"/>
                         <c:forEach items="${cursos}" var="curso">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="page-header">
-                                        <h1><c:out value="${curso.nombre}"/></h1>
+                                        <h1>
+                                            <a href="#!"><c:out value="${curso.nombre}"/></a>
+                                            <i class="icon-folder-close"></i>
+                                        </h1>                                        
+                                                                              
                                     </div>
                                     <p><span class="input-title">Profesor: </span>No Asignado</p>
                                     <p><span class="input-title">Cantidad de creditos: </span><c:out value="${curso.creditos}"/></p>
-                                    <p><span class="input-title">Tipo de curso: </span><c:out value="${curso.tipo}"/></p>
+                                    <p><span class="input-title">Tipo de curso: </span><c:out value="${curso.tipo}" /></p>
+                                    
                                 </div>
                                 <div class="panel-footer">
                                     <div class="footer-date-info">
