@@ -4,11 +4,7 @@
 <web-app>
     
     <display-name>Archetype Created Web Application</display-name>
-    
-    <welcome-file-list>
-        <welcome-file>/inicio.html</welcome-file>
-    </welcome-file-list>
-    
+       
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/application-context.xml</param-value>
@@ -27,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.json</url-pattern>
     </servlet-mapping>
     
@@ -35,5 +35,9 @@
             30
         </session-timeout>
     </session-config>
+    
+    <welcome-file-list>
+        <welcome-file>/inicio.html</welcome-file>
+    </welcome-file-list>
     
 </web-app>

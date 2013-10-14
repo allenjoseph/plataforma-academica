@@ -19,14 +19,14 @@
                                 <div class="panel-body">
                                     <div class="page-header">
                                         <h1>
-                                            <a href="#!"><c:out value="${curso.nombre}"/></a>
+                                            <a href="#!">${curso.nombre}</a>
                                             <i class="icon-folder-close"></i>
                                         </h1>                                        
                                                                               
                                     </div>
                                     <p><span class="input-title">Profesor: </span>No Asignado</p>
-                                    <p><span class="input-title">Cantidad de creditos: </span><c:out value="${curso.creditos}"/></p>
-                                    <p><span class="input-title">Tipo de curso: </span><c:out value="${curso.tipo}" /></p>
+                                    <p><span class="input-title">Cantidad de creditos: </span>${curso.creditos}</p>
+                                    <p><span class="input-title">Tipo de curso: </span>${curso.tipo}</p>
                                     
                                 </div>
                                 <div class="panel-footer">
