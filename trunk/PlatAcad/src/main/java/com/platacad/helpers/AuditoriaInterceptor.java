@@ -1,22 +1,14 @@
 package com.platacad.helpers;
 
-import java.util.Date;
 import java.util.Map.Entry;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.platacad.entities.Auditoria;
 import com.platacad.to.MensajeTO;
-import com.platacad.to.UsuarioTO;
 
 public class AuditoriaInterceptor implements HandlerInterceptor{
-
-	private static final Logger logger = Logger.getLogger(AuditoriaInterceptor.class);
 	
 	public void afterCompletion(HttpServletRequest req,
 			HttpServletResponse res, Object obj, Exception ex)
