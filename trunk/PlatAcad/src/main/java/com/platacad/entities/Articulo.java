@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -32,10 +34,13 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Articulo.findByIdArticuloPk", query = "SELECT a FROM Articulo a WHERE a.idArticuloPk = :idArticuloPk"),
     @NamedQuery(name = "Articulo.findByTitulo", query = "SELECT a FROM Articulo a WHERE a.titulo = :titulo"),
     @NamedQuery(name = "Articulo.findByFechaCreacion", query = "SELECT a FROM Articulo a WHERE a.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Articulo.findByFechaModificacion", query = "SELECT a FROM Articulo a WHERE a.fechaModificacion = :fechaModificacion")})
+    @NamedQuery(name = "Articulo.findByFechaModificacion", query = "SELECT a FROM Articulo a WHERE a.fechaModificacion = :fechaModificacion"),
+    @NamedQuery(name = "Articulo.findByModificacionFecha", query = "SELECT a FROM Articulo a WHERE a.modificacionFecha = :modificacionFecha"),
+    @NamedQuery(name = "Articulo.findByModificacionUsuario", query = "SELECT a FROM Articulo a WHERE a.modificacionUsuario = :modificacionUsuario")})
 public class Articulo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_articulo_pk", nullable = false)
     private Integer idArticuloPk;
@@ -50,15 +55,22 @@ public class Articulo implements Serializable {
     @Column(name = "fecha_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
-    @JoinColumn(name = "id_curso_fk", referencedColumnName = "id_curso_pk")
-    @ManyToOne
-    private Curso idCursoFk;
-    @JoinColumn(name = "id_archivo_fk", referencedColumnName = "id_archivo_pk")
-    @ManyToOne
-    private Archivo idArchivoFk;
+    @Basic(optional = false)
+    @Column(name = "modificacion_fecha", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificacionFecha;
+    @Basic(optional = false)
+    @Column(name = "modificacion_usuario", nullable = false, length = 10)
+    private String modificacionUsuario;
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
+    @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado", nullable = false)
+    @ManyToOne(optional = false)
+    private CursoAperturado idCursoAperturadoFk;
+    @JoinColumn(name = "id_archivo_fk", referencedColumnName = "id_archivo_pk")
+    @ManyToOne
+    private Archivo idArchivoFk;
     @OneToMany(mappedBy = "idArticuloFk")
     private List<Comentario> comentarioList;
 
@@ -67,6 +79,12 @@ public class Articulo implements Serializable {
 
     public Articulo(Integer idArticuloPk) {
         this.idArticuloPk = idArticuloPk;
+    }
+
+    public Articulo(Integer idArticuloPk, Date modificacionFecha, String modificacionUsuario) {
+        this.idArticuloPk = idArticuloPk;
+        this.modificacionFecha = modificacionFecha;
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdArticuloPk() {
@@ -109,20 +127,20 @@ public class Articulo implements Serializable {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public Curso getIdCursoFk() {
-        return idCursoFk;
+    public Date getModificacionFecha() {
+        return modificacionFecha;
     }
 
-    public void setIdCursoFk(Curso idCursoFk) {
-        this.idCursoFk = idCursoFk;
+    public void setModificacionFecha(Date modificacionFecha) {
+        this.modificacionFecha = modificacionFecha;
     }
 
-    public Archivo getIdArchivoFk() {
-        return idArchivoFk;
+    public String getModificacionUsuario() {
+        return modificacionUsuario;
     }
 
-    public void setIdArchivoFk(Archivo idArchivoFk) {
-        this.idArchivoFk = idArchivoFk;
+    public void setModificacionUsuario(String modificacionUsuario) {
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Usuario getIdUsuarioFk() {
@@ -131,6 +149,22 @@ public class Articulo implements Serializable {
 
     public void setIdUsuarioFk(Usuario idUsuarioFk) {
         this.idUsuarioFk = idUsuarioFk;
+    }
+
+    public CursoAperturado getIdCursoAperturadoFk() {
+        return idCursoAperturadoFk;
+    }
+
+    public void setIdCursoAperturadoFk(CursoAperturado idCursoAperturadoFk) {
+        this.idCursoAperturadoFk = idCursoAperturadoFk;
+    }
+
+    public Archivo getIdArchivoFk() {
+        return idArchivoFk;
+    }
+
+    public void setIdArchivoFk(Archivo idArchivoFk) {
+        this.idArchivoFk = idArchivoFk;
     }
 
     public List<Comentario> getComentarioList() {

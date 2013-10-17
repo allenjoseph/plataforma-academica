@@ -5,8 +5,10 @@
 package com.platacad.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -29,7 +33,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
     @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
     @NamedQuery(name = "Usuario.findByApellidoPaterno", query = "SELECT u FROM Usuario u WHERE u.apellidoPaterno = :apellidoPaterno"),
-    @NamedQuery(name = "Usuario.findByApellidoMaterno", query = "SELECT u FROM Usuario u WHERE u.apellidoMaterno = :apellidoMaterno")})
+    @NamedQuery(name = "Usuario.findByApellidoMaterno", query = "SELECT u FROM Usuario u WHERE u.apellidoMaterno = :apellidoMaterno"),
+    @NamedQuery(name = "Usuario.findByModificacionFecha", query = "SELECT u FROM Usuario u WHERE u.modificacionFecha = :modificacionFecha"),
+    @NamedQuery(name = "Usuario.findByModificacionUsuario", query = "SELECT u FROM Usuario u WHERE u.modificacionUsuario = :modificacionUsuario")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,32 +50,45 @@ public class Usuario implements Serializable {
     private String apellidoPaterno;
     @Column(name = "apellido_materno", length = 255)
     private String apellidoMaterno;
+    @Basic(optional = false)
+    @Column(name = "modificacion_fecha", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificacionFecha;
+    @Basic(optional = false)
+    @Column(name = "modificacion_usuario", nullable = false, length = 10)
+    private String modificacionUsuario;
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Articulo> articuloList;
-    @OneToMany(mappedBy = "idUsuarioFk")
-    private List<Archivo> archivoList;
     @JoinColumn(name = "estado", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos estado;
-    @JoinColumn(name = "id_rol_fk", referencedColumnName = "id_ro_pk")
+    @JoinColumn(name = "id_rol_fk", referencedColumnName = "id_rol_pk")
     @ManyToOne
     private Rol idRolFk;
-    @OneToMany(mappedBy = "idUsuarioFk")
-    private List<TrabajoEncargado> trabajoEncargadoList;
     @OneToMany(mappedBy = "idUsuarioDestinoFk")
     private List<Mensaje> mensajeList;
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Mensaje> mensajeList1;
     @OneToMany(mappedBy = "idUsuarioFk")
+    private List<Comentario> comentarioList;
+    @OneToMany(mappedBy = "idUsuarioFk")
     private List<Matricula> matriculaList;
     @OneToMany(mappedBy = "idUsuarioFk")
-    private List<Comentario> comentarioList;
+    private List<Archivo> archivoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDocenteFk")
+    private List<CursoAperturado> cursoAperturadoList;
 
     public Usuario() {
     }
 
     public Usuario(String idUsuarioPk) {
         this.idUsuarioPk = idUsuarioPk;
+    }
+
+    public Usuario(String idUsuarioPk, Date modificacionFecha, String modificacionUsuario) {
+        this.idUsuarioPk = idUsuarioPk;
+        this.modificacionFecha = modificacionFecha;
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public String getIdUsuarioPk() {
@@ -112,20 +131,28 @@ public class Usuario implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
+    public Date getModificacionFecha() {
+        return modificacionFecha;
+    }
+
+    public void setModificacionFecha(Date modificacionFecha) {
+        this.modificacionFecha = modificacionFecha;
+    }
+
+    public String getModificacionUsuario() {
+        return modificacionUsuario;
+    }
+
+    public void setModificacionUsuario(String modificacionUsuario) {
+        this.modificacionUsuario = modificacionUsuario;
+    }
+
     public List<Articulo> getArticuloList() {
         return articuloList;
     }
 
     public void setArticuloList(List<Articulo> articuloList) {
         this.articuloList = articuloList;
-    }
-
-    public List<Archivo> getArchivoList() {
-        return archivoList;
-    }
-
-    public void setArchivoList(List<Archivo> archivoList) {
-        this.archivoList = archivoList;
     }
 
     public Tipos getEstado() {
@@ -144,14 +171,6 @@ public class Usuario implements Serializable {
         this.idRolFk = idRolFk;
     }
 
-    public List<TrabajoEncargado> getTrabajoEncargadoList() {
-        return trabajoEncargadoList;
-    }
-
-    public void setTrabajoEncargadoList(List<TrabajoEncargado> trabajoEncargadoList) {
-        this.trabajoEncargadoList = trabajoEncargadoList;
-    }
-
     public List<Mensaje> getMensajeList() {
         return mensajeList;
     }
@@ -168,6 +187,14 @@ public class Usuario implements Serializable {
         this.mensajeList1 = mensajeList1;
     }
 
+    public List<Comentario> getComentarioList() {
+        return comentarioList;
+    }
+
+    public void setComentarioList(List<Comentario> comentarioList) {
+        this.comentarioList = comentarioList;
+    }
+
     public List<Matricula> getMatriculaList() {
         return matriculaList;
     }
@@ -176,12 +203,20 @@ public class Usuario implements Serializable {
         this.matriculaList = matriculaList;
     }
 
-    public List<Comentario> getComentarioList() {
-        return comentarioList;
+    public List<Archivo> getArchivoList() {
+        return archivoList;
     }
 
-    public void setComentarioList(List<Comentario> comentarioList) {
-        this.comentarioList = comentarioList;
+    public void setArchivoList(List<Archivo> archivoList) {
+        this.archivoList = archivoList;
+    }
+
+    public List<CursoAperturado> getCursoAperturadoList() {
+        return cursoAperturadoList;
+    }
+
+    public void setCursoAperturadoList(List<CursoAperturado> cursoAperturadoList) {
+        this.cursoAperturadoList = cursoAperturadoList;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class BaseController {
     public ModelAndView home(){
         ModelAndView model = new ModelAndView("home");
         model.addObject("user", usuarioService.getUsuario("0512013001"));
-        model.addObject("cursos", generalService.getCursos("0512013001"));
+        model.addObject("cursos_matriculados", generalService.getCursosMatriculados("0512013001"));
         return model;
     }
     

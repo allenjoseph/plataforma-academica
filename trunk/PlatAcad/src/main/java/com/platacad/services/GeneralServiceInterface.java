@@ -4,7 +4,9 @@
  */
 package com.platacad.services;
 
+import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
+
 import java.util.List;
 
 /**
@@ -14,4 +16,5 @@ import java.util.List;
 public interface GeneralServiceInterface {
     
     public List<CursoTO> getCursos(String usuarioId);
+    public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId);
 }

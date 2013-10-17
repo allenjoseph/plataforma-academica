@@ -5,17 +5,20 @@
 package com.platacad.entities;
 
 import java.io.Serializable;
-
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -26,38 +29,46 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Mensaje.findAll", query = "SELECT m FROM Mensaje m"),
     @NamedQuery(name = "Mensaje.findByIdMensajePk", query = "SELECT m FROM Mensaje m WHERE m.idMensajePk = :idMensajePk"),
-    @NamedQuery(name = "Mensaje.findByMensaje", query = "SELECT m FROM Mensaje m WHERE m.mensaje = :mensaje")})
+    @NamedQuery(name = "Mensaje.findByMensaje", query = "SELECT m FROM Mensaje m WHERE m.mensaje = :mensaje"),
+    @NamedQuery(name = "Mensaje.findByModificacionFecha", query = "SELECT m FROM Mensaje m WHERE m.modificacionFecha = :modificacionFecha"),
+    @NamedQuery(name = "Mensaje.findByModificacionUsuario", query = "SELECT m FROM Mensaje m WHERE m.modificacionUsuario = :modificacionUsuario")})
 public class Mensaje implements Serializable {
     private static final long serialVersionUID = 1L;
-    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_mensaje_pk", nullable = false)
     private Integer idMensajePk;
-    
     @Column(name = "mensaje", length = 255)
     private String mensaje;
-    
-    @JoinColumn(name = "id_curso_destino_fk", referencedColumnName = "id_curso_pk")
-    @ManyToOne
-    private Curso idCursoDestinoFk;
-    
+    @Basic(optional = false)
+    @Column(name = "modificacion_fecha", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificacionFecha;
+    @Basic(optional = false)
+    @Column(name = "modificacion_usuario", nullable = false, length = 10)
+    private String modificacionUsuario;
     @JoinColumn(name = "id_usuario_destino_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioDestinoFk;
-    
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
-    
-    @Embedded
-    protected Auditoria auditoria;
+    @JoinColumn(name = "id_curso_destino_fk", referencedColumnName = "id_curso_pk")
+    @ManyToOne
+    private Curso idCursoDestinoFk;
 
     public Mensaje() {
     }
 
     public Mensaje(Integer idMensajePk) {
         this.idMensajePk = idMensajePk;
+    }
+
+    public Mensaje(Integer idMensajePk, Date modificacionFecha, String modificacionUsuario) {
+        this.idMensajePk = idMensajePk;
+        this.modificacionFecha = modificacionFecha;
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdMensajePk() {
@@ -76,12 +87,20 @@ public class Mensaje implements Serializable {
         this.mensaje = mensaje;
     }
 
-    public Curso getIdCursoDestinoFk() {
-        return idCursoDestinoFk;
+    public Date getModificacionFecha() {
+        return modificacionFecha;
     }
 
-    public void setIdCursoDestinoFk(Curso idCursoDestinoFk) {
-        this.idCursoDestinoFk = idCursoDestinoFk;
+    public void setModificacionFecha(Date modificacionFecha) {
+        this.modificacionFecha = modificacionFecha;
+    }
+
+    public String getModificacionUsuario() {
+        return modificacionUsuario;
+    }
+
+    public void setModificacionUsuario(String modificacionUsuario) {
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Usuario getIdUsuarioDestinoFk() {
@@ -100,15 +119,15 @@ public class Mensaje implements Serializable {
         this.idUsuarioFk = idUsuarioFk;
     }
 
-    public Auditoria getAuditoria() {
-		return auditoria;
-	}
+    public Curso getIdCursoDestinoFk() {
+        return idCursoDestinoFk;
+    }
 
-	public void setAuditoria(Auditoria auditoria) {
-		this.auditoria = auditoria;
-	}
+    public void setIdCursoDestinoFk(Curso idCursoDestinoFk) {
+        this.idCursoDestinoFk = idCursoDestinoFk;
+    }
 
-	@Override
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (idMensajePk != null ? idMensajePk.hashCode() : 0);

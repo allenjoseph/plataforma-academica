@@ -5,6 +5,7 @@
 package com.platacad.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,45 +28,75 @@ import javax.persistence.Table;
 @Table(name = "matricula", catalog = "platacad", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Matricula.findAll", query = "SELECT m FROM Matricula m"),
-    @NamedQuery(name = "Matricula.findByCorrelativo", query = "SELECT m FROM Matricula m WHERE m.correlativo = :correlativo")})
+    @NamedQuery(name = "Matricula.findByIdMatriculaPk", query = "SELECT m FROM Matricula m WHERE m.idMatriculaPk = :idMatriculaPk"),
+    @NamedQuery(name = "Matricula.findByIdCursoAperturadoFk", query = "SELECT m FROM Matricula m WHERE m.idCursoAperturadoFk = :idCursoAperturadoFk"),
+    @NamedQuery(name = "Matricula.findByModificacionFecha", query = "SELECT m FROM Matricula m WHERE m.modificacionFecha = :modificacionFecha"),
+    @NamedQuery(name = "Matricula.findByModificacionUsuario", query = "SELECT m FROM Matricula m WHERE m.modificacionUsuario = :modificacionUsuario")})
 public class Matricula implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "correlativo", nullable = false)
-    private Integer correlativo;
-    @JoinColumn(name = "id_ciclo_fk", referencedColumnName = "id_ciclo_pk")
-    @ManyToOne
-    private Ciclo idCicloFk;
+    @Column(name = "id_matricula_pk", nullable = false)
+    private Integer idMatriculaPk;
+    @Basic(optional = false)
+    @Column(name = "id_curso_aperturado_fk", nullable = false)
+    private int idCursoAperturadoFk;
+    @Basic(optional = false)
+    @Column(name = "modificacion_fecha", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificacionFecha;
+    @Basic(optional = false)
+    @Column(name = "modificacion_usuario", nullable = false, length = 10)
+    private String modificacionUsuario;
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
-    @JoinColumn(name = "id_curso_fk", referencedColumnName = "id_curso_pk")
-    @ManyToOne
-    private Curso idCursoFk;
 
     public Matricula() {
     }
 
-    public Matricula(Integer correlativo) {
-        this.correlativo = correlativo;
+    public Matricula(Integer idMatriculaPk) {
+        this.idMatriculaPk = idMatriculaPk;
     }
 
-    public Integer getCorrelativo() {
-        return correlativo;
+    public Matricula(Integer idMatriculaPk, int idCursoAperturadoFk, Date modificacionFecha, String modificacionUsuario) {
+        this.idMatriculaPk = idMatriculaPk;
+        this.idCursoAperturadoFk = idCursoAperturadoFk;
+        this.modificacionFecha = modificacionFecha;
+        this.modificacionUsuario = modificacionUsuario;
     }
 
-    public void setCorrelativo(Integer correlativo) {
-        this.correlativo = correlativo;
+    public Integer getIdMatriculaPk() {
+        return idMatriculaPk;
     }
 
-    public Ciclo getIdCicloFk() {
-        return idCicloFk;
+    public void setIdMatriculaPk(Integer idMatriculaPk) {
+        this.idMatriculaPk = idMatriculaPk;
     }
 
-    public void setIdCicloFk(Ciclo idCicloFk) {
-        this.idCicloFk = idCicloFk;
+    public int getIdCursoAperturadoFk() {
+        return idCursoAperturadoFk;
+    }
+
+    public void setIdCursoAperturadoFk(int idCursoAperturadoFk) {
+        this.idCursoAperturadoFk = idCursoAperturadoFk;
+    }
+
+    public Date getModificacionFecha() {
+        return modificacionFecha;
+    }
+
+    public void setModificacionFecha(Date modificacionFecha) {
+        this.modificacionFecha = modificacionFecha;
+    }
+
+    public String getModificacionUsuario() {
+        return modificacionUsuario;
+    }
+
+    public void setModificacionUsuario(String modificacionUsuario) {
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Usuario getIdUsuarioFk() {
@@ -74,18 +107,10 @@ public class Matricula implements Serializable {
         this.idUsuarioFk = idUsuarioFk;
     }
 
-    public Curso getIdCursoFk() {
-        return idCursoFk;
-    }
-
-    public void setIdCursoFk(Curso idCursoFk) {
-        this.idCursoFk = idCursoFk;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (correlativo != null ? correlativo.hashCode() : 0);
+        hash += (idMatriculaPk != null ? idMatriculaPk.hashCode() : 0);
         return hash;
     }
 
@@ -96,7 +121,7 @@ public class Matricula implements Serializable {
             return false;
         }
         Matricula other = (Matricula) object;
-        if ((this.correlativo == null && other.correlativo != null) || (this.correlativo != null && !this.correlativo.equals(other.correlativo))) {
+        if ((this.idMatriculaPk == null && other.idMatriculaPk != null) || (this.idMatriculaPk != null && !this.idMatriculaPk.equals(other.idMatriculaPk))) {
             return false;
         }
         return true;
@@ -104,7 +129,7 @@ public class Matricula implements Serializable {
 
     @Override
     public String toString() {
-        return "com.platacad.entities.Matricula[ correlativo=" + correlativo + " ]";
+        return "com.platacad.entities.Matricula[ idMatriculaPk=" + idMatriculaPk + " ]";
     }
     
 }

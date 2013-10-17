@@ -5,6 +5,7 @@
 package com.platacad.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -26,7 +29,9 @@ import javax.persistence.Table;
 @Table(name = "archivo", catalog = "platacad", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a"),
-    @NamedQuery(name = "Archivo.findByIdArchivoPk", query = "SELECT a FROM Archivo a WHERE a.idArchivoPk = :idArchivoPk")})
+    @NamedQuery(name = "Archivo.findByIdArchivoPk", query = "SELECT a FROM Archivo a WHERE a.idArchivoPk = :idArchivoPk"),
+    @NamedQuery(name = "Archivo.findByModificacionFecha", query = "SELECT a FROM Archivo a WHERE a.modificacionFecha = :modificacionFecha"),
+    @NamedQuery(name = "Archivo.findByModificacionUsuario", query = "SELECT a FROM Archivo a WHERE a.modificacionUsuario = :modificacionUsuario")})
 public class Archivo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,13 +41,20 @@ public class Archivo implements Serializable {
     @Lob
     @Column(name = "contenido")
     private byte[] contenido;
+    @Basic(optional = false)
+    @Column(name = "modificacion_fecha", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificacionFecha;
+    @Basic(optional = false)
+    @Column(name = "modificacion_usuario", nullable = false, length = 10)
+    private String modificacionUsuario;
     @OneToMany(mappedBy = "idArchivoFk")
     private List<Articulo> articuloList;
+    @OneToMany(mappedBy = "idArchivoFk")
+    private List<Documento> documentoList;
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
-    @OneToMany(mappedBy = "idArchivoFk")
-    private List<Documento> documentoList;
     @OneToMany(mappedBy = "idArchivoFk")
     private List<DetalleTrabajo> detalleTrabajoList;
 
@@ -51,6 +63,12 @@ public class Archivo implements Serializable {
 
     public Archivo(Integer idArchivoPk) {
         this.idArchivoPk = idArchivoPk;
+    }
+
+    public Archivo(Integer idArchivoPk, Date modificacionFecha, String modificacionUsuario) {
+        this.idArchivoPk = idArchivoPk;
+        this.modificacionFecha = modificacionFecha;
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdArchivoPk() {
@@ -69,6 +87,22 @@ public class Archivo implements Serializable {
         this.contenido = contenido;
     }
 
+    public Date getModificacionFecha() {
+        return modificacionFecha;
+    }
+
+    public void setModificacionFecha(Date modificacionFecha) {
+        this.modificacionFecha = modificacionFecha;
+    }
+
+    public String getModificacionUsuario() {
+        return modificacionUsuario;
+    }
+
+    public void setModificacionUsuario(String modificacionUsuario) {
+        this.modificacionUsuario = modificacionUsuario;
+    }
+
     public List<Articulo> getArticuloList() {
         return articuloList;
     }
@@ -77,20 +111,20 @@ public class Archivo implements Serializable {
         this.articuloList = articuloList;
     }
 
-    public Usuario getIdUsuarioFk() {
-        return idUsuarioFk;
-    }
-
-    public void setIdUsuarioFk(Usuario idUsuarioFk) {
-        this.idUsuarioFk = idUsuarioFk;
-    }
-
     public List<Documento> getDocumentoList() {
         return documentoList;
     }
 
     public void setDocumentoList(List<Documento> documentoList) {
         this.documentoList = documentoList;
+    }
+
+    public Usuario getIdUsuarioFk() {
+        return idUsuarioFk;
+    }
+
+    public void setIdUsuarioFk(Usuario idUsuarioFk) {
+        this.idUsuarioFk = idUsuarioFk;
     }
 
     public List<DetalleTrabajo> getDetalleTrabajoList() {

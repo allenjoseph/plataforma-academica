@@ -11,16 +11,19 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.platacad" />
 	
-	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
+	<mvc:interceptors>
+      <bean class="com.platacad.helpers.AuditoriaInterceptor" />
+    </mvc:interceptors> 
+    
+	<!--<bean class="org.springframework.web.servlet.mvc.support.DefaultAnnotationHandlerMapping " >
 		<property name="interceptors">
 			<list>
 				<ref bean="auditoriaInterceptor" />
 			</list>
 		</property>
-	</bean>	
+	</bean>
+	<bean id="auditoriaInterceptor" class="com.platacad.helpers.AuditoriaInterceptor" />-->	
 	
-	<bean id="auditoriaInterceptor" class="com.platacad.helpers.AuditoriaInterceptor" />
-
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
