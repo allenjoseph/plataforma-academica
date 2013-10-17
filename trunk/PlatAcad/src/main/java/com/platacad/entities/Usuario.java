@@ -7,6 +7,7 @@ package com.platacad.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -77,7 +79,7 @@ public class Usuario implements Serializable {
     private List<Archivo> archivoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDocenteFk")
     private List<CursoAperturado> cursoAperturadoList;
-
+       
     public Usuario() {
     }
 
@@ -218,7 +220,11 @@ public class Usuario implements Serializable {
     public void setCursoAperturadoList(List<CursoAperturado> cursoAperturadoList) {
         this.cursoAperturadoList = cursoAperturadoList;
     }
-
+    
+    public String getNombreCompleto(){
+    	return "HOLA";
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -241,7 +247,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.platacad.entities.Usuario[ idUsuarioPk=" + idUsuarioPk + " ]";
+    	return nombres.concat(" ").concat(apellidoPaterno).concat(" ").concat(apellidoMaterno);
     }
     
 }

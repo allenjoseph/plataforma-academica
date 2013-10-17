@@ -4,12 +4,12 @@
 <header class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-header">
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="inicio.html"><t:message code="page.titulo"/></a>
+        <a class="navbar-brand" href="inicio.html"><t:message code="app.titulo"/></a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="t" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -19,17 +20,40 @@
                                         <h1>
                                             <a href="#!"><c:out value="${curso.nombre}"/></a>
                                             <i class="icon-folder-close"></i>
-                                        </h1>                                        
-                                                                              
+                                        </h1>                                  
                                     </div>
-                                    <p><span class="input-title">Profesor: </span><c:out value="${curso.docente}"/></p>
-                                    <p><span class="input-title">Créditos: </span><c:out value="${curso.creditos}"/></p>
-                                    <p><span class="input-title">Tipo de curso: </span><c:out value="${curso.tipo}"/></p>
-                                    
+                                    <p>
+                                    	<span class="input-title">
+											<t:message code="page.home.curso.docente" />
+										</span><c:out value="${curso.docente}"/>
+									</p>
+                                    <p>
+                                    	<span class="input-title">
+                                    		<t:message code="page.home.curso.articulos" />
+                                    	</span><c:out value="${curso.numero_articulos}"/>
+                                  	</p>
+                                    <p>
+                                    	<span class="input-title">
+                                    		<t:message code="page.home.curso.examenes" />
+                                   		</span><c:out value="${curso.numero_examenes}"/>
+                                   	</p>
+                                    <p>
+                                    	<span class="input-title">
+                                    		<t:message code="page.home.curso.trabajos" />
+                                    	</span>											
+										<c:out value="${curso.numero_trabajos}"/>
+									</p>                                    
                                 </div>
                                 <div class="panel-footer">
+                                	<div class="footer-curso-info">
+                                		<small><i class="icon-star"></i><c:out value="${curso.creditos}"/></small>
+                                		<small><i class="icon-book"></i><c:out value="${curso.tipo}"/></small>
+                                	</div>
                                     <div class="footer-date-info">
-                                        <small>Actualizado hace 2 Semanas</small>
+                                        <small>
+                                        	<t:message code="page.home.curso.fecha" />
+											<c:out value="${curso.fecha_actualizacion}"/>
+										</small>
                                     </div>
                                 </div>
                             </div>
