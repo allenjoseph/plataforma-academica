@@ -5,8 +5,11 @@
 package com.platacad.services;
 
 import com.platacad.business.GeneralBusiness;
+import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +26,9 @@ public class GeneralService implements GeneralServiceInterface{
     public List<CursoTO> getCursos(String usuarioId) {                   
         return generalBusiness.getCursos(usuarioId);
     }
+
+	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {
+		return generalBusiness.getCursosMatriculados(usuarioId);
+	}
     
 }

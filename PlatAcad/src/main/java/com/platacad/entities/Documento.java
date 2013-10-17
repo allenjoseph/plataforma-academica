@@ -5,15 +5,20 @@
 package com.platacad.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,15 +29,25 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Documento.findAll", query = "SELECT d FROM Documento d"),
     @NamedQuery(name = "Documento.findByIdDocumento", query = "SELECT d FROM Documento d WHERE d.idDocumento = :idDocumento"),
-    @NamedQuery(name = "Documento.findByTitulo", query = "SELECT d FROM Documento d WHERE d.titulo = :titulo")})
+    @NamedQuery(name = "Documento.findByTitulo", query = "SELECT d FROM Documento d WHERE d.titulo = :titulo"),
+    @NamedQuery(name = "Documento.findByModificacionFecha", query = "SELECT d FROM Documento d WHERE d.modificacionFecha = :modificacionFecha"),
+    @NamedQuery(name = "Documento.findByModificacionUsuario", query = "SELECT d FROM Documento d WHERE d.modificacionUsuario = :modificacionUsuario")})
 public class Documento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_documento", nullable = false)
     private Integer idDocumento;
     @Column(name = "titulo", length = 255)
     private String titulo;
+    @Basic(optional = false)
+    @Column(name = "modificacion_fecha", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificacionFecha;
+    @Basic(optional = false)
+    @Column(name = "modificacion_usuario", nullable = false, length = 10)
+    private String modificacionUsuario;
     @JoinColumn(name = "tipo", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos tipo;
@@ -45,6 +60,12 @@ public class Documento implements Serializable {
 
     public Documento(Integer idDocumento) {
         this.idDocumento = idDocumento;
+    }
+
+    public Documento(Integer idDocumento, Date modificacionFecha, String modificacionUsuario) {
+        this.idDocumento = idDocumento;
+        this.modificacionFecha = modificacionFecha;
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdDocumento() {
@@ -61,6 +82,22 @@ public class Documento implements Serializable {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public Date getModificacionFecha() {
+        return modificacionFecha;
+    }
+
+    public void setModificacionFecha(Date modificacionFecha) {
+        this.modificacionFecha = modificacionFecha;
+    }
+
+    public String getModificacionUsuario() {
+        return modificacionUsuario;
+    }
+
+    public void setModificacionUsuario(String modificacionUsuario) {
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Tipos getTipo() {

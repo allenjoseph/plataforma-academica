@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -32,10 +34,14 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "TrabajoEncargado.findByIdTrabajoPk", query = "SELECT t FROM TrabajoEncargado t WHERE t.idTrabajoPk = :idTrabajoPk"),
     @NamedQuery(name = "TrabajoEncargado.findByTitulo", query = "SELECT t FROM TrabajoEncargado t WHERE t.titulo = :titulo"),
     @NamedQuery(name = "TrabajoEncargado.findByFechaCreacion", query = "SELECT t FROM TrabajoEncargado t WHERE t.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "TrabajoEncargado.findByFechaPresentacion", query = "SELECT t FROM TrabajoEncargado t WHERE t.fechaPresentacion = :fechaPresentacion")})
+    @NamedQuery(name = "TrabajoEncargado.findByFechaPresentacion", query = "SELECT t FROM TrabajoEncargado t WHERE t.fechaPresentacion = :fechaPresentacion"),
+    @NamedQuery(name = "TrabajoEncargado.findByEstado", query = "SELECT t FROM TrabajoEncargado t WHERE t.estado = :estado"),
+    @NamedQuery(name = "TrabajoEncargado.findByModificacionFecha", query = "SELECT t FROM TrabajoEncargado t WHERE t.modificacionFecha = :modificacionFecha"),
+    @NamedQuery(name = "TrabajoEncargado.findByModificacionUsuario", query = "SELECT t FROM TrabajoEncargado t WHERE t.modificacionUsuario = :modificacionUsuario")})
 public class TrabajoEncargado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_trabajo_pk", nullable = false)
     private Integer idTrabajoPk;
@@ -50,15 +56,22 @@ public class TrabajoEncargado implements Serializable {
     @Column(name = "fecha_presentacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPresentacion;
+    @Basic(optional = false)
+    @Column(name = "estado", nullable = false)
+    private int estado;
+    @Basic(optional = false)
+    @Column(name = "modificacion_fecha", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificacionFecha;
+    @Basic(optional = false)
+    @Column(name = "modificacion_usuario", nullable = false, length = 10)
+    private String modificacionUsuario;
     @JoinColumn(name = "tipo", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos tipo;
-    @JoinColumn(name = "id_curso_fk", referencedColumnName = "id_curso_pk")
-    @ManyToOne
-    private Curso idCursoFk;
-    @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
-    @ManyToOne
-    private Usuario idUsuarioFk;
+    @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado", nullable = false)
+    @ManyToOne(optional = false)
+    private CursoAperturado idCursoAperturadoFk;
     @OneToMany(mappedBy = "idTrabajoFk")
     private List<DetalleTrabajo> detalleTrabajoList;
 
@@ -67,6 +80,13 @@ public class TrabajoEncargado implements Serializable {
 
     public TrabajoEncargado(Integer idTrabajoPk) {
         this.idTrabajoPk = idTrabajoPk;
+    }
+
+    public TrabajoEncargado(Integer idTrabajoPk, int estado, Date modificacionFecha, String modificacionUsuario) {
+        this.idTrabajoPk = idTrabajoPk;
+        this.estado = estado;
+        this.modificacionFecha = modificacionFecha;
+        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdTrabajoPk() {
@@ -109,6 +129,30 @@ public class TrabajoEncargado implements Serializable {
         this.fechaPresentacion = fechaPresentacion;
     }
 
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public Date getModificacionFecha() {
+        return modificacionFecha;
+    }
+
+    public void setModificacionFecha(Date modificacionFecha) {
+        this.modificacionFecha = modificacionFecha;
+    }
+
+    public String getModificacionUsuario() {
+        return modificacionUsuario;
+    }
+
+    public void setModificacionUsuario(String modificacionUsuario) {
+        this.modificacionUsuario = modificacionUsuario;
+    }
+
     public Tipos getTipo() {
         return tipo;
     }
@@ -117,20 +161,12 @@ public class TrabajoEncargado implements Serializable {
         this.tipo = tipo;
     }
 
-    public Curso getIdCursoFk() {
-        return idCursoFk;
+    public CursoAperturado getIdCursoAperturadoFk() {
+        return idCursoAperturadoFk;
     }
 
-    public void setIdCursoFk(Curso idCursoFk) {
-        this.idCursoFk = idCursoFk;
-    }
-
-    public Usuario getIdUsuarioFk() {
-        return idUsuarioFk;
-    }
-
-    public void setIdUsuarioFk(Usuario idUsuarioFk) {
-        this.idUsuarioFk = idUsuarioFk;
+    public void setIdCursoAperturadoFk(CursoAperturado idCursoAperturadoFk) {
+        this.idCursoAperturadoFk = idCursoAperturadoFk;
     }
 
     public List<DetalleTrabajo> getDetalleTrabajoList() {

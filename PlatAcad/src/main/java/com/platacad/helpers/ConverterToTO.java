@@ -21,23 +21,23 @@ public class ConverterToTO {
     
     public static UsuarioTO convertToUsuarioTO(Usuario user){
         UsuarioTO to = new UsuarioTO();
-        to.setCodigo(user.getIdUsuarioPk());
+        /*to.setCodigo(user.getIdUsuarioPk());
         to.setNombre(user.getNombres());
         to.setNombreCompleto(user.getNombres().concat(" ").concat(user.getApellidoPaterno()).concat(" ").concat(user.getApellidoPaterno()));
         to.setRol(user.getIdRolFk().getDescripcion());
-        to.setRolId(user.getIdRolFk().getIdRoPk());
+        to.setRolId(user.getIdRolFk().getIdRoPk());*/
         return to;
     }
 
     public static List<CursoTO> convertListaCursoTO(List<Curso> cursos) {
         List<CursoTO> listaCursoTO = new ArrayList<CursoTO>();        
-        for(Curso c : cursos){
+        /*for(Curso c : cursos){
             CursoTO cursoTO = new CursoTO();
             cursoTO.setNombre(c.getNombre());
             cursoTO.setCreditos(c.getCreditos());
             cursoTO.setTipo(TipoCursoEnum.obtenerEnum(c.getTipo().getIdTiposPk()));
             listaCursoTO.add(cursoTO);
-        }
+        }*/
         return listaCursoTO;
     }
 }
