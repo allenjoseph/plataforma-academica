@@ -30,6 +30,15 @@ footer{
 .panel-footer small{
     color: #bbb;
 }
+.footer-curso-info small{
+	float: left;
+	font-size: 0.9em;
+}
+.footer-curso-info i{	
+    opacity: 0.3;
+   	margin: 0 2px;
+	margin-left: 4px;
+}
 .page-header{
     margin-top: 0;
 }
