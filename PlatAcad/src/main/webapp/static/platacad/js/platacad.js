@@ -1,18 +1,55 @@
+var container_examen = $('#container-examen');
+
 $(function(){
-   $(".page-header h1 a").mouseenter(function(){
-        $(this).siblings("i").attr('class','icon-folder-open');
-   }).mouseleave(function(){
-        $(this).siblings("i").attr('class','icon-folder-close');
-   });
-   
-   $.datepicker.setDefaults($.datepicker.regional['es']);
-   var myDate = new Date();
-   var prettyDate = myDate.getDate() + '/' + (myDate.getMonth()+1) + '/' + myDate.getFullYear();
-   $(".datepicker").val(prettyDate);   
-   $(".datepicker").datepicker({
-	    dateFormat: 'dd/mm/yy'
-   });
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
+	
+	$('.page-header h1 a').mouseenter(function(){
+       $(this).siblings('i').attr('class','icon-folder-open');
+	}).mouseleave(function(){
+       $(this).siblings('i').attr('class','icon-folder-close');
+	});
+	
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	
+	$.datepicker.setDefaults($.datepicker.regional['es']);  
+	$('.datepicker').datepicker({
+	   dateFormat: 'DD, d MM yy'
+	});  
+	
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	
+	$('#form-registro').on('submit', function(e){
+	   e.preventDefault();
+	   alert("hola");
+	   FormularioRegistro(container_examen, $(this));
+	});
+	
+	
 });
+
+function FormularioRegistro(contenedor,formulario){
+	alert("hola2");
+	var confirmacion = contenedor.find('div.dialogo-confirmacion');
+	
+	validarDatepicker(formulario); 
+	   
+	confirmacion.find('button.btn-confirmacion').on('click', function(){
+		formulario.submit();
+	});
+	mostrarDialogo(confirmacion);	 
+}
+
+function validarDatepicker(formulario){
+	alert("hola3");
+	 var date = formulario.find('.datepicker').datepicker('getDate');
+	 formulario.find('.hidden-date').val(date);
+}
+
+function mostrarDialogo(dialogo){	
+	alert("hola4");
+	dialogo.modal();
+	dialogo.show();
+}
 
 /* Inicialización en español para la extensión 'UI date picker' para jQuery. */
 jQuery(function($){
