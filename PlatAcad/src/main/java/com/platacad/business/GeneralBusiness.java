@@ -6,9 +6,12 @@ package com.platacad.business;
 
 import com.platacad.dao.GeneralDAO;
 import com.platacad.entities.Curso;
+import com.platacad.entities.Tipos;
 import com.platacad.helpers.ConverterToTO;
+import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
+import com.platacad.to.TipoTO;
 
 import java.util.List;
 
@@ -33,6 +36,14 @@ public class GeneralBusiness {
 
 	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {
 		return generalDAO.getCursosMatriculados(usuarioId);
+	}
+
+	public List<CursoAsignadoTO> getCursosAsignados(String usuarioId) {
+		return generalDAO.getCursosAsignados(usuarioId);
+	}
+
+	public List<TipoTO> getTipos(String tabla_referencia) {
+		return generalDAO.getTipos(tabla_referencia);
 	}
     
     

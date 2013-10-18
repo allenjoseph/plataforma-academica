@@ -5,8 +5,11 @@
 package com.platacad.services;
 
 import com.platacad.business.GeneralBusiness;
+import com.platacad.entities.Tipos;
+import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
+import com.platacad.to.TipoTO;
 
 import java.util.List;
 
@@ -29,6 +32,14 @@ public class GeneralService implements GeneralServiceInterface{
 
 	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {
 		return generalBusiness.getCursosMatriculados(usuarioId);
+	}
+
+	public List<CursoAsignadoTO>  getCursosAsignados(String usuarioId) {
+		return generalBusiness.getCursosAsignados(usuarioId);
+	}
+
+	public List<TipoTO> getTipos(String tabla_referencia) {		
+		return generalBusiness.getTipos(tabla_referencia);
 	}
     
 }

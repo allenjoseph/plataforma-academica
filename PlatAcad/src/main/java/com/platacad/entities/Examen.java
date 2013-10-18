@@ -6,6 +6,7 @@ package com.platacad.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -52,6 +54,9 @@ public class Examen implements Serializable {
     @JoinColumn(name = "tipo_examen", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos tipoExamen;
+    @Lob
+    @Column(name = "descripcion", length = 65535)
+    private String descripcion;
     @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado", nullable = false)
     @ManyToOne(optional = false)
     private CursoAperturado idCursoAperturadoFk;
@@ -117,7 +122,15 @@ public class Examen implements Serializable {
         this.idCursoAperturadoFk = idCursoAperturadoFk;
     }
 
-    @Override
+    public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idExamen != null ? idExamen.hashCode() : 0);
