@@ -44,6 +44,8 @@ public class Tipos implements Serializable {
     private String descripcion;
     @Column(name = "parametro", length = 255)
     private String parametro;
+    @Column(name = "tabla_referencia", length = 255)
+    private String tablaReferencia;
     @Basic(optional = false)
     @Column(name = "modificacion_fecha", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -101,7 +103,15 @@ public class Tipos implements Serializable {
         this.parametro = parametro;
     }
 
-    public Date getModificacionFecha() {
+    public String getTablaReferencia() {
+		return tablaReferencia;
+	}
+
+	public void setTablaReferencia(String tablaReferencia) {
+		this.tablaReferencia = tablaReferencia;
+	}
+
+	public Date getModificacionFecha() {
         return modificacionFecha;
     }
 

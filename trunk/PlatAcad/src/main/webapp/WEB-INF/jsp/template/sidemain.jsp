@@ -17,15 +17,21 @@
         <div class="tab-pane active">
             <ul class="nav nav-pills nav-stacked">
                 <li>
-                    <a href="mensajes.html">
-                        <span class="badge pull-right">5</span>
-                        Mensajes
+                    <a href="mensaje.html">
+                        <span class="badge pull-right">0</span>
+                        <t:message code="tab.actividad.mensaje"/>
                     </a>
                 </li>
                 <li>
-                    <a href="articulos.html">
-                        <span class="badge pull-right">3</span>
-                        Articulos
+                    <a href="examen.html">
+                        <span class="badge pull-right">0</span>
+                        <t:message code="tab.actividad.docente.examen"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="trabajo.html">
+                        <span class="badge pull-right">0</span>
+                        <t:message code="tab.actividad.docente.trabajo"/>
                     </a>
                 </li>
             </ul>            

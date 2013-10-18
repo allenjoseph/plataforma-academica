@@ -13,7 +13,7 @@
                 <div class="col-md-8" id="main">
                     <div>                        
                         <jsp:include page="template/user.jsp"/>
-                        <c:forEach items="${cursos_docente}" var="curso">
+                        <c:forEach items="${cursos_asignados}" var="curso">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="page-header">

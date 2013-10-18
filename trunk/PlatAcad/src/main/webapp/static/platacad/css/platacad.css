@@ -10,6 +10,9 @@ footer{
     text-align: center;
     color: #ccc;
 }
+.datepicker{
+	text-align: right;
+}
 .lowertext{
     text-transform: lowercase;
 }
