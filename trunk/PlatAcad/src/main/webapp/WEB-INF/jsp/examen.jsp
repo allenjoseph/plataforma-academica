@@ -7,7 +7,7 @@
 <html lang="es">
 	<jsp:include page="template/head.jsp"/>
     <body>
-        <div class="container">            
+        <div class="container" id="container-examen">            
             <jsp:include page="template/navbar.jsp"/>            
             <div class="row">
                 <div class="col-md-8" id="main">
@@ -21,18 +21,19 @@
                                         <i class="icon-envelope"></i>
                                     </h1>       
                                 </div>                                
-                                <f:form method="post" action="registrar-examen.html" commandName="examen" >
+                                <f:form id="form-registro" method="post" action="registrar-examen.html" commandName="examen" >
                                     <div class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <label for="inputFecha" class="col-lg-2 control-label">Fecha</label>
                                             <div class="col-lg-10">
-                                            	<f:input path="fechaExamen" cssClass="col-lg-4 datepicker" id="inputFecha" placeholder="Fecha de examen"/>
+                                            	<f:hidden path="fechaExamen" class="hidden-date"/>
+                                            	<input class="form-control datepicker" id="inputFecha" placeholder="Fecha de examen"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputTipo" class="col-lg-2 control-label">Tipo</label>
                                             <div class="col-lg-10">
-                                            	<f:select path="tipoExamen" cssClass="col-lg-4 ">
+                                            	<f:select path="tipoExamen" cssClass="form-control ">
                                             		<f:options items="${tipos_examen}" itemValue="id" itemLabel="descripcion"/>
                                             	</f:select>
                                             </div>
@@ -63,5 +64,6 @@
             </div>
             <jsp:include page="template/footer.jsp"/>
         </div>
+        <jsp:include page="template/dialogoConfirmacion.jsp"/>
     </body>
 </html>
