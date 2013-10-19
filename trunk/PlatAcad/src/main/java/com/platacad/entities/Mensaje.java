@@ -6,6 +6,7 @@ package com.platacad.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Mensaje.findByMensaje", query = "SELECT m FROM Mensaje m WHERE m.mensaje = :mensaje"),
     @NamedQuery(name = "Mensaje.findByModificacionFecha", query = "SELECT m FROM Mensaje m WHERE m.modificacionFecha = :modificacionFecha"),
     @NamedQuery(name = "Mensaje.findByModificacionUsuario", query = "SELECT m FROM Mensaje m WHERE m.modificacionUsuario = :modificacionUsuario")})
-public class Mensaje implements Serializable {
+public class Mensaje extends Auditoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,8 +42,10 @@ public class Mensaje implements Serializable {
     private Integer idMensajePk;
     @Column(name = "mensaje", length = 255)
     private String mensaje;
+    @Column(name = "asunto", length = 255)
+    private String asunto;    
     @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
+    @Column(name = "modificacion_fecha", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modificacionFecha;
     @Basic(optional = false)
@@ -127,7 +130,15 @@ public class Mensaje implements Serializable {
         this.idCursoDestinoFk = idCursoDestinoFk;
     }
 
-    @Override
+    public String getAsunto() {
+		return asunto;
+	}
+
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idMensajePk != null ? idMensajePk.hashCode() : 0);

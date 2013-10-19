@@ -23,22 +23,21 @@
                                 <div class="form-horizontal" role="form">
                                     <table border=0 align="center" width="80%">
                                         <tr>
-                                            <th>asunto</th>
-                                            <th>mensaje</th>
-                                            <th>usuario Destinatario</th>
+                                            <th>Enviado a </th>
+                                            <th>Asunto</th>
+                                            <th>Mensaje</th>
+                                            <th>Opciones</th>
                                         </tr>
                                         <c:forEach items="${listado}" var="t" >
                                             <tr>
+                                            	<td><c:out value="${t.nombres}"/></td>
                                                 <td> <c:out value="${t.asunto}"/></td>
-                                                <td><c:out value="${t.mensaje}"/></td>
-                                                <td><c:out value="${t.nombres}"/></td>
-                                                <td><a href="BaseControllerElimMsj.php?codigo="<c:out value="${t.id_mensaje_pk}"/>> Eliminar</a>
-                                                
+                                                <td><c:out value="${t.mensaje}"/></td>                                                
+                                                <td><a href="eliminar-mensaje.html?codigo=<c:out value="${t.id_mensaje_pk}"/>">Eliminar</a>
                                             </tr>
                                         </c:forEach>
-                                    
                                 </table>
-                                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>
