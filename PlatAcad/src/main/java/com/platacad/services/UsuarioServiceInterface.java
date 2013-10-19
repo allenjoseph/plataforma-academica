@@ -4,6 +4,7 @@
  */
 package com.platacad.services;
 
+import com.platacad.entities.Usuario;
 import com.platacad.to.UsuarioTO;
 
 /**
@@ -13,4 +14,6 @@ import com.platacad.to.UsuarioTO;
 public interface UsuarioServiceInterface {
     
     public UsuarioTO getUsuario(String usuarioId);
+    
+     public Usuario buscarUsuario(String usuarioId);
 }
