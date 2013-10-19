@@ -6,15 +6,19 @@ package com.platacad.controllers;
 
 import com.platacad.entities.Articulo;
 import com.platacad.entities.Examen;
+import com.platacad.entities.Mensaje;
 import com.platacad.entities.TrabajoEncargado;
 import com.platacad.services.GeneralService;
+import com.platacad.services.MensajeService;
 import com.platacad.services.UsuarioService;
 import com.platacad.to.MensajeTO;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
@@ -31,6 +35,8 @@ public class BaseController {
     UsuarioService usuarioService;
     @Autowired
     GeneralService generalService;
+    @Autowired
+    MensajeService mensajeService;
     
     @RequestMapping("inicio.html")
     public ModelAndView home(){
@@ -51,8 +57,10 @@ public class BaseController {
     @RequestMapping("mensaje.html")
     public ModelAndView mensaje(){
         ModelAndView model = new ModelAndView("mensaje");
+        Mensaje m = new Mensaje();
+        m.setIdUsuarioFk(usuarioService.buscarUsuario("0512013001"));
         model.addObject("user", usuarioService.getUsuario("0512013001"));
-        model.addObject("mensaje", new MensajeTO());
+        model.addObject("mensaje", m);
         return model;
     }
     
@@ -73,8 +81,34 @@ public class BaseController {
         return model;
     }
     
+    //---- mensajeService
     @RequestMapping("enviarMensaje.html")
-    public View enviarMensaje(@ModelAttribute("mensaje") MensajeTO mensaje){    	
-    	return new RedirectView("mensajes.html");
+    public ModelAndView enviarMensaje(@ModelAttribute("mensaje") Mensaje mensaje){  
+        System.out.println("entre a ingresar msj");
+        mensaje.setModificacionFecha(new Date());
+        mensajeService.enviarMensaje(mensaje);
+    	ModelAndView model = new ModelAndView("home");
+        model.addObject("user", usuarioService.getUsuario("0512013001"));
+        model.addObject("cursos_matriculados", generalService.getCursosMatriculados("0512013001"));
+        return model;
+        
     }
+    
+    @RequestMapping("listarMensaje.html")
+    public ModelAndView listarMensaje(){
+        ModelAndView model = new ModelAndView("listarmensaje");
+        model.addObject("listado", mensajeService.listarMensaje("0512013001"));
+        return model;
+    }
+    
+    @RequestMapping(value = "/BaseControllerElimMsj.php", method = RequestMethod.GET)
+    public ModelAndView EliminarMensaje( @RequestParam("codigo") int codigo ){
+        System.out.println("codigo"+codigo);
+        mensajeService.eliminarMensaje(codigo);
+        ModelAndView model = new ModelAndView("listarmensaje");
+        model.addObject("listado", mensajeService.listarMensaje("0512013001"));
+        return model;
+    }
+    
+    
 }
