@@ -15,13 +15,23 @@ import com.platacad.entities.Auditoria;
  */
 public class MensajeTO extends Auditoria implements Serializable{
     
-	private String asunto;
+	
+    private Integer id_mensaje_pk;
+    private String asunto;
     private String mensaje;
-    private String usuarioRemitente;
-    private String usuarioDestinatario;
+   private String nombres;
 
     public MensajeTO() {
-    }    
+    }
+
+    public Integer getId_mensaje_pk() {
+        return id_mensaje_pk;
+    }
+
+    public void setId_mensaje_pk(Integer id_mensaje_pk) {
+        this.id_mensaje_pk = id_mensaje_pk;
+    }
+
     
     public String getMensaje() {
         return mensaje;
@@ -31,21 +41,15 @@ public class MensajeTO extends Auditoria implements Serializable{
         this.mensaje = mensaje;
     }
 
-    public String getUsuarioRemitente() {
-        return usuarioRemitente;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setUsuarioRemitente(String usuarioRemitente) {
-        this.usuarioRemitente = usuarioRemitente;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getUsuarioDestinatario() {
-        return usuarioDestinatario;
-    }
-
-    public void setUsuarioDestinatario(String usuarioDestinatario) {
-        this.usuarioDestinatario = usuarioDestinatario;
-    }
+    
 
 	public String getAsunto() {
 		return asunto;
