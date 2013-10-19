@@ -10,6 +10,7 @@
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.core.version>3.5.6-Final</hibernate.core.version>
+		<jackson.version>1.9.10</jackson.version>
 	</properties>
 	<build>
 		<finalName>PlatAcad</finalName>
@@ -106,7 +107,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.0.8</version>
 		</dependency>
-		
+
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -124,6 +125,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+		</dependency>
+		<!-- Jackson JSON Mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 </project>

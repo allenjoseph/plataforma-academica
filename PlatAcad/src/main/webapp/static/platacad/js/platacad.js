@@ -22,8 +22,7 @@ $(function(){
 	   e.preventDefault();
 	   alert("hola");
 	   FormularioRegistro(container_examen, $(this));
-	});
-	
+	});	
 	
 });
 

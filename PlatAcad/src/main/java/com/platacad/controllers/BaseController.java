@@ -12,7 +12,10 @@ import com.platacad.services.GeneralService;
 import com.platacad.services.MensajeService;
 import com.platacad.services.UsuarioService;
 import com.platacad.to.MensajeTO;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
@@ -81,17 +85,11 @@ public class BaseController {
         return model;
     }
     
-    //---- mensajeService
     @RequestMapping("enviarMensaje.html")
-    public ModelAndView enviarMensaje(@ModelAttribute("mensaje") Mensaje mensaje){  
-        System.out.println("entre a ingresar msj");
-        mensaje.setModificacionFecha(new Date());
-        mensajeService.enviarMensaje(mensaje);
-    	ModelAndView model = new ModelAndView("home");
-        model.addObject("user", usuarioService.getUsuario("0512013001"));
-        model.addObject("cursos_matriculados", generalService.getCursosMatriculados("0512013001"));
-        return model;
-        
+    public View enviarMensaje(@ModelAttribute("mensaje") Mensaje mensaje){
+    	mensaje.setModificacionUsuario("0512013001");
+        mensajeService.enviarMensaje(mensaje);    	
+        return new RedirectView("listarMensaje.html");        
     }
     
     @RequestMapping("listarMensaje.html")
@@ -101,13 +99,20 @@ public class BaseController {
         return model;
     }
     
-    @RequestMapping(value = "/BaseControllerElimMsj.php", method = RequestMethod.GET)
+    @RequestMapping(value = "eliminar-mensaje.html", method = RequestMethod.GET)
     public ModelAndView EliminarMensaje( @RequestParam("codigo") int codigo ){
         System.out.println("codigo"+codigo);
         mensajeService.eliminarMensaje(codigo);
         ModelAndView model = new ModelAndView("listarmensaje");
         model.addObject("listado", mensajeService.listarMensaje("0512013001"));
         return model;
+    }
+    
+    /*EJEMPLO JSON - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+	@RequestMapping(value = "listar-mensajes.json", method = RequestMethod.GET)
+    public @ResponseBody  List<MensajeTO> obtenerListaMensajes() {
+        List<MensajeTO> lista = mensajeService.listarMensaje("0512013001");        
+        return lista;
     }
     
     

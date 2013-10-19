@@ -8,12 +8,14 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:annotation-config />
+	<!-- context:annotation-config /-->
 	<context:component-scan base-package="com.platacad" />
 	
-	<mvc:interceptors>
+	<mvc:annotation-driven />
+	
+	<!--mvc:interceptors>
       <bean class="com.platacad.helpers.AuditoriaInterceptor" />
-    </mvc:interceptors> 
+    </mvc:interceptors--> 
     
 	<!--<bean class="org.springframework.web.servlet.mvc.support.DefaultAnnotationHandlerMapping " >
 		<property name="interceptors">
@@ -23,12 +25,26 @@
 		</property>
 	</bean>
 	<bean id="auditoriaInterceptor" class="com.platacad.helpers.AuditoriaInterceptor" />-->	
-	
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="mediaTypes">
+            <map>
+                <!-- El servidor responde en formato json y html-->
+                <entry key="html" value="text/html" />
+                <entry key="json" value="application/json" />
+            </map>
+        </property>
+        <property name="viewResolvers">
+            <list>               
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <property name="prefix" value="/WEB-INF/jsp/" />
+                    <property name="suffix" value=".jsp" />
+                </bean>
+            </list>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+            </list>
+        </property>
+    </bean>
 </beans>
