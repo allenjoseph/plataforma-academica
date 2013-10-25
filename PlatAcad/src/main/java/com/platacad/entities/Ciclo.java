@@ -7,9 +7,11 @@ package com.platacad.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,9 +34,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Ciclo.findAll", query = "SELECT c FROM Ciclo c"),
     @NamedQuery(name = "Ciclo.findByIdCicloPk", query = "SELECT c FROM Ciclo c WHERE c.idCicloPk = :idCicloPk"),
-    @NamedQuery(name = "Ciclo.findByAnio", query = "SELECT c FROM Ciclo c WHERE c.anio = :anio"),
-    @NamedQuery(name = "Ciclo.findByModificacionFecha", query = "SELECT c FROM Ciclo c WHERE c.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Ciclo.findByModificacionUsuario", query = "SELECT c FROM Ciclo c WHERE c.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Ciclo.findByAnio", query = "SELECT c FROM Ciclo c WHERE c.anio = :anio")})
 public class Ciclo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,13 +44,8 @@ public class Ciclo implements Serializable {
     private Integer idCicloPk;
     @Column(name = "anio")
     private Integer anio;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @JoinColumn(name = "tipo_periodo", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos tipoPeriodo;
@@ -62,12 +57,6 @@ public class Ciclo implements Serializable {
 
     public Ciclo(Integer idCicloPk) {
         this.idCicloPk = idCicloPk;
-    }
-
-    public Ciclo(Integer idCicloPk, Date modificacionFecha, String modificacionUsuario) {
-        this.idCicloPk = idCicloPk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdCicloPk() {
@@ -86,22 +75,14 @@ public class Ciclo implements Serializable {
         this.anio = anio;
     }
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
-
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
+	
     public Tipos getTipoPeriodo() {
         return tipoPeriodo;
     }

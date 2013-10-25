@@ -7,8 +7,10 @@ package com.platacad.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,9 +32,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Tipos.findAll", query = "SELECT t FROM Tipos t"),
     @NamedQuery(name = "Tipos.findByIdTiposPk", query = "SELECT t FROM Tipos t WHERE t.idTiposPk = :idTiposPk"),
     @NamedQuery(name = "Tipos.findByDescripcion", query = "SELECT t FROM Tipos t WHERE t.descripcion = :descripcion"),
-    @NamedQuery(name = "Tipos.findByParametro", query = "SELECT t FROM Tipos t WHERE t.parametro = :parametro"),
-    @NamedQuery(name = "Tipos.findByModificacionFecha", query = "SELECT t FROM Tipos t WHERE t.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Tipos.findByModificacionUsuario", query = "SELECT t FROM Tipos t WHERE t.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Tipos.findByParametro", query = "SELECT t FROM Tipos t WHERE t.parametro = :parametro")})
 public class Tipos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,13 +46,8 @@ public class Tipos implements Serializable {
     private String parametro;
     @Column(name = "tabla_referencia", length = 255)
     private String tablaReferencia;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @OneToMany(mappedBy = "estado")
     private List<Usuario> usuarioList;
     @OneToMany(mappedBy = "tipo")
@@ -71,12 +66,6 @@ public class Tipos implements Serializable {
 
     public Tipos(Integer idTiposPk) {
         this.idTiposPk = idTiposPk;
-    }
-
-    public Tipos(Integer idTiposPk, Date modificacionFecha, String modificacionUsuario) {
-        this.idTiposPk = idTiposPk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdTiposPk() {
@@ -111,23 +100,15 @@ public class Tipos implements Serializable {
 		this.tablaReferencia = tablaReferencia;
 	}
 
-	public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public List<Usuario> getUsuarioList() {
+	public List<Usuario> getUsuarioList() {
         return usuarioList;
     }
 

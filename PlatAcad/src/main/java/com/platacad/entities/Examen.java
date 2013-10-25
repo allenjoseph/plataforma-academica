@@ -9,6 +9,7 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,9 +32,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Examen.findAll", query = "SELECT e FROM Examen e"),
     @NamedQuery(name = "Examen.findByIdExamen", query = "SELECT e FROM Examen e WHERE e.idExamen = :idExamen"),
-    @NamedQuery(name = "Examen.findByFechaExamen", query = "SELECT e FROM Examen e WHERE e.fechaExamen = :fechaExamen"),
-    @NamedQuery(name = "Examen.findByModificacionFecha", query = "SELECT e FROM Examen e WHERE e.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Examen.findByModificacionUsuario", query = "SELECT e FROM Examen e WHERE e.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Examen.findByFechaExamen", query = "SELECT e FROM Examen e WHERE e.fechaExamen = :fechaExamen")})
 public class Examen implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,13 +43,8 @@ public class Examen implements Serializable {
     @Column(name = "fecha_examen")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaExamen;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @JoinColumn(name = "tipo_examen", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos tipoExamen;
@@ -68,12 +62,6 @@ public class Examen implements Serializable {
         this.idExamen = idExamen;
     }
 
-    public Examen(Integer idExamen, Date modificacionFecha, String modificacionUsuario) {
-        this.idExamen = idExamen;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
     public Integer getIdExamen() {
         return idExamen;
     }
@@ -89,24 +77,16 @@ public class Examen implements Serializable {
     public void setFechaExamen(Date fechaExamen) {
         this.fechaExamen = fechaExamen;
     }
+    
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
-
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public Tipos getTipoExamen() {
+	public Tipos getTipoExamen() {
         return tipoExamen;
     }
 

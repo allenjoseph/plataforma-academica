@@ -7,8 +7,10 @@ package com.platacad.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,9 +37,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "TrabajoEncargado.findByTitulo", query = "SELECT t FROM TrabajoEncargado t WHERE t.titulo = :titulo"),
     @NamedQuery(name = "TrabajoEncargado.findByFechaCreacion", query = "SELECT t FROM TrabajoEncargado t WHERE t.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "TrabajoEncargado.findByFechaPresentacion", query = "SELECT t FROM TrabajoEncargado t WHERE t.fechaPresentacion = :fechaPresentacion"),
-    @NamedQuery(name = "TrabajoEncargado.findByEstado", query = "SELECT t FROM TrabajoEncargado t WHERE t.estado = :estado"),
-    @NamedQuery(name = "TrabajoEncargado.findByModificacionFecha", query = "SELECT t FROM TrabajoEncargado t WHERE t.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "TrabajoEncargado.findByModificacionUsuario", query = "SELECT t FROM TrabajoEncargado t WHERE t.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "TrabajoEncargado.findByEstado", query = "SELECT t FROM TrabajoEncargado t WHERE t.estado = :estado")})
 public class TrabajoEncargado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,13 +59,8 @@ public class TrabajoEncargado implements Serializable {
     @Basic(optional = false)
     @Column(name = "estado", nullable = false)
     private int estado;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @JoinColumn(name = "tipo", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos tipo;
@@ -80,13 +75,6 @@ public class TrabajoEncargado implements Serializable {
 
     public TrabajoEncargado(Integer idTrabajoPk) {
         this.idTrabajoPk = idTrabajoPk;
-    }
-
-    public TrabajoEncargado(Integer idTrabajoPk, int estado, Date modificacionFecha, String modificacionUsuario) {
-        this.idTrabajoPk = idTrabajoPk;
-        this.estado = estado;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdTrabajoPk() {
@@ -136,24 +124,16 @@ public class TrabajoEncargado implements Serializable {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+    
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
-
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public Tipos getTipo() {
+	public Tipos getTipo() {
         return tipo;
     }
 

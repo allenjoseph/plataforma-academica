@@ -7,9 +7,11 @@ package com.platacad.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,9 +35,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
     @NamedQuery(name = "Curso.findByIdCursoPk", query = "SELECT c FROM Curso c WHERE c.idCursoPk = :idCursoPk"),
     @NamedQuery(name = "Curso.findByNombre", query = "SELECT c FROM Curso c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Curso.findByCreditos", query = "SELECT c FROM Curso c WHERE c.creditos = :creditos"),
-    @NamedQuery(name = "Curso.findByModificacionFecha", query = "SELECT c FROM Curso c WHERE c.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Curso.findByModificacionUsuario", query = "SELECT c FROM Curso c WHERE c.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Curso.findByCreditos", query = "SELECT c FROM Curso c WHERE c.creditos = :creditos")})
 public class Curso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,13 +47,8 @@ public class Curso implements Serializable {
     private String nombre;
     @Column(name = "creditos")
     private Integer creditos;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @OneToMany(mappedBy = "idCursoDestinoFk")
     private List<Mensaje> mensajeList;
     @JoinColumn(name = "tipo", referencedColumnName = "id_tipos_pk")
@@ -67,12 +62,6 @@ public class Curso implements Serializable {
 
     public Curso(Integer idCursoPk) {
         this.idCursoPk = idCursoPk;
-    }
-
-    public Curso(Integer idCursoPk, Date modificacionFecha, String modificacionUsuario) {
-        this.idCursoPk = idCursoPk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdCursoPk() {
@@ -99,23 +88,15 @@ public class Curso implements Serializable {
         this.creditos = creditos;
     }
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public List<Mensaje> getMensajeList() {
+	public List<Mensaje> getMensajeList() {
         return mensajeList;
     }
 

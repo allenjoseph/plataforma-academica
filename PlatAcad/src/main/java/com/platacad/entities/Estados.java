@@ -6,8 +6,10 @@ package com.platacad.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,9 +30,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Estados.findAll", query = "SELECT e FROM Estados e"),
     @NamedQuery(name = "Estados.findByIdEstadoPk", query = "SELECT e FROM Estados e WHERE e.idEstadoPk = :idEstadoPk"),
     @NamedQuery(name = "Estados.findByDescripcion", query = "SELECT e FROM Estados e WHERE e.descripcion = :descripcion"),
-    @NamedQuery(name = "Estados.findByParametro", query = "SELECT e FROM Estados e WHERE e.parametro = :parametro"),
-    @NamedQuery(name = "Estados.findByModificacionFecha", query = "SELECT e FROM Estados e WHERE e.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Estados.findByModificacionUsuario", query = "SELECT e FROM Estados e WHERE e.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Estados.findByParametro", query = "SELECT e FROM Estados e WHERE e.parametro = :parametro")})
 public class Estados implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,13 +44,8 @@ public class Estados implements Serializable {
     @Basic(optional = false)
     @Column(name = "parametro", nullable = false, length = 255)
     private String parametro;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
 
     public Estados() {
     }
@@ -58,15 +53,7 @@ public class Estados implements Serializable {
     public Estados(Integer idEstadoPk) {
         this.idEstadoPk = idEstadoPk;
     }
-
-    public Estados(Integer idEstadoPk, String descripcion, String parametro, Date modificacionFecha, String modificacionUsuario) {
-        this.idEstadoPk = idEstadoPk;
-        this.descripcion = descripcion;
-        this.parametro = parametro;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
+    
     public Integer getIdEstadoPk() {
         return idEstadoPk;
     }
@@ -91,23 +78,15 @@ public class Estados implements Serializable {
         this.parametro = parametro;
     }
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    @Override
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idEstadoPk != null ? idEstadoPk.hashCode() : 0);

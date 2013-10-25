@@ -7,9 +7,11 @@ package com.platacad.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,9 +33,7 @@ import javax.persistence.TemporalType;
 @Table(name = "curso_aperturado", catalog = "platacad", schema = "")
 @NamedQueries({
     @NamedQuery(name = "CursoAperturado.findAll", query = "SELECT c FROM CursoAperturado c"),
-    @NamedQuery(name = "CursoAperturado.findByIdCursoAperturado", query = "SELECT c FROM CursoAperturado c WHERE c.idCursoAperturado = :idCursoAperturado"),
-    @NamedQuery(name = "CursoAperturado.findByModificacionFecha", query = "SELECT c FROM CursoAperturado c WHERE c.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "CursoAperturado.findByModificacionUsuario", query = "SELECT c FROM CursoAperturado c WHERE c.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "CursoAperturado.findByIdCursoAperturado", query = "SELECT c FROM CursoAperturado c WHERE c.idCursoAperturado = :idCursoAperturado")})
 public class CursoAperturado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,13 +41,8 @@ public class CursoAperturado implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_curso_aperturado", nullable = false)
     private Integer idCursoAperturado;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
     private List<Articulo> articuloList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
@@ -71,12 +66,6 @@ public class CursoAperturado implements Serializable {
         this.idCursoAperturado = idCursoAperturado;
     }
 
-    public CursoAperturado(Integer idCursoAperturado, Date modificacionFecha, String modificacionUsuario) {
-        this.idCursoAperturado = idCursoAperturado;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
     public Integer getIdCursoAperturado() {
         return idCursoAperturado;
     }
@@ -85,23 +74,15 @@ public class CursoAperturado implements Serializable {
         this.idCursoAperturado = idCursoAperturado;
     }
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public List<Articulo> getArticuloList() {
+	public List<Articulo> getArticuloList() {
         return articuloList;
     }
 

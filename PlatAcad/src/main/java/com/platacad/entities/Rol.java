@@ -7,8 +7,10 @@ package com.platacad.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,9 +31,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r"),
     @NamedQuery(name = "Rol.findByIdRolPk", query = "SELECT r FROM Rol r WHERE r.idRolPk = :idRolPk"),
-    @NamedQuery(name = "Rol.findByDescripcion", query = "SELECT r FROM Rol r WHERE r.descripcion = :descripcion"),
-    @NamedQuery(name = "Rol.findByModificacionFecha", query = "SELECT r FROM Rol r WHERE r.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Rol.findByModificacionUsuario", query = "SELECT r FROM Rol r WHERE r.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Rol.findByDescripcion", query = "SELECT r FROM Rol r WHERE r.descripcion = :descripcion")})
 public class Rol implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,13 +41,8 @@ public class Rol implements Serializable {
     private Integer idRolPk;
     @Column(name = "descripcion", length = 255)
     private String descripcion;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @OneToMany(mappedBy = "idRolFk")
     private List<Usuario> usuarioList;
 
@@ -56,12 +51,6 @@ public class Rol implements Serializable {
 
     public Rol(Integer idRolPk) {
         this.idRolPk = idRolPk;
-    }
-
-    public Rol(Integer idRolPk, Date modificacionFecha, String modificacionUsuario) {
-        this.idRolPk = idRolPk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdRolPk() {
@@ -79,24 +68,16 @@ public class Rol implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
-
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public List<Usuario> getUsuarioList() {
+	public List<Usuario> getUsuarioList() {
         return usuarioList;
     }
 
