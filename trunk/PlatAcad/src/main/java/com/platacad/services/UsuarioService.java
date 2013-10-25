@@ -20,7 +20,7 @@ public class UsuarioService implements UsuarioServiceInterface{
     @Autowired
     UsuarioBusiness usuarioBussiness;
 
-    public UsuarioTO getUsuario(String usuarioId) {
+    public Usuario getUsuario(String usuarioId) {
         return usuarioBussiness.getUsuario(usuarioId);
     }
     

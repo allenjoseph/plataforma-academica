@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,13 +31,6 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "usuario", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByIdUsuarioPk", query = "SELECT u FROM Usuario u WHERE u.idUsuarioPk = :idUsuarioPk"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
-    @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
-    @NamedQuery(name = "Usuario.findByApellidoPaterno", query = "SELECT u FROM Usuario u WHERE u.apellidoPaterno = :apellidoPaterno"),
-    @NamedQuery(name = "Usuario.findByApellidoMaterno", query = "SELECT u FROM Usuario u WHERE u.apellidoMaterno = :apellidoMaterno")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,26 +47,44 @@ public class Usuario implements Serializable {
     private String apellidoMaterno;
     @Embedded
     private Auditoria auditoria;
-    @OneToMany(mappedBy = "idUsuarioFk")
-    private List<Articulo> articuloList;
+        
     @JoinColumn(name = "estado", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos estado;
+    
     @JoinColumn(name = "id_rol_fk", referencedColumnName = "id_rol_pk")
     @ManyToOne
     private Rol idRolFk;
+    
+
+    @OneToMany(mappedBy = "idUsuarioFk")
+    private List<Articulo> articuloList;
+    
     @OneToMany(mappedBy = "idUsuarioDestinoFk")
     private List<Mensaje> mensajeList;
+    
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Mensaje> mensajeList1;
+    
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Comentario> comentarioList;
+    
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Matricula> matriculaList;
+    
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Archivo> archivoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDocenteFk")
+    
+    @OneToMany(mappedBy = "idDocenteFk")
     private List<CursoAperturado> cursoAperturadoList;
+    
+    @Transient
+    private String nombreCompleto;
+    
+    @PostLoad
+    public void postLoad(){
+    	this.nombreCompleto = String.format("%s %s %s", this.nombres, this.apellidoPaterno, this.apellidoMaterno);
+    }
        
     public Usuario() {
     }
@@ -202,10 +214,14 @@ public class Usuario implements Serializable {
     }
     
     public String getNombreCompleto(){
-    	return "HOLA";
+    	return nombreCompleto;
     }
     
-    @Override
+    public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idUsuarioPk != null ? idUsuarioPk.hashCode() : 0);

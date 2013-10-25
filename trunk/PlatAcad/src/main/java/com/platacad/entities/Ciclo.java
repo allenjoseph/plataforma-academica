@@ -31,10 +31,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "ciclo", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Ciclo.findAll", query = "SELECT c FROM Ciclo c"),
-    @NamedQuery(name = "Ciclo.findByIdCicloPk", query = "SELECT c FROM Ciclo c WHERE c.idCicloPk = :idCicloPk"),
-    @NamedQuery(name = "Ciclo.findByAnio", query = "SELECT c FROM Ciclo c WHERE c.anio = :anio")})
 public class Ciclo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

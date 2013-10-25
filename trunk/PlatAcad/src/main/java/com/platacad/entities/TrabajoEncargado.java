@@ -31,13 +31,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "trabajo_encargado", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "TrabajoEncargado.findAll", query = "SELECT t FROM TrabajoEncargado t"),
-    @NamedQuery(name = "TrabajoEncargado.findByIdTrabajoPk", query = "SELECT t FROM TrabajoEncargado t WHERE t.idTrabajoPk = :idTrabajoPk"),
-    @NamedQuery(name = "TrabajoEncargado.findByTitulo", query = "SELECT t FROM TrabajoEncargado t WHERE t.titulo = :titulo"),
-    @NamedQuery(name = "TrabajoEncargado.findByFechaCreacion", query = "SELECT t FROM TrabajoEncargado t WHERE t.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "TrabajoEncargado.findByFechaPresentacion", query = "SELECT t FROM TrabajoEncargado t WHERE t.fechaPresentacion = :fechaPresentacion"),
-    @NamedQuery(name = "TrabajoEncargado.findByEstado", query = "SELECT t FROM TrabajoEncargado t WHERE t.estado = :estado")})
 public class TrabajoEncargado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

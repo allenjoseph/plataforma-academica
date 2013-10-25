@@ -32,10 +32,6 @@ import javax.persistence.TemporalType;
 @Entity
 @EntityListeners(AuditLogger.class)
 @Table(name = "mensaje", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Mensaje.findAll", query = "SELECT m FROM Mensaje m"),
-    @NamedQuery(name = "Mensaje.findByIdMensajePk", query = "SELECT m FROM Mensaje m WHERE m.idMensajePk = :idMensajePk"),
-    @NamedQuery(name = "Mensaje.findByMensaje", query = "SELECT m FROM Mensaje m WHERE m.mensaje = :mensaje")})
 public class Mensaje implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     

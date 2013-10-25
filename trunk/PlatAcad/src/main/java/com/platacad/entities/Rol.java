@@ -28,10 +28,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "rol", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r"),
-    @NamedQuery(name = "Rol.findByIdRolPk", query = "SELECT r FROM Rol r WHERE r.idRolPk = :idRolPk"),
-    @NamedQuery(name = "Rol.findByDescripcion", query = "SELECT r FROM Rol r WHERE r.descripcion = :descripcion")})
 public class Rol implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

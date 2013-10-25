@@ -6,7 +6,6 @@ package com.platacad.business;
 
 import com.platacad.dao.GeneralDAO;
 import com.platacad.entities.Curso;
-import com.platacad.entities.Tipos;
 import com.platacad.helpers.ConverterToTO;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;

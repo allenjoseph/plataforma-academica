@@ -5,7 +5,6 @@
 package com.platacad.dao;
 
 import com.platacad.entities.Curso;
-import com.platacad.entities.Matricula;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.TipoTO;
@@ -13,35 +12,35 @@ import com.platacad.to.TipoTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Property;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author allen
  */
 @Repository
-public class GeneralDAO extends HibernateDaoSupport {
+@Transactional
+public class GeneralDAO {
 
-    @Autowired
-    public GeneralDAO(SessionFactory sessionFactory) {
-        super.setSessionFactory(sessionFactory);
-    }
+	@PersistenceContext
+	private EntityManager em;
 
     public List<Curso> getCursos(String usuarioId) {
         return null;
     }
 
 	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {
-		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		/*Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Query query = session.createSQLQuery("SELECT c.nombre AS \"nombre\","
 				+ "	c.creditos AS \"creditos\","
 				+ "	(SELECT t.parametro FROM tipos t WHERE t.id_tipos_pk = c.tipo) AS \"tipo\","
@@ -61,11 +60,12 @@ public class GeneralDAO extends HibernateDaoSupport {
 				+ "	AND m.id_usuario_fk = ?")
 				.setParameter(0, usuarioId)
 				.setResultTransformer(Transformers.aliasToBean(CursoMatriculadoTO.class));
-		return query.list();
+		return query.list();*/
+		return new ArrayList<CursoMatriculadoTO>();
 	}
 
 	public List<CursoAsignadoTO> getCursosAsignados(String usuarioId) {
-		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		/*Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Query query = session.createSQLQuery("SELECT c.nombre AS \"nombre\","
 				+ "	c.creditos AS \"creditos\","
 				+ "	(SELECT t.parametro FROM tipos t WHERE t.id_tipos_pk = c.tipo) AS \"tipo\","
@@ -83,11 +83,12 @@ public class GeneralDAO extends HibernateDaoSupport {
 				+ "	AND ca.id_docente_fk = ?")
 				.setParameter(0, usuarioId)
 				.setResultTransformer(Transformers.aliasToBean(CursoAsignadoTO.class));
-		return query.list();
+		return query.list();*/
+		return new ArrayList<CursoAsignadoTO>();
 	}
 
 	public List<TipoTO> getTipos(String tabla_referencia) {
-		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		/*Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Query query = session.createSQLQuery("SELECT t.id_tipos_pk AS \"id\","
 				+ "	t.parametro AS \"parametro\","
 				+ "	t.descripcion AS \"descripcion\""
@@ -95,6 +96,7 @@ public class GeneralDAO extends HibernateDaoSupport {
 				+ " WHERE t.tabla_referencia = ?")
 				.setParameter(0, tabla_referencia)
 				.setResultTransformer(Transformers.aliasToBean(TipoTO.class));
-		return query.list();
+		return query.list();*/
+		return new ArrayList<TipoTO>();
 	}
 }

@@ -4,17 +4,15 @@
  */
 package com.platacad.controllers;
 
-import com.platacad.entities.Articulo;
 import com.platacad.entities.Examen;
 import com.platacad.entities.Mensaje;
 import com.platacad.entities.TrabajoEncargado;
+import com.platacad.entities.Usuario;
 import com.platacad.services.GeneralService;
 import com.platacad.services.MensajeService;
 import com.platacad.services.UsuarioService;
 import com.platacad.to.MensajeTO;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +43,9 @@ public class BaseController {
     @RequestMapping("inicio.html")
     public ModelAndView home(){
         ModelAndView model = new ModelAndView("home");
-        model.addObject("user", usuarioService.getUsuario("0512013001"));
+        Usuario u = usuarioService.getUsuario("0512013001");
+        System.out.println(u.getNombres());
+        model.addObject("user", u);
         model.addObject("cursos_matriculados", generalService.getCursosMatriculados("0512013001"));
         return model;
     }

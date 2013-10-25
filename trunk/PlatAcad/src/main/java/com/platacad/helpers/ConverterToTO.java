@@ -6,10 +6,8 @@ package com.platacad.helpers;
 
 import com.platacad.entities.Curso;
 import com.platacad.entities.Usuario;
-import com.platacad.enums.TipoCursoEnum;
 import com.platacad.to.CursoTO;
 import com.platacad.to.UsuarioTO;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
