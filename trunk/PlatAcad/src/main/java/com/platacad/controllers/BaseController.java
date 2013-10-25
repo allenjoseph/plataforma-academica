@@ -87,7 +87,6 @@ public class BaseController {
     
     @RequestMapping("enviarMensaje.html")
     public View enviarMensaje(@ModelAttribute("mensaje") Mensaje mensaje){
-    	mensaje.setModificacionUsuario("0512013001");
         mensajeService.enviarMensaje(mensaje);    	
         return new RedirectView("listarMensaje.html");        
     }

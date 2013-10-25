@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -35,9 +36,7 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
     @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
     @NamedQuery(name = "Usuario.findByApellidoPaterno", query = "SELECT u FROM Usuario u WHERE u.apellidoPaterno = :apellidoPaterno"),
-    @NamedQuery(name = "Usuario.findByApellidoMaterno", query = "SELECT u FROM Usuario u WHERE u.apellidoMaterno = :apellidoMaterno"),
-    @NamedQuery(name = "Usuario.findByModificacionFecha", query = "SELECT u FROM Usuario u WHERE u.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Usuario.findByModificacionUsuario", query = "SELECT u FROM Usuario u WHERE u.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Usuario.findByApellidoMaterno", query = "SELECT u FROM Usuario u WHERE u.apellidoMaterno = :apellidoMaterno")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,13 +51,8 @@ public class Usuario implements Serializable {
     private String apellidoPaterno;
     @Column(name = "apellido_materno", length = 255)
     private String apellidoMaterno;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Articulo> articuloList;
     @JoinColumn(name = "estado", referencedColumnName = "id_tipos_pk")
@@ -85,12 +79,6 @@ public class Usuario implements Serializable {
 
     public Usuario(String idUsuarioPk) {
         this.idUsuarioPk = idUsuarioPk;
-    }
-
-    public Usuario(String idUsuarioPk, Date modificacionFecha, String modificacionUsuario) {
-        this.idUsuarioPk = idUsuarioPk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public String getIdUsuarioPk() {
@@ -133,23 +121,15 @@ public class Usuario implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public List<Articulo> getArticuloList() {
+	public List<Articulo> getArticuloList() {
         return articuloList;
     }
 

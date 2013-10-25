@@ -6,8 +6,10 @@ package com.platacad.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,9 +31,7 @@ import javax.persistence.TemporalType;
 @Table(name = "comentario", catalog = "platacad", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Comentario.findAll", query = "SELECT c FROM Comentario c"),
-    @NamedQuery(name = "Comentario.findByIdComentarioPk", query = "SELECT c FROM Comentario c WHERE c.idComentarioPk = :idComentarioPk"),
-    @NamedQuery(name = "Comentario.findByModificacionFecha", query = "SELECT c FROM Comentario c WHERE c.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Comentario.findByModificacionUsuario", query = "SELECT c FROM Comentario c WHERE c.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Comentario.findByIdComentarioPk", query = "SELECT c FROM Comentario c WHERE c.idComentarioPk = :idComentarioPk")})
 public class Comentario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,13 +42,8 @@ public class Comentario implements Serializable {
     @Lob
     @Column(name = "contenido", length = 65535)
     private String contenido;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
@@ -61,12 +56,6 @@ public class Comentario implements Serializable {
 
     public Comentario(Integer idComentarioPk) {
         this.idComentarioPk = idComentarioPk;
-    }
-
-    public Comentario(Integer idComentarioPk, Date modificacionFecha, String modificacionUsuario) {
-        this.idComentarioPk = idComentarioPk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdComentarioPk() {
@@ -84,24 +73,16 @@ public class Comentario implements Serializable {
     public void setContenido(String contenido) {
         this.contenido = contenido;
     }
+    
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
-
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public Usuario getIdUsuarioFk() {
+	public Usuario getIdUsuarioFk() {
         return idUsuarioFk;
     }
 

@@ -7,8 +7,10 @@ package com.platacad.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,9 +36,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Articulo.findByIdArticuloPk", query = "SELECT a FROM Articulo a WHERE a.idArticuloPk = :idArticuloPk"),
     @NamedQuery(name = "Articulo.findByTitulo", query = "SELECT a FROM Articulo a WHERE a.titulo = :titulo"),
     @NamedQuery(name = "Articulo.findByFechaCreacion", query = "SELECT a FROM Articulo a WHERE a.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Articulo.findByFechaModificacion", query = "SELECT a FROM Articulo a WHERE a.fechaModificacion = :fechaModificacion"),
-    @NamedQuery(name = "Articulo.findByModificacionFecha", query = "SELECT a FROM Articulo a WHERE a.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Articulo.findByModificacionUsuario", query = "SELECT a FROM Articulo a WHERE a.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Articulo.findByFechaModificacion", query = "SELECT a FROM Articulo a WHERE a.fechaModificacion = :fechaModificacion")})
 public class Articulo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,13 +55,8 @@ public class Articulo implements Serializable {
     @Column(name = "fecha_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;    
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
@@ -79,12 +74,6 @@ public class Articulo implements Serializable {
 
     public Articulo(Integer idArticuloPk) {
         this.idArticuloPk = idArticuloPk;
-    }
-
-    public Articulo(Integer idArticuloPk, Date modificacionFecha, String modificacionUsuario) {
-        this.idArticuloPk = idArticuloPk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdArticuloPk() {
@@ -126,24 +115,16 @@ public class Articulo implements Serializable {
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
+    
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
-
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public Usuario getIdUsuarioFk() {
+	public Usuario getIdUsuarioFk() {
         return idUsuarioFk;
     }
 

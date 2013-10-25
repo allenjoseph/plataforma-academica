@@ -1,30 +1,69 @@
 package com.platacad.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Auditoria {
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-	private String usuarioAuditoria;
-	private Date fechaAuditoria;
+@Embeddable
+public class Auditoria implements Serializable{
 	
+	@Basic(optional = false)
+	@Column(name = "creacion_fecha")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creacionFecha;
+	
+	@Basic(optional = false)
+	@Column(name = "creacion_usuario")
+	private String creacionUsuario;
+	
+	@Basic(optional = false)
+	@Column(name = "modificacion_fecha", insertable = false, updatable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modificacionFecha;
+	
+	@Basic(optional = false)
+	@Column(name = "modificacion_usuario", nullable = false, length = 10)
+	private String modificacionUsuario;
+		
 	public Auditoria() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getUsuarioAuditoria() {
-		return usuarioAuditoria;
+	public Date getCreacionFecha() {
+		return creacionFecha;
 	}
 
-	public void setUsuarioAuditoria(String usuarioAuditoria) {
-		this.usuarioAuditoria = usuarioAuditoria;
+	public void setCreacionFecha(Date creacionFecha) {
+		this.creacionFecha = creacionFecha;
 	}
 
-	public Date getFechaAuditoria() {
-		return fechaAuditoria;
+	public String getCreacionUsuario() {
+		return creacionUsuario;
 	}
 
-	public void setFechaAuditoria(Date fechaAuditoria) {
-		this.fechaAuditoria = fechaAuditoria;
+	public void setCreacionUsuario(String creacionUsuario) {
+		this.creacionUsuario = creacionUsuario;
 	}
-	
+
+	public Date getModificacionFecha() {
+		return modificacionFecha;
+	}
+
+	public void setModificacionFecha(Date modificacionFecha) {
+		this.modificacionFecha = modificacionFecha;
+	}
+
+	public String getModificacionUsuario() {
+		return modificacionUsuario;
+	}
+
+	public void setModificacionUsuario(String modificacionUsuario) {
+		this.modificacionUsuario = modificacionUsuario;
+	}
+
 }

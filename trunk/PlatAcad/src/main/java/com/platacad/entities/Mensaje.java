@@ -9,7 +9,9 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +19,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,52 +30,47 @@ import javax.persistence.TemporalType;
  * @author allen
  */
 @Entity
+@EntityListeners(AuditLogger.class)
 @Table(name = "mensaje", catalog = "platacad", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Mensaje.findAll", query = "SELECT m FROM Mensaje m"),
     @NamedQuery(name = "Mensaje.findByIdMensajePk", query = "SELECT m FROM Mensaje m WHERE m.idMensajePk = :idMensajePk"),
-    @NamedQuery(name = "Mensaje.findByMensaje", query = "SELECT m FROM Mensaje m WHERE m.mensaje = :mensaje"),
-    @NamedQuery(name = "Mensaje.findByModificacionFecha", query = "SELECT m FROM Mensaje m WHERE m.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Mensaje.findByModificacionUsuario", query = "SELECT m FROM Mensaje m WHERE m.modificacionUsuario = :modificacionUsuario")})
-public class Mensaje extends Auditoria implements Serializable {
+    @NamedQuery(name = "Mensaje.findByMensaje", query = "SELECT m FROM Mensaje m WHERE m.mensaje = :mensaje")})
+public class Mensaje implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_mensaje_pk", nullable = false)
     private Integer idMensajePk;
+    
     @Column(name = "mensaje", length = 255)
     private String mensaje;
+    
     @Column(name = "asunto", length = 255)
     private String asunto;    
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+   
     @JoinColumn(name = "id_usuario_destino_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioDestinoFk;
+    
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
+    
     @JoinColumn(name = "id_curso_destino_fk", referencedColumnName = "id_curso_pk")
     @ManyToOne
     private Curso idCursoDestinoFk;
+    
+    @Embedded
+    private Auditoria auditoria = new Auditoria();
 
     public Mensaje() {
     }
 
     public Mensaje(Integer idMensajePk) {
         this.idMensajePk = idMensajePk;
-    }
-
-    public Mensaje(Integer idMensajePk, Date modificacionFecha, String modificacionUsuario) {
-        this.idMensajePk = idMensajePk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdMensajePk() {
@@ -88,22 +87,6 @@ public class Mensaje extends Auditoria implements Serializable {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
-    }
-
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
-
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
-
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Usuario getIdUsuarioDestinoFk() {
@@ -138,6 +121,14 @@ public class Mensaje extends Auditoria implements Serializable {
 		this.asunto = asunto;
 	}
 
+	public Auditoria getAuditoria() {
+		return auditoria;
+	}
+
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
+
 	@Override
     public int hashCode() {
         int hash = 0;
@@ -162,5 +153,16 @@ public class Mensaje extends Auditoria implements Serializable {
     public String toString() {
         return "com.platacad.entities.Mensaje[ idMensajePk=" + idMensajePk + " ]";
     }
+
+	public void prePresist() {
+		auditoria.setCreacionFecha(new Date());
+		auditoria.setCreacionUsuario("0512013000");
+		
+	}
+
+	public void preUpdate() {
+		auditoria.setModificacionFecha(new Date());
+		auditoria.setModificacionUsuario("0512013000");		
+	}
     
 }

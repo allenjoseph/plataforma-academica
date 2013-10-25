@@ -6,8 +6,10 @@ package com.platacad.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,9 +31,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Matricula.findAll", query = "SELECT m FROM Matricula m"),
     @NamedQuery(name = "Matricula.findByIdMatriculaPk", query = "SELECT m FROM Matricula m WHERE m.idMatriculaPk = :idMatriculaPk"),
-    @NamedQuery(name = "Matricula.findByIdCursoAperturadoFk", query = "SELECT m FROM Matricula m WHERE m.idCursoAperturadoFk = :idCursoAperturadoFk"),
-    @NamedQuery(name = "Matricula.findByModificacionFecha", query = "SELECT m FROM Matricula m WHERE m.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Matricula.findByModificacionUsuario", query = "SELECT m FROM Matricula m WHERE m.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Matricula.findByIdCursoAperturadoFk", query = "SELECT m FROM Matricula m WHERE m.idCursoAperturadoFk = :idCursoAperturadoFk")})
 public class Matricula implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,13 +42,8 @@ public class Matricula implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_curso_aperturado_fk", nullable = false)
     private int idCursoAperturadoFk;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
@@ -58,13 +53,6 @@ public class Matricula implements Serializable {
 
     public Matricula(Integer idMatriculaPk) {
         this.idMatriculaPk = idMatriculaPk;
-    }
-
-    public Matricula(Integer idMatriculaPk, int idCursoAperturadoFk, Date modificacionFecha, String modificacionUsuario) {
-        this.idMatriculaPk = idMatriculaPk;
-        this.idCursoAperturadoFk = idCursoAperturadoFk;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdMatriculaPk() {
@@ -83,23 +71,15 @@ public class Matricula implements Serializable {
         this.idCursoAperturadoFk = idCursoAperturadoFk;
     }
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public Usuario getIdUsuarioFk() {
+	public Usuario getIdUsuarioFk() {
         return idUsuarioFk;
     }
 

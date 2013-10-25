@@ -6,7 +6,13 @@ package com.platacad.dao;
 
 import com.platacad.entities.Mensaje;
 import com.platacad.to.MensajeTO;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,67 +22,66 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 /**
- *
+ * 
  * @author PC
  */
 @Repository
-public class MensajeDAO extends HibernateDaoSupport{
-    
-    @Autowired
-    public MensajeDAO(SessionFactory sessionFactory) {
-        super.setSessionFactory(sessionFactory);
-    }
-    
- 
-    public boolean insertarActualizaMensaje(Mensaje t) {
-         boolean b=false;
-        try{
-            getHibernateTemplate().saveOrUpdate(t);
-            b=true;
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return b;
-    }
-    
-   
-    public boolean eliminarMensaje(int cod) {
-         boolean b=false;
-        try{
-            Mensaje t = getHibernateTemplate().get(Mensaje.class, cod);
-            getHibernateTemplate().delete(t);
-            b=true;
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return b;
-    }
-     
-    
-    public Mensaje BuscarMensaje(int cod) {
-         Mensaje t = null;
-        try{
-            t = getHibernateTemplate().get(Mensaje.class, cod);
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return t;
-    }
-    
-   
+public class MensajeDAO {
 
- 
-    public List<MensajeTO> getListaMensaje(String cod) {
-          Session session = getHibernateTemplate().getSessionFactory()
-				.openSession();
-		Query consulta = session
-				.createSQLQuery(
-						"SELECT a.id_mensaje_pk ,a.asunto, a.mensaje,  b.nombres FROM mensaje a "
-                        + "INNER JOIN usuario b ON b.id_usuario_pk = a.id_usuario_destino_fk where a.id_usuario_fk='"+cod+"'")
-				.setResultTransformer(Transformers.aliasToBean(MensajeTO.class));
-                return consulta.list();
-    }
-    
-    
+	// @Autowired
+	// public MensajeDAO(SessionFactory sessionFactory) {
+	// super.setSessionFactory(sessionFactory);
+	// }
+	@PersistenceContext
+	private EntityManager em;
+
+	public boolean insertarActualizaMensaje(Mensaje t) {
+		boolean b = false;
+		try {
+			em.persist(t);
+			b = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+
+	public boolean eliminarMensaje(int cod) {
+		boolean b = false;
+		try {
+			Mensaje t = em.getReference(Mensaje.class, cod);
+			em.remove(t);			
+			b = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+
+	public Mensaje BuscarMensaje(int cod) {
+		Mensaje t = null;
+		try {
+			t = em.getReference(Mensaje.class, cod);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return t;
+	}
+
+	public List<MensajeTO> getListaMensaje(String cod) {
+		List<Mensaje> lista = em.createNativeQuery( "SELECT a.id_mensaje_pk ,a.asunto, a.mensaje,  b.nombres FROM mensaje a INNER JOIN usuario b ON b.id_usuario_pk = a.id_usuario_destino_fk where a.id_usuario_fk='"+ cod + "'").getResultList();
+		List<MensajeTO> listaTO = new ArrayList<MensajeTO>();
+		
+		for(Mensaje m : lista){
+			MensajeTO mTO = new MensajeTO();
+			mTO.setAsunto(m.getAsunto());
+			mTO.setId_mensaje_pk(m.getIdMensajePk());
+			mTO.setMensaje(m.getMensaje());
+			listaTO.add(mTO);
+		}
+		
+		return null;
+	}
+
 }

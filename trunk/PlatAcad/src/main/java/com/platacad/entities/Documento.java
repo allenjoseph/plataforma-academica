@@ -6,8 +6,10 @@ package com.platacad.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,9 +31,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Documento.findAll", query = "SELECT d FROM Documento d"),
     @NamedQuery(name = "Documento.findByIdDocumento", query = "SELECT d FROM Documento d WHERE d.idDocumento = :idDocumento"),
-    @NamedQuery(name = "Documento.findByTitulo", query = "SELECT d FROM Documento d WHERE d.titulo = :titulo"),
-    @NamedQuery(name = "Documento.findByModificacionFecha", query = "SELECT d FROM Documento d WHERE d.modificacionFecha = :modificacionFecha"),
-    @NamedQuery(name = "Documento.findByModificacionUsuario", query = "SELECT d FROM Documento d WHERE d.modificacionUsuario = :modificacionUsuario")})
+    @NamedQuery(name = "Documento.findByTitulo", query = "SELECT d FROM Documento d WHERE d.titulo = :titulo")})
 public class Documento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,13 +41,8 @@ public class Documento implements Serializable {
     private Integer idDocumento;
     @Column(name = "titulo", length = 255)
     private String titulo;
-    @Basic(optional = false)
-    @Column(name = "modificacion_fecha", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificacionFecha;
-    @Basic(optional = false)
-    @Column(name = "modificacion_usuario", nullable = false, length = 10)
-    private String modificacionUsuario;
+    @Embedded
+    private Auditoria auditoria;
     @JoinColumn(name = "tipo", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos tipo;
@@ -60,12 +55,6 @@ public class Documento implements Serializable {
 
     public Documento(Integer idDocumento) {
         this.idDocumento = idDocumento;
-    }
-
-    public Documento(Integer idDocumento, Date modificacionFecha, String modificacionUsuario) {
-        this.idDocumento = idDocumento;
-        this.modificacionFecha = modificacionFecha;
-        this.modificacionUsuario = modificacionUsuario;
     }
 
     public Integer getIdDocumento() {
@@ -84,23 +73,15 @@ public class Documento implements Serializable {
         this.titulo = titulo;
     }
 
-    public Date getModificacionFecha() {
-        return modificacionFecha;
-    }
+    public Auditoria getAuditoria() {
+		return auditoria;
+	}
 
-    public void setModificacionFecha(Date modificacionFecha) {
-        this.modificacionFecha = modificacionFecha;
-    }
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
 
-    public String getModificacionUsuario() {
-        return modificacionUsuario;
-    }
-
-    public void setModificacionUsuario(String modificacionUsuario) {
-        this.modificacionUsuario = modificacionUsuario;
-    }
-
-    public Tipos getTipo() {
+	public Tipos getTipo() {
         return tipo;
     }
 
