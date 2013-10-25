@@ -31,11 +31,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "curso", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
-    @NamedQuery(name = "Curso.findByIdCursoPk", query = "SELECT c FROM Curso c WHERE c.idCursoPk = :idCursoPk"),
-    @NamedQuery(name = "Curso.findByNombre", query = "SELECT c FROM Curso c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Curso.findByCreditos", query = "SELECT c FROM Curso c WHERE c.creditos = :creditos")})
 public class Curso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

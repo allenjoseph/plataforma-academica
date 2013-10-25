@@ -20,25 +20,27 @@ import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
  * @author PC
  */
 @Repository
+@Transactional
 public class MensajeDAO {
 
-	// @Autowired
-	// public MensajeDAO(SessionFactory sessionFactory) {
-	// super.setSessionFactory(sessionFactory);
-	// }
 	@PersistenceContext
 	private EntityManager em;
 
 	public boolean insertarActualizaMensaje(Mensaje t) {
 		boolean b = false;
 		try {
-			em.persist(t);
+			if(t.getIdMensajePk() == null){
+				em.persist(t);
+			}else{
+				em.merge(t);
+			}			
 			b = true;
 		} catch (Exception e) {
 			e.printStackTrace();

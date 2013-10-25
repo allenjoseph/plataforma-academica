@@ -29,9 +29,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "comentario", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Comentario.findAll", query = "SELECT c FROM Comentario c"),
-    @NamedQuery(name = "Comentario.findByIdComentarioPk", query = "SELECT c FROM Comentario c WHERE c.idComentarioPk = :idComentarioPk")})
 public class Comentario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

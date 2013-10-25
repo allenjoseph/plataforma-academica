@@ -13,7 +13,7 @@ import com.platacad.to.UsuarioTO;
  */
 public interface UsuarioServiceInterface {
     
-    public UsuarioTO getUsuario(String usuarioId);
+    public Usuario getUsuario(String usuarioId);
     
      public Usuario buscarUsuario(String usuarioId);
 }

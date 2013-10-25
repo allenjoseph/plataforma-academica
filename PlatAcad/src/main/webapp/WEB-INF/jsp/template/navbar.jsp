@@ -20,7 +20,7 @@
                 <a href="#"><t:message code="nav.info.usuario"/></a>
             </li>
             <li>
-                <a href="#"><c:out value="${user.nombre}"/></a>
+                <a href="#"><c:out value="${user.nombres}"/></a>
             </li>
         </ul>
 	</nav>

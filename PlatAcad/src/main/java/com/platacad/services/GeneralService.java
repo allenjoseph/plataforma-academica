@@ -5,7 +5,6 @@
 package com.platacad.services;
 
 import com.platacad.business.GeneralBusiness;
-import com.platacad.entities.Tipos;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;

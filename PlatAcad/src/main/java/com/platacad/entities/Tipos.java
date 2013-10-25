@@ -28,11 +28,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tipos", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Tipos.findAll", query = "SELECT t FROM Tipos t"),
-    @NamedQuery(name = "Tipos.findByIdTiposPk", query = "SELECT t FROM Tipos t WHERE t.idTiposPk = :idTiposPk"),
-    @NamedQuery(name = "Tipos.findByDescripcion", query = "SELECT t FROM Tipos t WHERE t.descripcion = :descripcion"),
-    @NamedQuery(name = "Tipos.findByParametro", query = "SELECT t FROM Tipos t WHERE t.parametro = :parametro")})
 public class Tipos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -26,11 +26,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "estados", catalog = "platacad", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Estados.findAll", query = "SELECT e FROM Estados e"),
-    @NamedQuery(name = "Estados.findByIdEstadoPk", query = "SELECT e FROM Estados e WHERE e.idEstadoPk = :idEstadoPk"),
-    @NamedQuery(name = "Estados.findByDescripcion", query = "SELECT e FROM Estados e WHERE e.descripcion = :descripcion"),
-    @NamedQuery(name = "Estados.findByParametro", query = "SELECT e FROM Estados e WHERE e.parametro = :parametro")})
 public class Estados implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
