@@ -29,7 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author allen
  */
 @Repository
-@Transactional
 public class GeneralDAO {
 
 	@PersistenceContext
@@ -40,7 +39,9 @@ public class GeneralDAO {
     }
 
 	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {
-		/*Session session = getHibernateTemplate().getSessionFactory().openSession();
+		/*StringBuilder query = new StringBuilder();
+		query.append("select ")
+		
 		Query query = session.createSQLQuery("SELECT c.nombre AS \"nombre\","
 				+ "	c.creditos AS \"creditos\","
 				+ "	(SELECT t.parametro FROM tipos t WHERE t.id_tipos_pk = c.tipo) AS \"tipo\","

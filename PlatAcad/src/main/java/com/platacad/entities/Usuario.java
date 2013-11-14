@@ -32,19 +32,25 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "usuario", catalog = "platacad", schema = "")
 public class Usuario implements Serializable {
+	
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "id_usuario_pk", nullable = false, length = 10)
     private String idUsuarioPk;
+    
     @Column(name = "password", length = 255)
     private String password;
+    
     @Column(name = "nombres", length = 255)
     private String nombres;
+    
     @Column(name = "apellido_paterno", length = 255)
     private String apellidoPaterno;
+    
     @Column(name = "apellido_materno", length = 255)
     private String apellidoMaterno;
+    
     @Embedded
     private Auditoria auditoria;
         
@@ -77,15 +83,7 @@ public class Usuario implements Serializable {
     
     @OneToMany(mappedBy = "idDocenteFk")
     private List<CursoAperturado> cursoAperturadoList;
-    
-    @Transient
-    private String nombreCompleto;
-    
-    @PostLoad
-    public void postLoad(){
-    	this.nombreCompleto = String.format("%s %s %s", this.nombres, this.apellidoPaterno, this.apellidoMaterno);
-    }
-       
+                 
     public Usuario() {
     }
 
@@ -212,14 +210,6 @@ public class Usuario implements Serializable {
     public void setCursoAperturadoList(List<CursoAperturado> cursoAperturadoList) {
         this.cursoAperturadoList = cursoAperturadoList;
     }
-    
-    public String getNombreCompleto(){
-    	return nombreCompleto;
-    }
-    
-    public void setNombreCompleto(String nombreCompleto) {
-		this.nombreCompleto = nombreCompleto;
-	}
 
 	@Override
     public int hashCode() {
