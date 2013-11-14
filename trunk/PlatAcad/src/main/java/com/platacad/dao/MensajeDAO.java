@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author PC
  */
 @Repository
-@Transactional
 public class MensajeDAO {
 
 	@PersistenceContext

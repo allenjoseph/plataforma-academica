@@ -4,16 +4,11 @@
  */
 package com.platacad.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.annotation.Resource;
 
 import com.platacad.entities.Usuario;
-
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import com.platacad.repositories.UsuarioRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -22,12 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class UsuarioDAO {
 
-	@PersistenceContext
-	private EntityManager em;
+	@Resource
+	private UsuarioRepository usuarioRepository;
     
-	@Transactional
     public Usuario getUsuario(String usuarioId) {
-        return em.getReference(Usuario.class, usuarioId);
+    	Usuario u = usuarioRepository.findOne(usuarioId);
+        return u;
     }
     
 }
