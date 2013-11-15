@@ -48,7 +48,7 @@ public class DataBaseConfig {
 
 		return dataSource;
 	}
-	
+	/*
 	@Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -56,7 +56,7 @@ public class DataBaseConfig {
         hibernateJpaVendorAdapter.setGenerateDdl(true);
         hibernateJpaVendorAdapter.setDatabase(Database.H2);
         return hibernateJpaVendorAdapter;
-    }
+    }*/
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
