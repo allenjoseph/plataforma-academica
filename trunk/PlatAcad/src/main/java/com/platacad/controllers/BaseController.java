@@ -43,8 +43,13 @@ public class BaseController {
     @RequestMapping("inicio.html")
     public ModelAndView home(){
         ModelAndView model = new ModelAndView("home");
-        Usuario u = usuarioService.getUsuario("0512013001");
-        model.addObject("user", u);
+        /*Usuario que se logeo*/
+        model.addObject("user", usuarioService.getUsuario("0512013001"));
+        /*Ciclo vigente*/
+        
+        /*Cursos Aperturados en el ciclo*/
+        
+        /*Cursos Matriculados del Usuario*/
         model.addObject("cursos_matriculados", generalService.getCursosMatriculados("0512013001"));
         return model;
     }

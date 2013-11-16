@@ -4,7 +4,11 @@
  */
 package com.platacad.dao;
 
+import com.platacad.entities.Ciclo;
 import com.platacad.entities.Curso;
+import com.platacad.entities.Tipos;
+import com.platacad.repositories.CicloRepository;
+import com.platacad.repositories.MatriculaRepository;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.TipoTO;
@@ -12,6 +16,7 @@ import com.platacad.to.TipoTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -30,14 +35,21 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 public class GeneralDAO {
-
-	@PersistenceContext
-	private EntityManager em;
-
+	
+	@Resource
+	private MatriculaRepository matriculaRepository;
+	
+	@Resource
+	private CicloRepository cicloRepository;
+	
+	public List<Ciclo> getCiclo(Integer anio, Tipos periodo){
+		return cicloRepository.findByAnioAndTipoPeriodo(anio, periodo);
+	}
+	
     public List<Curso> getCursos(String usuarioId) {
         return null;
     }
-
+    
 	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {
 		/*StringBuilder query = new StringBuilder();
 		query.append("select ")

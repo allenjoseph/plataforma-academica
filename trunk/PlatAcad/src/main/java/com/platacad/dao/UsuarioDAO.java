@@ -21,8 +21,7 @@ public class UsuarioDAO {
 	private UsuarioRepository usuarioRepository;
     
     public Usuario getUsuario(String usuarioId) {
-    	Usuario u = usuarioRepository.findOne(usuarioId);
-        return u;
+        return usuarioRepository.findOne(usuarioId);
     }
     
 }
