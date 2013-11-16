@@ -33,18 +33,23 @@ import javax.persistence.TemporalType;
 @Table(name = "ciclo", catalog = "platacad", schema = "")
 public class Ciclo implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_ciclo_pk", nullable = false)
     private Integer idCicloPk;
+    
     @Column(name = "anio")
     private Integer anio;
+    
     @Embedded
     private Auditoria auditoria;
+    
     @JoinColumn(name = "tipo_periodo", referencedColumnName = "id_tipos_pk")
     @ManyToOne
     private Tipos tipoPeriodo;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCicloFk")
     private List<CursoAperturado> cursoAperturadoList;
 

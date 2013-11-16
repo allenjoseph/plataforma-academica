@@ -30,19 +30,23 @@ import javax.persistence.TemporalType;
 @Table(name = "matricula", catalog = "platacad", schema = "")
 public class Matricula implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_matricula_pk", nullable = false)
     private Integer idMatriculaPk;
+    
     @Basic(optional = false)
     @Column(name = "id_curso_aperturado_fk", nullable = false)
     private int idCursoAperturadoFk;
-    @Embedded
-    private Auditoria auditoria;
+     
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
+    
+    @Embedded
+    private Auditoria auditoria;
 
     public Matricula() {
     }
