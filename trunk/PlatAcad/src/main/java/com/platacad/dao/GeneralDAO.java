@@ -6,9 +6,14 @@ package com.platacad.dao;
 
 import com.platacad.entities.Ciclo;
 import com.platacad.entities.Curso;
+import com.platacad.entities.CursoAperturado;
+import com.platacad.entities.Matricula;
 import com.platacad.entities.Tipos;
+import com.platacad.entities.Usuario;
 import com.platacad.repositories.CicloRepository;
+import com.platacad.repositories.CursoAperturadoRepository;
 import com.platacad.repositories.MatriculaRepository;
+import com.platacad.repositories.TiposRepository;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.TipoTO;
@@ -42,12 +47,32 @@ public class GeneralDAO {
 	@Resource
 	private CicloRepository cicloRepository;
 	
+	@Resource
+	private TiposRepository tiposRepository;
+	
+	@Resource
+	private CursoAperturadoRepository cursoAperturadoRepository;
+	
+	public Tipos getTipo(Integer id){
+		Tipos tipo = tiposRepository.findOne(id);
+		return tipo;
+	}
+	
 	public List<Ciclo> getCiclo(Integer anio, Tipos periodo){
 		return cicloRepository.findByAnioAndTipoPeriodo(anio, periodo);
 	}
 	
     public List<Curso> getCursos(String usuarioId) {
         return null;
+    }
+    
+    public List<CursoAperturado> getCursosAperturados(Ciclo ciclo){
+    	return cursoAperturadoRepository.findByIdCicloFk(ciclo);
+    }
+    
+    public List<Matricula> getCursosMatriculados(Usuario usuario){
+    	//matriculaRepository.findByIdUsuarioFk(where usuario)
+    	return null;
     }
     
 	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {
@@ -113,3 +138,4 @@ public class GeneralDAO {
 		return new ArrayList<TipoTO>();
 	}
 }
+

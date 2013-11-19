@@ -35,24 +35,34 @@ public class Tipos implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_tipos_pk", nullable = false)
     private Integer idTiposPk;
+    
     @Column(name = "descripcion", length = 255)
     private String descripcion;
+    
     @Column(name = "parametro", length = 255)
     private String parametro;
+    
     @Column(name = "tabla_referencia", length = 255)
     private String tablaReferencia;
+    
     @Embedded
     private Auditoria auditoria;
+    
     @OneToMany(mappedBy = "estado")
     private List<Usuario> usuarioList;
+    
     @OneToMany(mappedBy = "tipo")
     private List<TrabajoEncargado> trabajoEncargadoList;
+    
     @OneToMany(mappedBy = "tipo")
     private List<Documento> documentoList;
+    
     @OneToMany(mappedBy = "tipo")
     private List<Curso> cursoList;
+    
     @OneToMany(mappedBy = "tipoExamen")
     private List<Examen> examenList;
+    
     @OneToMany(mappedBy = "tipoPeriodo")
     private List<Ciclo> cicloList;
 
