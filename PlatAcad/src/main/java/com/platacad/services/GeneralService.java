@@ -5,6 +5,9 @@
 package com.platacad.services;
 
 import com.platacad.business.GeneralBusiness;
+import com.platacad.entities.Ciclo;
+import com.platacad.entities.CursoAperturado;
+import com.platacad.enums.TipoPeriodoEnum;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
@@ -39,6 +42,14 @@ public class GeneralService implements GeneralServiceInterface{
 
 	public List<TipoTO> getTipos(String tabla_referencia) {		
 		return generalBusiness.getTipos(tabla_referencia);
+	}
+
+	public Ciclo getCiclo(Integer anio, TipoPeriodoEnum periodo) {		
+		return generalBusiness.getCiclo(anio, periodo);
+	}
+
+	public List<CursoAperturado> getCursosAperturados(Ciclo ciclo) {		
+		return generalBusiness.getCursosAperturados(ciclo);
 	}
     
 }

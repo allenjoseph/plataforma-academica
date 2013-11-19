@@ -5,7 +5,11 @@
 package com.platacad.business;
 
 import com.platacad.dao.GeneralDAO;
+import com.platacad.entities.Ciclo;
 import com.platacad.entities.Curso;
+import com.platacad.entities.CursoAperturado;
+import com.platacad.entities.Tipos;
+import com.platacad.enums.TipoPeriodoEnum;
 import com.platacad.helpers.ConverterToTO;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
@@ -26,7 +30,20 @@ public class GeneralBusiness {
     
     @Autowired
     GeneralDAO generalDAO;
+    
+    public List<CursoAperturado> getCursosAperturados(Ciclo ciclo){
+    	return generalDAO.getCursosAperturados(ciclo);
+    }
 
+    public Ciclo getCiclo(Integer anio, TipoPeriodoEnum periodo){
+    	Tipos tipo = generalDAO.getTipo(periodo.getId());    			
+    	List<Ciclo> ciclo = generalDAO.getCiclo(anio, tipo);
+    	if(ciclo != null && ciclo.size() > 0){
+    		return ciclo.get(0);
+    	}
+    	return null;
+    }
+    
     public List<CursoTO> getCursos(String usuarioId) {
          List<Curso> cursos = generalDAO.getCursos(usuarioId);
          List<CursoTO> listaCursoTO = ConverterToTO.convertListaCursoTO(cursos);

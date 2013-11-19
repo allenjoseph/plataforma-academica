@@ -38,20 +38,27 @@ public class CursoAperturado implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_curso_aperturado", nullable = false)
     private Integer idCursoAperturado;
+    
     @Embedded
     private Auditoria auditoria;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
     private List<Articulo> articuloList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
     private List<TrabajoEncargado> trabajoEncargadoList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
     private List<Examen> examenList;
+    
     @JoinColumn(name = "id_docente_fk", referencedColumnName = "id_usuario_pk", nullable = false)
     @ManyToOne(optional = false)
     private Usuario idDocenteFk;
+    
     @JoinColumn(name = "id_curso_fk", referencedColumnName = "id_curso_pk", nullable = false)
     @ManyToOne(optional = false)
     private Curso idCursoFk;
+    
     @JoinColumn(name = "id_ciclo_fk", referencedColumnName = "id_ciclo_pk", nullable = false)
     @ManyToOne(optional = false)
     private Ciclo idCicloFk;

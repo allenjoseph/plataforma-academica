@@ -15,6 +15,7 @@ public enum TipoCursoEnum {
 
     private final int id;
     private final String descripcion;
+    
     private TipoCursoEnum(int id, String descripcion) {   
          this.id = id;
          this.descripcion = descripcion;
@@ -34,7 +35,8 @@ public enum TipoCursoEnum {
                 return OBLIGATORIO;
             case 6:
                 return ELECTIVO;
+            default:
+            	return OBLIGATORIO;
         }        
-        return ELECTIVO;        
     }
 }
