@@ -52,6 +52,9 @@ public class Ciclo implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCicloFk")
     private List<CursoAperturado> cursoAperturadoList;
+    
+    @OneToMany(mappedBy = "idCicloFk")
+    private List<Matricula> matriculaList;
 
     public Ciclo() {
     }

@@ -8,7 +8,9 @@ import com.platacad.dao.GeneralDAO;
 import com.platacad.entities.Ciclo;
 import com.platacad.entities.Curso;
 import com.platacad.entities.CursoAperturado;
+import com.platacad.entities.Matricula;
 import com.platacad.entities.Tipos;
+import com.platacad.entities.Usuario;
 import com.platacad.enums.TipoPeriodoEnum;
 import com.platacad.helpers.ConverterToTO;
 import com.platacad.to.CursoAsignadoTO;
@@ -43,6 +45,10 @@ public class GeneralBusiness {
     	}
     	return null;
     }
+    
+    public List<Matricula> getCursosMatriculados(Ciclo ciclo, Usuario usuario) {
+		return generalDAO.getCursosMatriculados(ciclo, usuario);
+	}
     
     public List<CursoTO> getCursos(String usuarioId) {
          List<Curso> cursos = generalDAO.getCursos(usuarioId);

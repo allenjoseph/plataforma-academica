@@ -45,6 +45,10 @@ public class Matricula implements Serializable {
     @ManyToOne
     private Usuario idUsuarioFk;
     
+    @JoinColumn(name = "id_ciclo_fk", referencedColumnName = "id_ciclo_pk")
+    @ManyToOne
+    private Ciclo idCicloFk;
+    
     @Embedded
     private Auditoria auditoria;
 

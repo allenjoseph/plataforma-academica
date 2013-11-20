@@ -70,9 +70,8 @@ public class GeneralDAO {
     	return cursoAperturadoRepository.findByIdCicloFk(ciclo);
     }
     
-    public List<Matricula> getCursosMatriculados(Usuario usuario){
-    	//matriculaRepository.findByIdUsuarioFk(where usuario)
-    	return null;
+    public List<Matricula> getCursosMatriculados(Ciclo ciclo, Usuario usuario){
+    	return matriculaRepository.findByIdCicloFkAndIdUsuarioFk(ciclo, usuario);
     }
     
 	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {

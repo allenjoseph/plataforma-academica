@@ -7,6 +7,8 @@ package com.platacad.services;
 import com.platacad.business.GeneralBusiness;
 import com.platacad.entities.Ciclo;
 import com.platacad.entities.CursoAperturado;
+import com.platacad.entities.Matricula;
+import com.platacad.entities.Usuario;
 import com.platacad.enums.TipoPeriodoEnum;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
@@ -50,6 +52,10 @@ public class GeneralService implements GeneralServiceInterface{
 
 	public List<CursoAperturado> getCursosAperturados(Ciclo ciclo) {		
 		return generalBusiness.getCursosAperturados(ciclo);
+	}
+	
+	public List<Matricula> getCursosMatriculados(Ciclo ciclo, Usuario usuario){
+		return generalBusiness.getCursosMatriculados(ciclo, usuario);
 	}
     
 }
