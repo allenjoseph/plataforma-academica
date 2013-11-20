@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.platacad.entities.Ciclo;
 import com.platacad.entities.Matricula;
 import com.platacad.entities.Usuario;
 
 public interface MatriculaRepository extends JpaRepository<Matricula, Integer>{
 
-	public List<Matricula> findByIdUsuarioFk(Usuario usuario);
+	public List<Matricula> findByIdCicloFkAndIdUsuarioFk(Ciclo ciclo, Usuario usuario);
 }

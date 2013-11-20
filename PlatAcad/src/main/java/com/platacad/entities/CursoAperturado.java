@@ -36,7 +36,7 @@ public class CursoAperturado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_curso_aperturado", nullable = false)
+    @Column(name = "id_curso_aperturado_pk", nullable = false)
     private Integer idCursoAperturado;
     
     @Embedded

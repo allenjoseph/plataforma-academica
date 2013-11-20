@@ -54,7 +54,7 @@ public class Articulo implements Serializable {
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
-    @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado", nullable = false)
+    @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado_pk", nullable = false)
     @ManyToOne(optional = false)
     private CursoAperturado idCursoAperturadoFk;
     @JoinColumn(name = "id_archivo_fk", referencedColumnName = "id_archivo_pk")

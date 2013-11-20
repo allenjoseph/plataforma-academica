@@ -7,6 +7,7 @@ package com.platacad.controllers;
 import com.platacad.entities.Ciclo;
 import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Examen;
+import com.platacad.entities.Matricula;
 import com.platacad.entities.Mensaje;
 import com.platacad.entities.TrabajoEncargado;
 import com.platacad.entities.Usuario;
@@ -47,12 +48,15 @@ public class BaseController {
     public ModelAndView home(){
         ModelAndView model = new ModelAndView("home");
         /*Usuario que se logeo*/
-        model.addObject("user", usuarioService.getUsuario("0512013001"));
+        Usuario usuario = usuarioService.getUsuario("0512013001");
+        model.addObject("user", usuario);
         /*Ciclo vigente*/
         Ciclo ciclo = generalService.getCiclo(2013, TipoPeriodoEnum.IMPAR);
         /*Cursos Aperturados en el ciclo*/
-        List<CursoAperturado> cursosAperturados = generalService.getCursosAperturados(ciclo);
+        //List<CursoAperturado> cursosAperturados = generalService.getCursosAperturados(ciclo);
         /*Cursos Matriculados del Usuario*/
+        List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(ciclo, usuario);
+        
         model.addObject("cursos_matriculados", generalService.getCursosMatriculados("0512013001"));
         return model;
     }

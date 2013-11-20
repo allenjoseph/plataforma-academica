@@ -47,7 +47,7 @@ public class Examen implements Serializable {
     @Lob
     @Column(name = "descripcion", length = 65535)
     private String descripcion;
-    @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado", nullable = false)
+    @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado_pk", nullable = false)
     @ManyToOne(optional = false)
     private CursoAperturado idCursoAperturadoFk;
 
