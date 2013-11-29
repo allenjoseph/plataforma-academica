@@ -11,13 +11,14 @@ import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Matricula;
 import com.platacad.entities.Parametros;
 import com.platacad.entities.Usuario;
-import com.platacad.enums.TipoPeriodoEnum;
+import com.platacad.entities.enums.TipoPeriodoEnum;
 import com.platacad.helpers.ConverterToTO;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
 import com.platacad.to.TipoTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,20 @@ public class GeneralBusiness {
     
     public List<Matricula> getCursosMatriculados(Integer ciclo, String usuario) {
 		return generalDAO.getCursosMatriculados(ciclo, usuario);
+	}
+
+	public List<CursoMatriculadoTO> getCursosMatriculadosTO(Integer ciclo, String usuario) {
+		List<CursoMatriculadoTO> lista = new ArrayList<CursoMatriculadoTO>();
+		List<Matricula> matriculas = generalDAO.getCursosMatriculados(ciclo, usuario);
+
+        for(Matricula matricula : matriculas){
+        	CursoMatriculadoTO curso = new CursoMatriculadoTO();
+        	curso.setNombre(matricula.getIdCursoAperturadoFk().getIdCursoFk().getNombre());
+        	curso.setDocente(matricula.getIdCursoAperturadoFk().getIdDocenteFk().getApellidoPaterno());
+        	curso.setCreditos(matricula.getIdCursoAperturadoFk().getIdCursoFk().getCreditos());
+        	curso.setTipo(matricula.getIdCursoAperturadoFk().getIdCursoFk().getTipo().getDescripcion());        	
+        }
+		return null;
 	}
     
     
