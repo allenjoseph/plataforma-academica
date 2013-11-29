@@ -9,7 +9,7 @@ import com.platacad.entities.Ciclo;
 import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Matricula;
 import com.platacad.entities.Usuario;
-import com.platacad.enums.TipoPeriodoEnum;
+import com.platacad.entities.enums.TipoPeriodoEnum;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
@@ -32,6 +32,10 @@ public class GeneralService implements GeneralServiceInterface{
         
     public List<Matricula> getCursosMatriculados(Integer ciclo, String usuario){
 		return generalBusiness.getCursosMatriculados(ciclo, usuario);
+	}
+
+	public List<CursoMatriculadoTO> getCursosMatriculadosTO(Integer ciclo, String usuario) {		
+		return generalBusiness.getCursosMatriculadosTO(ciclo, usuario);
 	}
     
     

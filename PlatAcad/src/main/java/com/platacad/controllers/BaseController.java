@@ -13,6 +13,7 @@ import com.platacad.entities.Usuario;
 import com.platacad.services.GeneralService;
 import com.platacad.services.MensajeService;
 import com.platacad.services.UsuarioService;
+import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.MensajeTO;
 
 import java.util.ArrayList;
@@ -48,17 +49,10 @@ public class BaseController {
         ModelAndView model = new ModelAndView("home");
         
         Usuario user = usuarioService.getUsuario("0512013001");
-        List<Matricula> matriculas = generalService.getCursosMatriculados(1, "0512013001");
-        List<Curso> cursos = new ArrayList<Curso>();
-        for(Matricula matricula : matriculas){
-        	matricula.getIdCursoAperturadoFk().getIdCursoFk().setDocente(
-        			matricula.getIdCursoAperturadoFk().getIdDocenteFk().getApellidoPaterno());
-        	cursos.add(matricula.getIdCursoAperturadoFk().getIdCursoFk());
-        	
-        }
+        List<CursoMatriculadoTO> cursosMatriculados = generalService.getCursosMatriculadosTO(1, "0512013001");
         
         model.addObject("user", user);
-        model.addObject("cursos_matriculados", cursos);
+        model.addObject("cursos_matriculados", cursosMatriculados);
         return model;
     }
     

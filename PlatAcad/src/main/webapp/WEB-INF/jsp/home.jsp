@@ -48,7 +48,7 @@
                                 <div class="panel-footer">
                                 	<div class="footer-curso-info">
                                 		<small><i class="icon-star"></i><c:out value="${curso.creditos}"/></small>
-                                		<small><i class="icon-book"></i><c:out value="${curso.tipo.descripcion}"/></small>
+                                		<small><i class="icon-book"></i><c:out value="${curso.tipo}"/></small>
                                 	</div>
                                     <div class="footer-date-info">
                                         <small>

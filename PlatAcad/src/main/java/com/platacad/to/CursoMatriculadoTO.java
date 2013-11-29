@@ -5,18 +5,29 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class CursoMatriculadoTO {
+	
 	private String nombre;
+	
 	private Integer creditos;
+	
 	private String tipo;
+	
 	private String docente;
+	
 	private BigDecimal numero_articulos;
+	
 	private BigDecimal numero_examenes;
+	
 	private BigDecimal numero_trabajos;
+	
 	private String fecha_actualizacion;
 	
 	private Timestamp actualizacion_articulos;
+	
 	private Timestamp actualizacion_examenes;
+	
 	private Timestamp actualizacion_trabajos;
+	
 	
 	public CursoMatriculadoTO() {
 		// TODO Auto-generated constructor stub

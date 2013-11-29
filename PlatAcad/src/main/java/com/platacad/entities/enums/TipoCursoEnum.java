@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.platacad.enums;
+package com.platacad.entities.enums;
 
 /**
  *
