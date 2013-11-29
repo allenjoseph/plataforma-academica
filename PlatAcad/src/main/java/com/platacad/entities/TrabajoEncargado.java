@@ -54,9 +54,9 @@ public class TrabajoEncargado implements Serializable {
     private int estado;
     @Embedded
     private Auditoria auditoria;
-    @JoinColumn(name = "tipo", referencedColumnName = "id_tipos_pk")
+    @JoinColumn(name = "tipo_param", referencedColumnName = "id_parametro_pk")
     @ManyToOne
-    private Tipos tipo;
+    private Parametros tipo;
     @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado_pk", nullable = false)
     @ManyToOne(optional = false)
     private CursoAperturado idCursoAperturadoFk;
@@ -126,11 +126,11 @@ public class TrabajoEncargado implements Serializable {
 		this.auditoria = auditoria;
 	}
 
-	public Tipos getTipo() {
+	public Parametros getTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipos tipo) {
+    public void setTipo(Parametros tipo) {
         this.tipo = tipo;
     }
 

@@ -27,14 +27,14 @@ import javax.persistence.TemporalType;
  * @author allen
  */
 @Entity
-@Table(name = "tipos", catalog = "platacad", schema = "")
-public class Tipos implements Serializable {
+@Table(name = "parametros", catalog = "platacad", schema = "")
+public class Parametros implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_tipos_pk", nullable = false)
-    private Integer idTiposPk;
+    @Column(name = "id_parametro_pk", nullable = false)
+    private Integer idParametroPk;
     
     @Column(name = "descripcion", length = 255)
     private String descripcion;
@@ -42,8 +42,8 @@ public class Tipos implements Serializable {
     @Column(name = "parametro", length = 255)
     private String parametro;
     
-    @Column(name = "tabla_referencia", length = 255)
-    private String tablaReferencia;
+    @Column(name = "referencia", length = 255)
+    private String referencia;
     
     @Embedded
     private Auditoria auditoria;
@@ -60,25 +60,25 @@ public class Tipos implements Serializable {
     @OneToMany(mappedBy = "tipo")
     private List<Curso> cursoList;
     
-    @OneToMany(mappedBy = "tipoExamen")
+    @OneToMany(mappedBy = "tipo")
     private List<Examen> examenList;
     
-    @OneToMany(mappedBy = "tipoPeriodo")
+    @OneToMany(mappedBy = "tipo")
     private List<Ciclo> cicloList;
 
-    public Tipos() {
+    public Parametros() {
     }
 
-    public Tipos(Integer idTiposPk) {
-        this.idTiposPk = idTiposPk;
+    public Parametros(Integer idParametroPk) {
+        this.idParametroPk = idParametroPk;
     }
 
-    public Integer getIdTiposPk() {
-        return idTiposPk;
+    public Integer getIdParametroPk() {
+        return idParametroPk;
     }
 
-    public void setIdTiposPk(Integer idTiposPk) {
-        this.idTiposPk = idTiposPk;
+    public void setIdParametroPk(Integer idParametroPk) {
+        this.idParametroPk = idParametroPk;
     }
 
     public String getDescripcion() {
@@ -97,15 +97,15 @@ public class Tipos implements Serializable {
         this.parametro = parametro;
     }
 
-    public String getTablaReferencia() {
-		return tablaReferencia;
+    public String getReferencia() {
+		return referencia;
 	}
 
-	public void setTablaReferencia(String tablaReferencia) {
-		this.tablaReferencia = tablaReferencia;
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 
-    public Auditoria getAuditoria() {
+	public Auditoria getAuditoria() {
 		return auditoria;
 	}
 
@@ -164,18 +164,18 @@ public class Tipos implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTiposPk != null ? idTiposPk.hashCode() : 0);
+        hash += (idParametroPk != null ? idParametroPk.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tipos)) {
+        if (!(object instanceof Parametros)) {
             return false;
         }
-        Tipos other = (Tipos) object;
-        if ((this.idTiposPk == null && other.idTiposPk != null) || (this.idTiposPk != null && !this.idTiposPk.equals(other.idTiposPk))) {
+        Parametros other = (Parametros) object;
+        if ((this.idParametroPk == null && other.idParametroPk != null) || (this.idParametroPk != null && !this.idParametroPk.equals(other.idParametroPk))) {
             return false;
         }
         return true;
@@ -183,7 +183,7 @@ public class Tipos implements Serializable {
 
     @Override
     public String toString() {
-        return "com.platacad.entities.Tipos[ idTiposPk=" + idTiposPk + " ]";
+        return "com.platacad.entities.Parametros[ idParametroPk=" + idParametroPk + " ]";
     }
     
 }

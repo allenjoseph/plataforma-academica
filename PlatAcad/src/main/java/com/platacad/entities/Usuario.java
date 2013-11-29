@@ -54,14 +54,11 @@ public class Usuario implements Serializable {
     @Embedded
     private Auditoria auditoria;
         
-    @JoinColumn(name = "estado", referencedColumnName = "id_tipos_pk")
-    @ManyToOne
-    private Tipos estado;
+    @Column(name = "estado_param")
+    private Integer estado;
     
-    @JoinColumn(name = "id_rol_fk", referencedColumnName = "id_rol_pk")
-    @ManyToOne
-    private Rol idRolFk;
-    
+    @Column(name = "rol_param")
+    private Integer rol;    
 
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Articulo> articuloList;
@@ -74,9 +71,6 @@ public class Usuario implements Serializable {
     
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Comentario> comentarioList;
-    
-    @OneToMany(mappedBy = "idUsuarioFk")
-    private List<Matricula> matriculaList;
     
     @OneToMany(mappedBy = "idUsuarioFk")
     private List<Archivo> archivoList;
@@ -147,22 +141,6 @@ public class Usuario implements Serializable {
         this.articuloList = articuloList;
     }
 
-    public Tipos getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Tipos estado) {
-        this.estado = estado;
-    }
-
-    public Rol getIdRolFk() {
-        return idRolFk;
-    }
-
-    public void setIdRolFk(Rol idRolFk) {
-        this.idRolFk = idRolFk;
-    }
-
     public List<Mensaje> getMensajeList() {
         return mensajeList;
     }
@@ -187,14 +165,6 @@ public class Usuario implements Serializable {
         this.comentarioList = comentarioList;
     }
 
-    public List<Matricula> getMatriculaList() {
-        return matriculaList;
-    }
-
-    public void setMatriculaList(List<Matricula> matriculaList) {
-        this.matriculaList = matriculaList;
-    }
-
     public List<Archivo> getArchivoList() {
         return archivoList;
     }
@@ -210,6 +180,22 @@ public class Usuario implements Serializable {
     public void setCursoAperturadoList(List<CursoAperturado> cursoAperturadoList) {
         this.cursoAperturadoList = cursoAperturadoList;
     }
+
+	public Integer getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
+
+	public Integer getRol() {
+		return rol;
+	}
+
+	public void setRol(Integer rol) {
+		this.rol = rol;
+	}
 
 	@Override
     public int hashCode() {

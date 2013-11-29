@@ -25,34 +25,34 @@
                                     <p>
                                     	<span class="input-title">
 											<t:message code="page.home.curso.docente" />
-										</span><c:out value="${curso.docente}"/>
+										</span>
+										<c:out value="${curso.docente}"/>
 									</p>
                                     <p>
                                     	<span class="input-title">
                                     		<t:message code="page.home.curso.articulos" />
-                                    	</span><c:out value="${curso.numero_articulos}"/>
+                                    	</span>
                                   	</p>
                                     <p>
                                     	<span class="input-title">
                                     		<t:message code="page.home.curso.examenes" />
-                                   		</span><c:out value="${curso.numero_examenes}"/>
+                                   		</span>
                                    	</p>
                                     <p>
                                     	<span class="input-title">
                                     		<t:message code="page.home.curso.trabajos" />
                                     	</span>											
-										<c:out value="${curso.numero_trabajos}"/>
+										
 									</p>                                    
                                 </div>
                                 <div class="panel-footer">
                                 	<div class="footer-curso-info">
                                 		<small><i class="icon-star"></i><c:out value="${curso.creditos}"/></small>
-                                		<small><i class="icon-book"></i><c:out value="${curso.tipo}"/></small>
+                                		<small><i class="icon-book"></i><c:out value="${curso.tipo.descripcion}"/></small>
                                 	</div>
                                     <div class="footer-date-info">
                                         <small>
                                         	<t:message code="page.home.curso.fecha" />
-											<c:out value="${curso.fecha_actualizacion}"/>
 										</small>
                                     </div>
                                 </div>

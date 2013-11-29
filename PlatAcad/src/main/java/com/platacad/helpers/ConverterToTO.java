@@ -22,8 +22,6 @@ public class ConverterToTO {
         to.setCodigo(user.getIdUsuarioPk());
         to.setNombre(user.getNombres());
         to.setNombreCompleto(user.getNombres().concat(" ").concat(user.getApellidoPaterno()).concat(" ").concat(user.getApellidoPaterno()));
-        to.setRol(user.getIdRolFk().getDescripcion());
-        to.setRolId(user.getIdRolFk().getIdRolPk());
         return to;
     }
 

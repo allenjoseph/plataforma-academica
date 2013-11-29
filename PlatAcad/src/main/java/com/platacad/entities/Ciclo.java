@@ -46,15 +46,11 @@ public class Ciclo implements Serializable {
     @Embedded
     private Auditoria auditoria;
     
-    @JoinColumn(name = "tipo_periodo", referencedColumnName = "id_tipos_pk")
-    @ManyToOne
-    private Tipos tipoPeriodo;
+    @Column(name = "tipo_param")
+    private Integer tipo;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCicloFk")
     private List<CursoAperturado> cursoAperturadoList;
-    
-    @OneToMany(mappedBy = "idCicloFk")
-    private List<Matricula> matriculaList;
 
     public Ciclo() {
     }
@@ -86,16 +82,16 @@ public class Ciclo implements Serializable {
 	public void setAuditoria(Auditoria auditoria) {
 		this.auditoria = auditoria;
 	}
-	
-    public Tipos getTipoPeriodo() {
-        return tipoPeriodo;
-    }
 
-    public void setTipoPeriodo(Tipos tipoPeriodo) {
-        this.tipoPeriodo = tipoPeriodo;
-    }
+	public Integer getTipo() {
+		return tipo;
+	}
 
-    public List<CursoAperturado> getCursoAperturadoList() {
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+
+	public List<CursoAperturado> getCursoAperturadoList() {
         return cursoAperturadoList;
     }
 

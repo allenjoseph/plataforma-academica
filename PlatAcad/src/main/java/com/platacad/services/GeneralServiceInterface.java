@@ -20,9 +20,11 @@ import java.util.List;
  */
 public interface GeneralServiceInterface {
     
-    public List<CursoTO> getCursos(String usuarioId);
+    public List<Matricula> getCursosMatriculados(Integer ciclo, String usuario);
+	/*
+	public List<CursoTO> getCursos(String usuarioId);
     public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId);
-    public Ciclo getCiclo(Integer anio, TipoPeriodoEnum periodo);
+    public Ciclo getCiclo(Integer anio, Integer periodo);
     public List<CursoAperturado> getCursosAperturados(Ciclo ciclo);
-    public List<Matricula> getCursosMatriculados(Ciclo ciclo, Usuario usuario);
+	 */
 }
