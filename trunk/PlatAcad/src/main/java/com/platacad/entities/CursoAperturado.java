@@ -42,15 +42,6 @@ public class CursoAperturado implements Serializable {
     @Embedded
     private Auditoria auditoria;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
-    private List<Articulo> articuloList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
-    private List<TrabajoEncargado> trabajoEncargadoList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
-    private List<Examen> examenList;
-    
     @JoinColumn(name = "id_docente_fk", referencedColumnName = "id_usuario_pk", nullable = false)
     @ManyToOne(optional = false)
     private Usuario idDocenteFk;
@@ -59,10 +50,21 @@ public class CursoAperturado implements Serializable {
     @ManyToOne(optional = false)
     private Curso idCursoFk;
     
-    @JoinColumn(name = "id_ciclo_fk", referencedColumnName = "id_ciclo_pk", nullable = false)
-    @ManyToOne(optional = false)
-    private Ciclo idCicloFk;
-
+    @Column(name = "id_ciclo_fk")
+    private Integer idCicloFk;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
+    private List<Articulo> articuloList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
+    private List<TrabajoEncargado> trabajoEncargadoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
+    private List<Examen> examenList;   
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
+    private List<Matricula> matriculaList;  
+        
     public CursoAperturado() {
     }
 
@@ -125,16 +127,24 @@ public class CursoAperturado implements Serializable {
     public void setIdCursoFk(Curso idCursoFk) {
         this.idCursoFk = idCursoFk;
     }
+ 
+    public Integer getIdCicloFk() {
+		return idCicloFk;
+	}
 
-    public Ciclo getIdCicloFk() {
-        return idCicloFk;
-    }
+	public void setIdCicloFk(Integer idCicloFk) {
+		this.idCicloFk = idCicloFk;
+	}
 
-    public void setIdCicloFk(Ciclo idCicloFk) {
-        this.idCicloFk = idCicloFk;
-    }
+	public List<Matricula> getMatriculaList() {
+		return matriculaList;
+	}
 
-    @Override
+	public void setMatriculaList(List<Matricula> matriculaList) {
+		this.matriculaList = matriculaList;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idCursoAperturado != null ? idCursoAperturado.hashCode() : 0);

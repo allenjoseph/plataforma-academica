@@ -4,35 +4,13 @@
  */
 package com.platacad.dao;
 
-import com.platacad.entities.Ciclo;
-import com.platacad.entities.Curso;
-import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Matricula;
-import com.platacad.entities.Tipos;
-import com.platacad.entities.Usuario;
-import com.platacad.repositories.CicloRepository;
 import com.platacad.repositories.CursoAperturadoRepository;
 import com.platacad.repositories.MatriculaRepository;
-import com.platacad.repositories.TiposRepository;
-import com.platacad.to.CursoAsignadoTO;
-import com.platacad.to.CursoMatriculadoTO;
-import com.platacad.to.TipoTO;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.transform.Transformers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -45,20 +23,30 @@ public class GeneralDAO {
 	private MatriculaRepository matriculaRepository;
 	
 	@Resource
-	private CicloRepository cicloRepository;
-	
-	@Resource
-	private TiposRepository tiposRepository;
-	
-	@Resource
 	private CursoAperturadoRepository cursoAperturadoRepository;
 	
-	public Tipos getTipo(Integer id){
-		Tipos tipo = tiposRepository.findOne(id);
+	/* obtiene lista de matriculas de cursos por ciclo y usuario */
+	public List<Matricula> getCursosMatriculados(Integer ciclo, String usuario){
+    	return matriculaRepository.findByIdCicloFkAndIdUsuarioFk(ciclo, usuario);
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	public Parametros getTipo(Integer id){
+		Parametros tipo = tiposRepository.findOne(id);
 		return tipo;
 	}
 	
-	public List<Ciclo> getCiclo(Integer anio, Tipos periodo){
+	public List<Ciclo> getCiclo(Integer anio, Integer periodo){
 		return cicloRepository.findByAnioAndTipoPeriodo(anio, periodo);
 	}
 	
@@ -70,12 +58,10 @@ public class GeneralDAO {
     	return cursoAperturadoRepository.findByIdCicloFk(ciclo);
     }
     
-    public List<Matricula> getCursosMatriculados(Ciclo ciclo, Usuario usuario){
-    	return matriculaRepository.findByIdCicloFkAndIdUsuarioFk(ciclo, usuario);
-    }
+    
     
 	public List<CursoMatriculadoTO> getCursosMatriculados(String usuarioId) {
-		/*StringBuilder query = new StringBuilder();
+		StringBuilder query = new StringBuilder();
 		query.append("select ")
 		
 		Query query = session.createSQLQuery("SELECT c.nombre AS \"nombre\","
@@ -97,12 +83,12 @@ public class GeneralDAO {
 				+ "	AND m.id_usuario_fk = ?")
 				.setParameter(0, usuarioId)
 				.setResultTransformer(Transformers.aliasToBean(CursoMatriculadoTO.class));
-		return query.list();*/
+		return query.list();
 		return new ArrayList<CursoMatriculadoTO>();
 	}
 
 	public List<CursoAsignadoTO> getCursosAsignados(String usuarioId) {
-		/*Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Query query = session.createSQLQuery("SELECT c.nombre AS \"nombre\","
 				+ "	c.creditos AS \"creditos\","
 				+ "	(SELECT t.parametro FROM tipos t WHERE t.id_tipos_pk = c.tipo) AS \"tipo\","
@@ -120,12 +106,12 @@ public class GeneralDAO {
 				+ "	AND ca.id_docente_fk = ?")
 				.setParameter(0, usuarioId)
 				.setResultTransformer(Transformers.aliasToBean(CursoAsignadoTO.class));
-		return query.list();*/
+		return query.list();
 		return new ArrayList<CursoAsignadoTO>();
 	}
 
 	public List<TipoTO> getTipos(String tabla_referencia) {
-		/*Session session = getHibernateTemplate().getSessionFactory().openSession();
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Query query = session.createSQLQuery("SELECT t.id_tipos_pk AS \"id\","
 				+ "	t.parametro AS \"parametro\","
 				+ "	t.descripcion AS \"descripcion\""
@@ -133,8 +119,8 @@ public class GeneralDAO {
 				+ " WHERE t.tabla_referencia = ?")
 				.setParameter(0, tabla_referencia)
 				.setResultTransformer(Transformers.aliasToBean(TipoTO.class));
-		return query.list();*/
+		return query.list();
 		return new ArrayList<TipoTO>();
-	}
+	}*/
 }
 

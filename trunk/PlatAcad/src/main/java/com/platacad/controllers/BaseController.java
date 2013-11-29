@@ -4,19 +4,18 @@
  */
 package com.platacad.controllers;
 
-import com.platacad.entities.Ciclo;
-import com.platacad.entities.CursoAperturado;
+import com.platacad.entities.Curso;
 import com.platacad.entities.Examen;
 import com.platacad.entities.Matricula;
 import com.platacad.entities.Mensaje;
 import com.platacad.entities.TrabajoEncargado;
 import com.platacad.entities.Usuario;
-import com.platacad.enums.TipoPeriodoEnum;
 import com.platacad.services.GeneralService;
 import com.platacad.services.MensajeService;
 import com.platacad.services.UsuarioService;
 import com.platacad.to.MensajeTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,17 +46,19 @@ public class BaseController {
     @RequestMapping("inicio.html")
     public ModelAndView home(){
         ModelAndView model = new ModelAndView("home");
-        /*Usuario que se logeo*/
-        Usuario usuario = usuarioService.getUsuario("0512013001");
-        model.addObject("user", usuario);
-        /*Ciclo vigente*/
-        Ciclo ciclo = generalService.getCiclo(2013, TipoPeriodoEnum.IMPAR);
-        /*Cursos Aperturados en el ciclo*/
-        //List<CursoAperturado> cursosAperturados = generalService.getCursosAperturados(ciclo);
-        /*Cursos Matriculados del Usuario*/
-        List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(ciclo, usuario);
         
-        model.addObject("cursos_matriculados", generalService.getCursosMatriculados("0512013001"));
+        Usuario user = usuarioService.getUsuario("0512013001");
+        List<Matricula> matriculas = generalService.getCursosMatriculados(1, "0512013001");
+        List<Curso> cursos = new ArrayList<Curso>();
+        for(Matricula matricula : matriculas){
+        	matricula.getIdCursoAperturadoFk().getIdCursoFk().setDocente(
+        			matricula.getIdCursoAperturadoFk().getIdDocenteFk().getApellidoPaterno());
+        	cursos.add(matricula.getIdCursoAperturadoFk().getIdCursoFk());
+        	
+        }
+        
+        model.addObject("user", user);
+        model.addObject("cursos_matriculados", cursos);
         return model;
     }
     
@@ -65,7 +66,7 @@ public class BaseController {
     public ModelAndView homeDocente(){
         ModelAndView model = new ModelAndView("homeDocente");
         model.addObject("user", usuarioService.getUsuario("45653716"));
-        model.addObject("cursos_asignados", generalService.getCursosAsignados("45653716"));
+        //model.addObject("cursos_asignados", generalService.getCursosAsignados("45653716"));
         return model;
     }
     
@@ -84,7 +85,7 @@ public class BaseController {
         ModelAndView model = new ModelAndView("examen");
         model.addObject("user", usuarioService.getUsuario("45653716"));
         model.addObject("examen", new Examen());
-        model.addObject("tipos_examen",generalService.getTipos("EXAMEN"));
+        //model.addObject("tipos_examen",generalService.getTipos("EXAMEN"));
         return model;
     }
     

@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -38,19 +39,31 @@ public class Curso implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_curso_pk", nullable = false)
     private Integer idCursoPk;
+    
     @Column(name = "nombre", length = 255)
     private String nombre;
+    
     @Column(name = "creditos")
     private Integer creditos;
+    
+    @Column(name = "estado_param")
+    private Integer estado;
+    
     @Embedded
     private Auditoria auditoria;
+    
     @OneToMany(mappedBy = "idCursoDestinoFk")
     private List<Mensaje> mensajeList;
-    @JoinColumn(name = "tipo", referencedColumnName = "id_tipos_pk")
+    
+    @JoinColumn(name = "tipo_param", referencedColumnName = "id_parametro_pk")
     @ManyToOne
-    private Tipos tipo;
+    private Parametros tipo;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoFk")
     private List<CursoAperturado> cursoAperturadoList;
+    
+    @Transient
+    private String docente;
 
     public Curso() {
     }
@@ -99,11 +112,11 @@ public class Curso implements Serializable {
         this.mensajeList = mensajeList;
     }
 
-    public Tipos getTipo() {
+    public Parametros getTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipos tipo) {
+    public void setTipo(Parametros tipo) {
         this.tipo = tipo;
     }
 
@@ -115,29 +128,20 @@ public class Curso implements Serializable {
         this.cursoAperturadoList = cursoAperturadoList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idCursoPk != null ? idCursoPk.hashCode() : 0);
-        return hash;
-    }
+    public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Curso)) {
-            return false;
-        }
-        Curso other = (Curso) object;
-        if ((this.idCursoPk == null && other.idCursoPk != null) || (this.idCursoPk != null && !this.idCursoPk.equals(other.idCursoPk))) {
-            return false;
-        }
-        return true;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Curso[ idCursoPk=" + idCursoPk + " ]";
-    }
+	public String getDocente() {
+		return docente;
+	}
+
+	public void setDocente(String docente) {
+		this.docente = docente;
+	}
     
 }

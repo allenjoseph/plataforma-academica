@@ -29,7 +29,20 @@ public class GeneralService implements GeneralServiceInterface{
 
     @Autowired
     GeneralBusiness generalBusiness;
+        
+    public List<Matricula> getCursosMatriculados(Integer ciclo, String usuario){
+		return generalBusiness.getCursosMatriculados(ciclo, usuario);
+	}
     
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
     public List<CursoTO> getCursos(String usuarioId) {                   
         return generalBusiness.getCursos(usuarioId);
     }
@@ -46,16 +59,12 @@ public class GeneralService implements GeneralServiceInterface{
 		return generalBusiness.getTipos(tabla_referencia);
 	}
 
-	public Ciclo getCiclo(Integer anio, TipoPeriodoEnum periodo) {		
+	public Ciclo getCiclo(Integer anio, Integer periodo) {		
 		return generalBusiness.getCiclo(anio, periodo);
 	}
 
 	public List<CursoAperturado> getCursosAperturados(Ciclo ciclo) {		
 		return generalBusiness.getCursosAperturados(ciclo);
 	}
-	
-	public List<Matricula> getCursosMatriculados(Ciclo ciclo, Usuario usuario){
-		return generalBusiness.getCursosMatriculados(ciclo, usuario);
-	}
-    
+	*/
 }

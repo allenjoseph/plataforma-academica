@@ -9,7 +9,7 @@ import com.platacad.entities.Ciclo;
 import com.platacad.entities.Curso;
 import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Matricula;
-import com.platacad.entities.Tipos;
+import com.platacad.entities.Parametros;
 import com.platacad.entities.Usuario;
 import com.platacad.enums.TipoPeriodoEnum;
 import com.platacad.helpers.ConverterToTO;
@@ -33,22 +33,32 @@ public class GeneralBusiness {
     @Autowired
     GeneralDAO generalDAO;
     
+    public List<Matricula> getCursosMatriculados(Integer ciclo, String usuario) {
+		return generalDAO.getCursosMatriculados(ciclo, usuario);
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
     public List<CursoAperturado> getCursosAperturados(Ciclo ciclo){
     	return generalDAO.getCursosAperturados(ciclo);
     }
 
-    public Ciclo getCiclo(Integer anio, TipoPeriodoEnum periodo){
-    	Tipos tipo = generalDAO.getTipo(periodo.getId());    			
-    	List<Ciclo> ciclo = generalDAO.getCiclo(anio, tipo);
+    public Ciclo getCiclo(Integer anio, Integer periodo){  			
+    	List<Ciclo> ciclo = generalDAO.getCiclo(anio, periodo);
     	if(ciclo != null && ciclo.size() > 0){
     		return ciclo.get(0);
     	}
     	return null;
     }
-    
-    public List<Matricula> getCursosMatriculados(Ciclo ciclo, Usuario usuario) {
-		return generalDAO.getCursosMatriculados(ciclo, usuario);
-	}
     
     public List<CursoTO> getCursos(String usuarioId) {
          List<Curso> cursos = generalDAO.getCursos(usuarioId);
@@ -67,6 +77,6 @@ public class GeneralBusiness {
 	public List<TipoTO> getTipos(String tabla_referencia) {
 		return generalDAO.getTipos(tabla_referencia);
 	}
-    
+    */
     
 }

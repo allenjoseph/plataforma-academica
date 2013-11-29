@@ -41,9 +41,9 @@ public class Examen implements Serializable {
     private Date fechaExamen;
     @Embedded
     private Auditoria auditoria;
-    @JoinColumn(name = "tipo_examen", referencedColumnName = "id_tipos_pk")
+    @JoinColumn(name = "tipo_param", referencedColumnName = "id_parametro_pk")
     @ManyToOne
-    private Tipos tipoExamen;
+    private Parametros tipo;
     @Lob
     @Column(name = "descripcion", length = 65535)
     private String descripcion;
@@ -82,15 +82,15 @@ public class Examen implements Serializable {
 		this.auditoria = auditoria;
 	}
 
-	public Tipos getTipoExamen() {
-        return tipoExamen;
-    }
+    public Parametros getTipo() {
+		return tipo;
+	}
 
-    public void setTipoExamen(Tipos tipoExamen) {
-        this.tipoExamen = tipoExamen;
-    }
+	public void setTipo(Parametros tipo) {
+		this.tipo = tipo;
+	}
 
-    public CursoAperturado getIdCursoAperturadoFk() {
+	public CursoAperturado getIdCursoAperturadoFk() {
         return idCursoAperturadoFk;
     }
 

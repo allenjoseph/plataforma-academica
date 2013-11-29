@@ -10,5 +10,5 @@ import com.platacad.entities.Usuario;
 
 public interface MatriculaRepository extends JpaRepository<Matricula, Integer>{
 
-	public List<Matricula> findByIdCicloFkAndIdUsuarioFk(Ciclo ciclo, Usuario usuario);
+	public List<Matricula> findByIdCicloFkAndIdUsuarioFk(Integer ciclo, String usuario);
 }

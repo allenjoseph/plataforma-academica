@@ -39,9 +39,9 @@ public class Documento implements Serializable {
     private String titulo;
     @Embedded
     private Auditoria auditoria;
-    @JoinColumn(name = "tipo", referencedColumnName = "id_tipos_pk")
+    @JoinColumn(name = "tipo_param", referencedColumnName = "id_parametro_pk")
     @ManyToOne
-    private Tipos tipo;
+    private Parametros tipo;
     @JoinColumn(name = "id_archivo_fk", referencedColumnName = "id_archivo_pk")
     @ManyToOne
     private Archivo idArchivoFk;
@@ -77,11 +77,11 @@ public class Documento implements Serializable {
 		this.auditoria = auditoria;
 	}
 
-	public Tipos getTipo() {
+	public Parametros getTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipos tipo) {
+    public void setTipo(Parametros tipo) {
         this.tipo = tipo;
     }
 

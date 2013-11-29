@@ -38,28 +38,37 @@ public class Articulo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_articulo_pk", nullable = false)
     private Integer idArticuloPk;
+    
     @Column(name = "titulo", length = 255)
     private String titulo;
+    
     @Lob
     @Column(name = "contenido")
     private byte[] contenido;
+    
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
+    
     @Column(name = "fecha_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
+    
     @Embedded
     private Auditoria auditoria;    
+    
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
+    
     @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado_pk", nullable = false)
     @ManyToOne(optional = false)
     private CursoAperturado idCursoAperturadoFk;
+    
     @JoinColumn(name = "id_archivo_fk", referencedColumnName = "id_archivo_pk")
     @ManyToOne
     private Archivo idArchivoFk;
+    
     @OneToMany(mappedBy = "idArticuloFk")
     private List<Comentario> comentarioList;
 
