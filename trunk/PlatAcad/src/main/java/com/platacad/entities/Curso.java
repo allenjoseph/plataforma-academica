@@ -55,9 +55,8 @@ public class Curso implements Serializable {
     @OneToMany(mappedBy = "idCursoDestinoFk")
     private List<Mensaje> mensajeList;
     
-    @JoinColumn(name = "tipo_param", referencedColumnName = "id_parametro_pk")
-    @ManyToOne
-    private Parametros tipo;
+    @Column(name = "tipo_param")
+    private Integer tipo;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoFk")
     private List<CursoAperturado> cursoAperturadoList;
@@ -111,16 +110,16 @@ public class Curso implements Serializable {
     public void setMensajeList(List<Mensaje> mensajeList) {
         this.mensajeList = mensajeList;
     }
+    
+    public Integer getTipo() {
+		return tipo;
+	}
 
-    public Parametros getTipo() {
-        return tipo;
-    }
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
 
-    public void setTipo(Parametros tipo) {
-        this.tipo = tipo;
-    }
-
-    public List<CursoAperturado> getCursoAperturadoList() {
+	public List<CursoAperturado> getCursoAperturadoList() {
         return cursoAperturadoList;
     }
 

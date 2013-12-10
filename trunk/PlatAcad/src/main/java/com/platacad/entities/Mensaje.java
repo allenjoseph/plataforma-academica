@@ -59,6 +59,9 @@ public class Mensaje implements Serializable, Auditable {
     @ManyToOne
     private Curso idCursoDestinoFk;
     
+    @Column(name = "estado_param")
+    private Integer estado;
+    
     @Embedded
     private Auditoria auditoria = new Auditoria();
 
@@ -125,30 +128,13 @@ public class Mensaje implements Serializable, Auditable {
 		this.auditoria = auditoria;
 	}
 
-	@Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idMensajePk != null ? idMensajePk.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Mensaje)) {
-            return false;
-        }
-        Mensaje other = (Mensaje) object;
-        if ((this.idMensajePk == null && other.idMensajePk != null) || (this.idMensajePk != null && !this.idMensajePk.equals(other.idMensajePk))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Mensaje[ idMensajePk=" + idMensajePk + " ]";
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
 	public void prePresist() {
 		auditoria.setCreacionFecha(new Date());

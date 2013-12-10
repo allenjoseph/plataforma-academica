@@ -47,24 +47,6 @@ public class Parametros implements Serializable {
     
     @Embedded
     private Auditoria auditoria;
-    
-    @OneToMany(mappedBy = "estado")
-    private List<Usuario> usuarioList;
-    
-    @OneToMany(mappedBy = "tipo")
-    private List<TrabajoEncargado> trabajoEncargadoList;
-    
-    @OneToMany(mappedBy = "tipo")
-    private List<Documento> documentoList;
-    
-    @OneToMany(mappedBy = "tipo")
-    private List<Curso> cursoList;
-    
-    @OneToMany(mappedBy = "tipo")
-    private List<Examen> examenList;
-    
-    @OneToMany(mappedBy = "tipo")
-    private List<Ciclo> cicloList;
 
     public Parametros() {
     }
@@ -112,78 +94,5 @@ public class Parametros implements Serializable {
 	public void setAuditoria(Auditoria auditoria) {
 		this.auditoria = auditoria;
 	}
-
-	public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
-    }
-
-    public List<TrabajoEncargado> getTrabajoEncargadoList() {
-        return trabajoEncargadoList;
-    }
-
-    public void setTrabajoEncargadoList(List<TrabajoEncargado> trabajoEncargadoList) {
-        this.trabajoEncargadoList = trabajoEncargadoList;
-    }
-
-    public List<Documento> getDocumentoList() {
-        return documentoList;
-    }
-
-    public void setDocumentoList(List<Documento> documentoList) {
-        this.documentoList = documentoList;
-    }
-
-    public List<Curso> getCursoList() {
-        return cursoList;
-    }
-
-    public void setCursoList(List<Curso> cursoList) {
-        this.cursoList = cursoList;
-    }
-
-    public List<Examen> getExamenList() {
-        return examenList;
-    }
-
-    public void setExamenList(List<Examen> examenList) {
-        this.examenList = examenList;
-    }
-
-    public List<Ciclo> getCicloList() {
-        return cicloList;
-    }
-
-    public void setCicloList(List<Ciclo> cicloList) {
-        this.cicloList = cicloList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idParametroPk != null ? idParametroPk.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Parametros)) {
-            return false;
-        }
-        Parametros other = (Parametros) object;
-        if ((this.idParametroPk == null && other.idParametroPk != null) || (this.idParametroPk != null && !this.idParametroPk.equals(other.idParametroPk))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Parametros[ idParametroPk=" + idParametroPk + " ]";
-    }
     
 }

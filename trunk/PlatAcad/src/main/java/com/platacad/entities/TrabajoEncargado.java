@@ -38,28 +38,35 @@ public class TrabajoEncargado implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_trabajo_pk", nullable = false)
     private Integer idTrabajoPk;
+    
     @Column(name = "titulo", length = 255)
     private String titulo;
+    
     @Lob
     @Column(name = "descripcion", length = 65535)
     private String descripcion;
+    
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
+    
     @Column(name = "fecha_presentacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPresentacion;
-    @Basic(optional = false)
-    @Column(name = "estado", nullable = false)
-    private int estado;
+    
+    @Column(name = "estado_param")
+    private Integer estado;
+    
     @Embedded
     private Auditoria auditoria;
-    @JoinColumn(name = "tipo_param", referencedColumnName = "id_parametro_pk")
-    @ManyToOne
-    private Parametros tipo;
+
+    @Column(name = "tipo_param")
+    private Integer tipo;
+    
     @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado_pk", nullable = false)
     @ManyToOne(optional = false)
     private CursoAperturado idCursoAperturadoFk;
+    
     @OneToMany(mappedBy = "idTrabajoFk")
     private List<DetalleTrabajo> detalleTrabajoList;
 
@@ -109,30 +116,30 @@ public class TrabajoEncargado implements Serializable {
     public void setFechaPresentacion(Date fechaPresentacion) {
         this.fechaPresentacion = fechaPresentacion;
     }
+   
+    public Integer getEstado() {
+		return estado;
+	}
 
-    public int getEstado() {
-        return estado;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-    
-    public Auditoria getAuditoria() {
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+
+	public Auditoria getAuditoria() {
 		return auditoria;
 	}
 
 	public void setAuditoria(Auditoria auditoria) {
 		this.auditoria = auditoria;
 	}
-
-	public Parametros getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Parametros tipo) {
-        this.tipo = tipo;
-    }
 
     public CursoAperturado getIdCursoAperturadoFk() {
         return idCursoAperturadoFk;
@@ -148,31 +155,6 @@ public class TrabajoEncargado implements Serializable {
 
     public void setDetalleTrabajoList(List<DetalleTrabajo> detalleTrabajoList) {
         this.detalleTrabajoList = detalleTrabajoList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idTrabajoPk != null ? idTrabajoPk.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TrabajoEncargado)) {
-            return false;
-        }
-        TrabajoEncargado other = (TrabajoEncargado) object;
-        if ((this.idTrabajoPk == null && other.idTrabajoPk != null) || (this.idTrabajoPk != null && !this.idTrabajoPk.equals(other.idTrabajoPk))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.platacad.entities.TrabajoEncargado[ idTrabajoPk=" + idTrabajoPk + " ]";
     }
     
 }

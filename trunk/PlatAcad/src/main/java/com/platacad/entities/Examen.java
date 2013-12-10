@@ -36,17 +36,24 @@ public class Examen implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_examen", nullable = false)
     private Integer idExamen;
+    
     @Column(name = "fecha_examen")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaExamen;
+    
     @Embedded
     private Auditoria auditoria;
-    @JoinColumn(name = "tipo_param", referencedColumnName = "id_parametro_pk")
-    @ManyToOne
-    private Parametros tipo;
+    
+    @Column(name = "tipo_param")
+    private Integer tipo;
+    
+    @Column(name = "estado_param")
+    private Integer estado;
+    
     @Lob
     @Column(name = "descripcion", length = 65535)
     private String descripcion;
+    
     @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado_pk", nullable = false)
     @ManyToOne(optional = false)
     private CursoAperturado idCursoAperturadoFk;
@@ -82,11 +89,11 @@ public class Examen implements Serializable {
 		this.auditoria = auditoria;
 	}
 
-    public Parametros getTipo() {
+	public Integer getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Parametros tipo) {
+	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
 
@@ -106,29 +113,13 @@ public class Examen implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idExamen != null ? idExamen.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Examen)) {
-            return false;
-        }
-        Examen other = (Examen) object;
-        if ((this.idExamen == null && other.idExamen != null) || (this.idExamen != null && !this.idExamen.equals(other.idExamen))) {
-            return false;
-        }
-        return true;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Examen[ idExamen=" + idExamen + " ]";
-    }
     
 }

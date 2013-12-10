@@ -49,6 +49,9 @@ public class Ciclo implements Serializable {
     @Column(name = "tipo_param")
     private Integer tipo;
     
+    @Column(name = "estado_param")
+    private Integer estado;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCicloFk")
     private List<CursoAperturado> cursoAperturadoList;
 
@@ -99,29 +102,13 @@ public class Ciclo implements Serializable {
         this.cursoAperturadoList = cursoAperturadoList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idCicloPk != null ? idCicloPk.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ciclo)) {
-            return false;
-        }
-        Ciclo other = (Ciclo) object;
-        if ((this.idCicloPk == null && other.idCicloPk != null) || (this.idCicloPk != null && !this.idCicloPk.equals(other.idCicloPk))) {
-            return false;
-        }
-        return true;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Ciclo[ idCicloPk=" + idCicloPk + " ]";
-    }
     
 }

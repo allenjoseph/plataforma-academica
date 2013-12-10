@@ -35,11 +35,17 @@ public class DetalleTrabajo implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_detalle_pk", nullable = false)
     private Integer idDetallePk;
+    
     @Embedded
     private Auditoria auditoria;
+    
+    @Column(name = "estado_param")
+    private Integer estado;
+    
     @JoinColumn(name = "id_archivo_fk", referencedColumnName = "id_archivo_pk")
     @ManyToOne
     private Archivo idArchivoFk;
+    
     @JoinColumn(name = "id_trabajo_fk", referencedColumnName = "id_trabajo_pk")
     @ManyToOne
     private TrabajoEncargado idTrabajoFk;
@@ -83,29 +89,12 @@ public class DetalleTrabajo implements Serializable {
         this.idTrabajoFk = idTrabajoFk;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idDetallePk != null ? idDetallePk.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DetalleTrabajo)) {
-            return false;
-        }
-        DetalleTrabajo other = (DetalleTrabajo) object;
-        if ((this.idDetallePk == null && other.idDetallePk != null) || (this.idDetallePk != null && !this.idDetallePk.equals(other.idDetallePk))) {
-            return false;
-        }
-        return true;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public String toString() {
-        return "com.platacad.entities.DetalleTrabajo[ idDetallePk=" + idDetallePk + " ]";
-    }
-    
 }

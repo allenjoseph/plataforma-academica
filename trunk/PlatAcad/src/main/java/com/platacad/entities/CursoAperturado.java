@@ -29,6 +29,10 @@ import javax.persistence.TemporalType;
  *
  * @author allen
  */
+/**
+ * @author Allen
+ *
+ */
 @Entity
 @Table(name = "curso_aperturado", catalog = "platacad", schema = "")
 public class CursoAperturado implements Serializable {
@@ -52,6 +56,9 @@ public class CursoAperturado implements Serializable {
     
     @Column(name = "id_ciclo_fk")
     private Integer idCicloFk;
+    
+    @Column(name = "estado_param")
+    private Integer estado;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
     private List<Articulo> articuloList;
@@ -144,29 +151,12 @@ public class CursoAperturado implements Serializable {
 		this.matriculaList = matriculaList;
 	}
 
-	@Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idCursoAperturado != null ? idCursoAperturado.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CursoAperturado)) {
-            return false;
-        }
-        CursoAperturado other = (CursoAperturado) object;
-        if ((this.idCursoAperturado == null && other.idCursoAperturado != null) || (this.idCursoAperturado != null && !this.idCursoAperturado.equals(other.idCursoAperturado))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.platacad.entities.CursoAperturado[ idCursoAperturado=" + idCursoAperturado + " ]";
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
     
 }

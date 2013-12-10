@@ -35,13 +35,19 @@ public class Documento implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_documento", nullable = false)
     private Integer idDocumento;
+    
     @Column(name = "titulo", length = 255)
     private String titulo;
+    
     @Embedded
     private Auditoria auditoria;
-    @JoinColumn(name = "tipo_param", referencedColumnName = "id_parametro_pk")
-    @ManyToOne
-    private Parametros tipo;
+    
+    @Column(name = "tipo_param")
+    private Integer tipo;
+    
+    @Column(name = "estado_param")
+    private Integer estado;
+    
     @JoinColumn(name = "id_archivo_fk", referencedColumnName = "id_archivo_pk")
     @ManyToOne
     private Archivo idArchivoFk;
@@ -76,16 +82,16 @@ public class Documento implements Serializable {
 	public void setAuditoria(Auditoria auditoria) {
 		this.auditoria = auditoria;
 	}
+	
+    public Integer getTipo() {
+		return tipo;
+	}
 
-	public Parametros getTipo() {
-        return tipo;
-    }
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
 
-    public void setTipo(Parametros tipo) {
-        this.tipo = tipo;
-    }
-
-    public Archivo getIdArchivoFk() {
+	public Archivo getIdArchivoFk() {
         return idArchivoFk;
     }
 
@@ -93,29 +99,13 @@ public class Documento implements Serializable {
         this.idArchivoFk = idArchivoFk;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idDocumento != null ? idDocumento.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Documento)) {
-            return false;
-        }
-        Documento other = (Documento) object;
-        if ((this.idDocumento == null && other.idDocumento != null) || (this.idDocumento != null && !this.idDocumento.equals(other.idDocumento))) {
-            return false;
-        }
-        return true;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Documento[ idDocumento=" + idDocumento + " ]";
-    }
     
 }

@@ -33,12 +33,15 @@ public class Estados implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_estado_pk", nullable = false)
     private Integer idEstadoPk;
+    
     @Basic(optional = false)
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
+    
     @Basic(optional = false)
     @Column(name = "parametro", nullable = false, length = 255)
     private String parametro;
+    
     @Embedded
     private Auditoria auditoria;
 
@@ -81,29 +84,4 @@ public class Estados implements Serializable {
 		this.auditoria = auditoria;
 	}
 
-	@Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idEstadoPk != null ? idEstadoPk.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Estados)) {
-            return false;
-        }
-        Estados other = (Estados) object;
-        if ((this.idEstadoPk == null && other.idEstadoPk != null) || (this.idEstadoPk != null && !this.idEstadoPk.equals(other.idEstadoPk))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Estados[ idEstadoPk=" + idEstadoPk + " ]";
-    }
-    
 }
