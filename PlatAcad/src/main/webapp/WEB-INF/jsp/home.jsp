@@ -13,12 +13,12 @@
                 <div class="col-md-8" id="main">
                     <div>                        
                         <jsp:include page="template/user.jsp"/>
-                        <c:forEach items="${cursos_matriculados}" var="curso">
+                        <c:forEach items="${cursos}" var="curso">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="page-header">
                                         <h1>
-                                            <a href="#!"><c:out value="${curso.nombre}"/></a>
+                                            <a href="#!"><c:out value="${curso.idCursoFk.nombre}"/></a>
                                             <i class="icon-folder-close"></i>
                                         </h1>                                  
                                     </div>
@@ -26,7 +26,7 @@
                                     	<span class="input-title">
 											<t:message code="page.home.curso.docente" />
 										</span>
-										<c:out value="${curso.docente}"/>
+										<c:out value="${curso.idDocenteFk.apellidoPaterno}"/>
 									</p>
                                     <p>
                                     	<span class="input-title">
@@ -47,8 +47,8 @@
                                 </div>
                                 <div class="panel-footer">
                                 	<div class="footer-curso-info">
-                                		<small><i class="icon-star"></i><c:out value="${curso.creditos}"/></small>
-                                		<small><i class="icon-book"></i><c:out value="${curso.tipo}"/></small>
+                                		<small><i class="icon-star"></i><c:out value="${curso.idCursoFk.creditos}"/></small>
+                                		<small><i class="icon-book"></i><c:out value="${curso.idCursoFk.tipo}"/></small>
                                 	</div>
                                     <div class="footer-date-info">
                                         <small>
