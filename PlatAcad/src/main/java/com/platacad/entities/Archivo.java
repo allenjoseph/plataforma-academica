@@ -56,6 +56,9 @@ public class Archivo implements Serializable {
     
     @Embedded
     private Auditoria auditoria;
+    
+    @Column(name = "estado_param")
+    private Integer estado;
 
     public Archivo() {
     }
@@ -120,29 +123,14 @@ public class Archivo implements Serializable {
 		this.auditoria = auditoria;
 	}
 
-	@Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idArchivoPk != null ? idArchivoPk.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Archivo)) {
-            return false;
-        }
-        Archivo other = (Archivo) object;
-        if ((this.idArchivoPk == null && other.idArchivoPk != null) || (this.idArchivoPk != null && !this.idArchivoPk.equals(other.idArchivoPk))) {
-            return false;
-        }
-        return true;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Archivo[ idArchivoPk=" + idArchivoPk + " ]";
-    }
+
     
 }

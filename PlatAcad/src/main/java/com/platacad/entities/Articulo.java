@@ -72,6 +72,9 @@ public class Articulo implements Serializable {
     @OneToMany(mappedBy = "idArticuloFk")
     private List<Comentario> comentarioList;
 
+    @Column(name = "estado_param")
+    private Integer estado;
+    
     public Articulo() {
     }
 
@@ -159,29 +162,13 @@ public class Articulo implements Serializable {
         this.comentarioList = comentarioList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idArticuloPk != null ? idArticuloPk.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Articulo)) {
-            return false;
-        }
-        Articulo other = (Articulo) object;
-        if ((this.idArticuloPk == null && other.idArticuloPk != null) || (this.idArticuloPk != null && !this.idArticuloPk.equals(other.idArticuloPk))) {
-            return false;
-        }
-        return true;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Articulo[ idArticuloPk=" + idArticuloPk + " ]";
-    }
     
 }

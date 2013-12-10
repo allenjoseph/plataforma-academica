@@ -36,17 +36,24 @@ public class Comentario implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_comentario_pk", nullable = false)
     private Integer idComentarioPk;
+    
     @Lob
     @Column(name = "contenido", length = 65535)
     private String contenido;
+    
     @Embedded
     private Auditoria auditoria;
+    
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
     private Usuario idUsuarioFk;
+    
     @JoinColumn(name = "id_articulo_fk", referencedColumnName = "id_articulo_pk")
     @ManyToOne
     private Articulo idArticuloFk;
+    
+    @Column(name = "estado_param")
+    private Integer estado;
 
     public Comentario() {
     }
@@ -95,29 +102,12 @@ public class Comentario implements Serializable {
         this.idArticuloFk = idArticuloFk;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idComentarioPk != null ? idComentarioPk.hashCode() : 0);
-        return hash;
-    }
+	public Integer getEstado() {
+		return estado;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Comentario)) {
-            return false;
-        }
-        Comentario other = (Comentario) object;
-        if ((this.idComentarioPk == null && other.idComentarioPk != null) || (this.idComentarioPk != null && !this.idComentarioPk.equals(other.idComentarioPk))) {
-            return false;
-        }
-        return true;
-    }
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
-    @Override
-    public String toString() {
-        return "com.platacad.entities.Comentario[ idComentarioPk=" + idComentarioPk + " ]";
-    }
-    
 }
