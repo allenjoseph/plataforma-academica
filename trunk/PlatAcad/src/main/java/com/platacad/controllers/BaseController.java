@@ -5,6 +5,7 @@
 package com.platacad.controllers;
 
 import com.platacad.entities.Curso;
+import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Examen;
 import com.platacad.entities.Matricula;
 import com.platacad.entities.Mensaje;
@@ -49,10 +50,15 @@ public class BaseController {
         ModelAndView model = new ModelAndView("home");
         
         Usuario user = usuarioService.getUsuario("0512013001");
-        List<CursoMatriculadoTO> cursosMatriculados = generalService.getCursosMatriculadosTO(1, "0512013001");
+        List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(1, "0512013001");
         
+        List<CursoAperturado> cursos = new ArrayList<CursoAperturado>();
+        for(Matricula matricula : cursosMatriculados){
+        	cursos.add(matricula.getIdCursoAperturadoFk());
+        }
+
         model.addObject("user", user);
-        model.addObject("cursos_matriculados", cursosMatriculados);
+        model.addObject("cursos", cursos);
         return model;
     }
     

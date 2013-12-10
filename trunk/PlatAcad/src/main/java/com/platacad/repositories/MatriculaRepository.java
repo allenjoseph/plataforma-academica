@@ -9,7 +9,7 @@ import com.platacad.entities.Ciclo;
 import com.platacad.entities.Matricula;
 import com.platacad.entities.Usuario;
 
-public interface MatriculaRepository extends JpaRepository<Matricula, Integer>, JpaSpecificationExecutor{
+public interface MatriculaRepository extends JpaRepository<Matricula, Integer>{
 
 	public List<Matricula> findByIdCicloFkAndIdUsuarioFk(Integer ciclo, String usuario);
 }

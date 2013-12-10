@@ -39,16 +39,7 @@ public class GeneralBusiness {
 	}
 
 	public List<CursoMatriculadoTO> getCursosMatriculadosTO(Integer ciclo, String usuario) {
-		List<CursoMatriculadoTO> lista = new ArrayList<CursoMatriculadoTO>();
-		List<Matricula> matriculas = generalDAO.getCursosMatriculados(ciclo, usuario);
 
-        for(Matricula matricula : matriculas){
-        	CursoMatriculadoTO curso = new CursoMatriculadoTO();
-        	curso.setNombre(matricula.getIdCursoAperturadoFk().getIdCursoFk().getNombre());
-        	curso.setDocente(matricula.getIdCursoAperturadoFk().getIdDocenteFk().getApellidoPaterno());
-        	curso.setCreditos(matricula.getIdCursoAperturadoFk().getIdCursoFk().getCreditos());
-        	curso.setTipo(matricula.getIdCursoAperturadoFk().getIdCursoFk().getTipo().getDescripcion());        	
-        }
 		return null;
 	}
     
