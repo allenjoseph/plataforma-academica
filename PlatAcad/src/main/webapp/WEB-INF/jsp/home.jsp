@@ -26,29 +26,18 @@
                                     	<span class="input-title">
 											<t:message code="page.home.curso.docente" />
 										</span>
-										<c:out value="${curso.idDocenteFk.apellidoPaterno}"/>
+										<c:out value="${curso.docenteValue}"/>
 									</p>
                                     <p>
                                     	<span class="input-title">
                                     		<t:message code="page.home.curso.articulos" />
                                     	</span>
-                                  	</p>
-                                    <p>
-                                    	<span class="input-title">
-                                    		<t:message code="page.home.curso.examenes" />
-                                   		</span>
-                                   	</p>
-                                    <p>
-                                    	<span class="input-title">
-                                    		<t:message code="page.home.curso.trabajos" />
-                                    	</span>											
-										
-									</p>                                    
+                                  	</p>                                   
                                 </div>
                                 <div class="panel-footer">
                                 	<div class="footer-curso-info">
                                 		<small><i class="icon-star"></i><c:out value="${curso.idCursoFk.creditos}"/></small>
-                                		<small><i class="icon-book"></i><c:out value="${curso.idCursoFk.tipo}"/></small>
+                                		<small><i class="icon-book"></i><c:out value="${curso.idCursoFk.tipoValue}"/></small>
                                 	</div>
                                     <div class="footer-date-info">
                                         <small>

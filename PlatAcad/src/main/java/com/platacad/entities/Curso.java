@@ -60,9 +60,9 @@ public class Curso implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoFk")
     private List<CursoAperturado> cursoAperturadoList;
-    
+        
     @Transient
-    private String docente;
+    private String tipoValue;
 
     public Curso() {
     }
@@ -135,12 +135,12 @@ public class Curso implements Serializable {
 		this.estado = estado;
 	}
 
-	public String getDocente() {
-		return docente;
+	public String getTipoValue() {
+		return tipoValue;
 	}
 
-	public void setDocente(String docente) {
-		this.docente = docente;
+	public void setTipoValue(String tipoValue) {
+		this.tipoValue = tipoValue;
 	}
     
 }

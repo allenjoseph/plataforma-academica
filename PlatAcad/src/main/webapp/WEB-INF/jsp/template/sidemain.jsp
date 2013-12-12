@@ -2,19 +2,19 @@
 <%@ taglib prefix="t" uri="http://www.springframework.org/tags" %>
 
 <div class="col-md-4" id="side-main">
-    <ul class="nav nav-tabs nav-justified">
+    <ul class="nav nav-tabs nav-justified" id="nav-tab-main">
         <li class="active">
-            <a href="#"><t:message code="tab.actividades"/></a>
+            <a href="#tab-one"><t:message code="tab.actividades"/></a>
         </li>
         <li>
-            <a href="#"><t:message code="tab.documentos"/></a>
+            <a href="#tab-two"><t:message code="tab.documentos"/></a>
         </li>
         <li>
-            <a href="#"><t:message code="tab.chat"/></a>
+            <a href="#tab-three"><t:message code="tab.chat"/></a>
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active">
+        <div class="tab-pane active" id="tab-one">
             <ul class="nav nav-pills nav-stacked">
                 <li>
                     <a href="mensaje.html">
@@ -42,5 +42,10 @@
                 </li>
             </ul>            
         </div>
+        <div class="tab-pane" id="tab-two">
+        	<input type="text" class="form-control" placeholder="Ingresa tu busqueda">
+        	<div class="sensitive-search-result"> CAMPO DONDE SE MOSTRARAN LOS RESULTADOS POR LA BUSQUEDA SENSITIVA</div>
+        </div>
+        <div class="tab-pane" id="tab-three"> tres </div>
     </div>
 </div>
