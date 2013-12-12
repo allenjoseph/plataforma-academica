@@ -7,11 +7,11 @@ import java.util.Map;
 
 public enum TipoPeriodoEnum {
 	
-	IMPAR(Integer.valueOf(3),"PERIODO I"),
+	IMPAR(Integer.valueOf(1),"PERIODO I"),
 	
-	PAR(Integer.valueOf(4),"PERIODO II");
+	PAR(Integer.valueOf(2),"PERIODO II");
 	
-	private final Integer code;
+	private final Integer codigo;
 	
     private final String descripcion;
     
@@ -21,26 +21,26 @@ public enum TipoPeriodoEnum {
 
 	static {
 		for(TipoPeriodoEnum c : TipoPeriodoEnum.values()){
-			lookup.put(c.getCode(), c);
+			lookup.put(c.getCodigo(), c);
 			list.add( c );
 		}
 	}
     
-    private TipoPeriodoEnum(Integer code, String descripcion) {   
-         this.code = code;
+    private TipoPeriodoEnum(Integer codigo, String descripcion) {   
+         this.codigo = codigo;
          this.descripcion = descripcion;
     }
 
-    public Integer getCode() {
-		return code;
+    public Integer getCodigo() {
+		return codigo;
 	}
 
 	public String getDescripcion() {
         return descripcion;
     }  
 	
-	public static TipoPeriodoEnum get(Integer code) {
-		return lookup.get(code);
+	public static TipoPeriodoEnum get(Integer codigo) {
+		return lookup.get(codigo);
 	}
  
 }

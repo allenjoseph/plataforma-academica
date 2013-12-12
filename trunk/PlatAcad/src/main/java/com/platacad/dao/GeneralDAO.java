@@ -4,12 +4,19 @@
  */
 package com.platacad.dao;
 
+import com.platacad.entities.Curso;
+import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Matricula;
+import com.platacad.entities.Usuario;
+import com.platacad.entities.enums.TipoCursoEnum;
+import com.platacad.helpers.KeyWords;
 import com.platacad.repositories.CursoAperturadoRepository;
 import com.platacad.repositories.MatriculaRepository;
 
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -27,7 +34,21 @@ public class GeneralDAO {
 	
 	/* obtiene lista de matriculas de cursos por ciclo y usuario */
 	public List<Matricula> getCursosMatriculados(Integer ciclo, String usuario){
-    	return matriculaRepository.findByIdCicloFkAndIdUsuarioFk(ciclo, usuario);
+		List<Matricula> matricula = matriculaRepository.findByIdCicloFkAndIdUsuarioFk(ciclo, usuario);
+		if(matricula != null){
+			for(Matricula item : matricula){
+				CursoAperturado cursoAperturado = item.getIdCursoAperturadoFk();
+				Usuario docente = cursoAperturado.getIdDocenteFk();
+				cursoAperturado.setDocenteValue(docente.getNombres()
+												.concat(KeyWords.BLANK_SPACE)
+												.concat(docente.getApellidoPaterno())
+												.concat(KeyWords.BLANK_SPACE)
+												.concat(docente.getApellidoMaterno()));
+				Curso curso = cursoAperturado.getIdCursoFk();
+				curso.setTipoValue(TipoCursoEnum.get(curso.getTipo()).getDescripcion());
+			}
+		}
+    	return matricula;
     }
 	
 	

@@ -11,6 +11,14 @@ $(function(){
 	
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	
+	$('#nav-tab-main a').click(function (e) {
+	  e.preventDefault();
+	  $(this).tab('show');
+	  $("#side-main .tab-pane.active input:first").focus();
+	});
+	
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		
 	$.datepicker.setDefaults($.datepicker.regional['es']);  
 	$('.datepicker').datepicker({
 	   dateFormat: 'DD, d MM yy'

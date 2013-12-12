@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -71,6 +72,9 @@ public class CursoAperturado implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
     private List<Matricula> matriculaList;  
+    
+    @Transient
+    private String docenteValue;
         
     public CursoAperturado() {
     }
@@ -157,6 +161,14 @@ public class CursoAperturado implements Serializable {
 
 	public void setEstado(Integer estado) {
 		this.estado = estado;
+	}
+
+	public String getDocenteValue() {
+		return docenteValue;
+	}
+
+	public void setDocenteValue(String docenteValue) {
+		this.docenteValue = docenteValue;
 	}
     
 }
