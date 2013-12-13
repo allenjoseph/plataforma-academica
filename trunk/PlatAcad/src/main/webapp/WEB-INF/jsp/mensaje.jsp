@@ -25,7 +25,8 @@
                                         <div class="form-group">
                                             <label for="inputUsuario" class="col-lg-2 control-label">De:</label>
                                             <div class="col-lg-10">
-                                                <f:input path="idUsuarioFk.idUsuarioPk"  cssClass="form-control" id="inputDestinatario" readonly="true"/>
+                                            	<f:hidden path="idUsuarioFk.idUsuarioPk"/>
+                                                <f:input path="idUsuarioFk.fullName" cssClass="form-control" readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="form-group">

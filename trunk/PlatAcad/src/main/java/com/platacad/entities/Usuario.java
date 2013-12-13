@@ -77,6 +77,9 @@ public class Usuario implements Serializable {
     
     @OneToMany(mappedBy = "idDocenteFk")
     private List<CursoAperturado> cursoAperturadoList;
+    
+    @Transient
+    private String fullName;
                  
     public Usuario() {
     }
@@ -197,23 +200,12 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 	}
 
-	@Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idUsuarioPk != null ? idUsuarioPk.hashCode() : 0);
-        return hash;
-    }
+	public String getFullName() {
+		return fullName;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.idUsuarioPk == null && other.idUsuarioPk != null) || (this.idUsuarioPk != null && !this.idUsuarioPk.equals(other.idUsuarioPk))) {
-            return false;
-        }
-        return true;
-    }    
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+    
 }
