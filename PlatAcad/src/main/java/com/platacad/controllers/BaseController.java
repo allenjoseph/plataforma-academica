@@ -4,7 +4,6 @@
  */
 package com.platacad.controllers;
 
-import com.platacad.entities.Curso;
 import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Examen;
 import com.platacad.entities.Matricula;
@@ -14,7 +13,6 @@ import com.platacad.entities.Usuario;
 import com.platacad.services.GeneralService;
 import com.platacad.services.MensajeService;
 import com.platacad.services.UsuarioService;
-import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.MensajeTO;
 
 import java.util.ArrayList;
@@ -49,6 +47,29 @@ public class BaseController {
     public String logon(){
     	return "logon";
     }
+    
+    @RequestMapping("success-login.html")  
+    public View successLogin() {  
+        return new RedirectView("inicio.html");  
+    } 
+
+    @RequestMapping("process-login.html")  
+    public View processLogin() {  
+        return new RedirectView("inicio.html");  
+    } 
+    
+    @RequestMapping("error-login.html")
+    public ModelAndView errorLogon(){
+    	ModelAndView modelAndView = new ModelAndView("logon");  
+        modelAndView.addObject("error", true);  
+        return modelAndView;  
+    }
+    
+    @RequestMapping("logout.html")
+    public String logout(){
+    	return "logon";
+    }
+    
     
     @RequestMapping("inicio.html")
     public ModelAndView home(){
