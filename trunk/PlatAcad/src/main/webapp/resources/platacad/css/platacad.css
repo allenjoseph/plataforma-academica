@@ -9,13 +9,25 @@ footer{
     text-align: center;
     color: #ccc;
 }
+#logon-main {
+	padding: 20px;
+	margin: 0 auto;
+}
+#logon-main .panel{
+	-webkit-box-shadow: 0px 5px 30px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    0px 5px 30px rgba(50, 50, 50, 0.5);
+	box-shadow:         0px 5px 30px rgba(50, 50, 50, 0.5);	
+}
+#logon-main .panel .panel-heading{
+	background-color: #563d7c;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.15);
+	color: #cdbfe3;
+}
 .navbar-default {
-	/*background-color: #9663AA;
-	border-color: #A388BB;*/
 	text-shadow: 0 -1px 0 rgba(0,0,0,.15);
 	background-color: #563d7c;
 	border-color: #463265;
-	/*box-shadow: 0 1px 0 rgba(255,255,255,.1);*/
+	
 	-webkit-box-shadow: 0px 5px 30px rgba(50, 50, 50, 0.2);
 	-moz-box-shadow:    0px 5px 30px rgba(50, 50, 50, 0.2);
 	box-shadow:         0px 5px 30px rgba(50, 50, 50, 0.2);
