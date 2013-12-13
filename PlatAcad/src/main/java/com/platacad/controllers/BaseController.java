@@ -45,6 +45,11 @@ public class BaseController {
     @Autowired
     MensajeService mensajeService;
     
+    @RequestMapping("login.html")
+    public String logon(){
+    	return "logon";
+    }
+    
     @RequestMapping("inicio.html")
     public ModelAndView home(){
         ModelAndView model = new ModelAndView("home");
@@ -74,8 +79,9 @@ public class BaseController {
     public ModelAndView mensaje(){
         ModelAndView model = new ModelAndView("mensaje");
         Mensaje m = new Mensaje();
-        m.setIdUsuarioFk(usuarioService.buscarUsuario("0512013001"));
-        model.addObject("user", usuarioService.getUsuario("0512013001"));
+        Usuario user = usuarioService.getUsuario("0512013001");
+        m.setIdUsuarioFk(user);
+        model.addObject("user", user);
         model.addObject("mensaje", m);
         return model;
     }

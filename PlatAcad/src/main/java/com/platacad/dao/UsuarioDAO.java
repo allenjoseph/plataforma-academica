@@ -7,7 +7,9 @@ package com.platacad.dao;
 import javax.annotation.Resource;
 
 import com.platacad.entities.Usuario;
+import com.platacad.helpers.KeyWords;
 import com.platacad.repositories.UsuarioRepository;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,7 +23,11 @@ public class UsuarioDAO {
 	private UsuarioRepository usuarioRepository;
     
     public Usuario getUsuario(String usuarioId) {
-        return usuarioRepository.findOne(usuarioId);
+    	Usuario user = usuarioRepository.findOne(usuarioId);
+    	user.setFullName(user.getNombres().concat(KeyWords.BLANK_SPACE)
+						.concat(user.getApellidoPaterno()).concat(KeyWords.BLANK_SPACE)
+						.concat(user.getApellidoMaterno()));
+        return user;
     }
     
 }
