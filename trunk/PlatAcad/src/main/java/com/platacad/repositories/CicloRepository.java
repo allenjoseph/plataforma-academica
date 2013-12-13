@@ -9,5 +9,5 @@ import com.platacad.entities.Parametros;
 
 public interface CicloRepository extends JpaRepository<Ciclo, Integer>{
 
-	public List<Ciclo> findByAnioAndTipoPeriodo(Integer anio, Integer tipo);
+	public List<Ciclo> findByAnioAndTipo(Integer anio, Integer tipo);
 }

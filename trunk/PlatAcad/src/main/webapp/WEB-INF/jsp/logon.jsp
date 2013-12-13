@@ -10,12 +10,32 @@
     	<div class="container">
     		<div class="row">
                 <div class="col-md-8" id="main">
-                
-                	<c:url value="/login" var="loginUrl"/>
-				    <form name="f" action="${loginUrl}" method="post">
-				        <fieldset>
-				            <legend>Please Login</legend>
-				            <c:if test="${param.error != null}">
+                	<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Plataforma Academica</h3>
+					  </div>
+					  <div class="panel-body">
+					  	<c:url value="/login.html" var="loginUrl"/>
+					    <form class="form-horizontal" role="form" name="f" action="${loginUrl}" method="post">
+						  <div class="form-group">
+						    <label for="j_username" class="col-sm-2 control-label">Email</label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="j_username" placeholder="Codigo de Usuario">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="j_password" class="col-sm-2 control-label">Contraseña</label>
+						    <div class="col-sm-10">
+						      <input type="password" class="form-control" id="j_password" placeholder="Password">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <div class="col-sm-offset-2 col-sm-10">
+						      <button type="submit" class="btn btn-default">Entrar</button>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						  	<c:if test="${param.error != null}">
 				                <div class="alert alert-error">
 				                    Failed to login.
 				                    <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
@@ -28,17 +48,10 @@
 				                    You have been logged out.
 				                </div>
 				            </c:if>
-				            <label for="j_username">Username</label>
-				            <input type="text" id="j_username" name="username" value="${username}"/>
-				            <label for="j_password">Password</label>
-				            <input type="password" id="j_password" name="password"/>
-				            <div class="form-actions">
-				                <button type="submit" class="btn">Log in</button>
-				            </div>
-				        </fieldset>
-				    </form>
-                
-                
+						  </div>
+						</form>
+					  </div>
+					</div>
                 </div>
 			</div>
     	</div>

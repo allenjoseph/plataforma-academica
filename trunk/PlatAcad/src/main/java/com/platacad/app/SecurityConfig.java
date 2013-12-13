@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.*;
 
 @Configuration
 @EnableWebSecurity
+@Import({ DataBaseConfig.class })
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
