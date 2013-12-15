@@ -4,6 +4,7 @@
  */
 package com.platacad.controllers;
 
+import com.platacad.entities.Articulo;
 import com.platacad.entities.CursoAperturado;
 import com.platacad.entities.Examen;
 import com.platacad.entities.Matricula;
@@ -68,6 +69,15 @@ public class BaseController {
     @RequestMapping("logout.html")
     public String logout(){
     	return "logon";
+    }
+    
+    @RequestMapping("grabar-aporte.html")
+    public ModelAndView aporte(){
+    	ModelAndView model = new ModelAndView("aporte");
+    	model.addObject("aporte", new Articulo());
+    	Usuario user = usuarioService.getUsuario("0512013001");
+    	model.addObject("user", user);
+    	return model;
     }
     
     

@@ -1,7 +1,5 @@
 package com.platacad.app;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
@@ -19,9 +17,9 @@ public class SecurityAppInitializer extends AbstractSecurityWebApplicationInitia
      * Insert the following filters before Spring Security. Be careful when inserting
      * filters before Spring Security!
      */
-    @Override
+    /*@Override
     protected void afterSpringSecurityFilterChain(ServletContext servletContext) {
-    }
+    }*/
 
     /**
      * Register the {@link HttpSessionEventPublisher}
