@@ -7,7 +7,7 @@ package com.platacad.to;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.platacad.entities.Auditoria;
+import com.platacad.model.entities.Auditoria;
 
 /**
  *

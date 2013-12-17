@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.platacad.entities;
+package com.platacad.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,75 +24,58 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  *
  * @author allen
  */
 @Entity
-@Table(name = "curso", catalog = "platacad", schema = "")
-public class Curso implements Serializable {
+@Table(name = "ciclo", catalog = "platacad", schema = "")
+public class Ciclo implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_curso_pk", nullable = false)
-    private Integer idCursoPk;
+    @Column(name = "id_ciclo_pk", nullable = false)
+    private Integer idCicloPk;
     
-    @Column(name = "nombre", length = 255)
-    private String nombre;
-    
-    @Column(name = "creditos")
-    private Integer creditos;
-    
-    @Column(name = "estado_param")
-    private Integer estado;
+    @Column(name = "anio")
+    private Integer anio;
     
     @Embedded
     private Auditoria auditoria;
     
-    @OneToMany(mappedBy = "idCursoDestinoFk")
-    private List<Mensaje> mensajeList;
-    
     @Column(name = "tipo_param")
     private Integer tipo;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoFk")
+    @Column(name = "estado_param")
+    private Integer estado;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCicloFk")
     private List<CursoAperturado> cursoAperturadoList;
-        
-    @Transient
-    private String tipoValue;
 
-    public Curso() {
+    public Ciclo() {
     }
 
-    public Curso(Integer idCursoPk) {
-        this.idCursoPk = idCursoPk;
+    public Ciclo(Integer idCicloPk) {
+        this.idCicloPk = idCicloPk;
     }
 
-    public Integer getIdCursoPk() {
-        return idCursoPk;
+    public Integer getIdCicloPk() {
+        return idCicloPk;
     }
 
-    public void setIdCursoPk(Integer idCursoPk) {
-        this.idCursoPk = idCursoPk;
+    public void setIdCicloPk(Integer idCicloPk) {
+        this.idCicloPk = idCicloPk;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Integer getAnio() {
+        return anio;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Integer getCreditos() {
-        return creditos;
-    }
-
-    public void setCreditos(Integer creditos) {
-        this.creditos = creditos;
+    public void setAnio(Integer anio) {
+        this.anio = anio;
     }
 
     public Auditoria getAuditoria() {
@@ -103,15 +86,7 @@ public class Curso implements Serializable {
 		this.auditoria = auditoria;
 	}
 
-	public List<Mensaje> getMensajeList() {
-        return mensajeList;
-    }
-
-    public void setMensajeList(List<Mensaje> mensajeList) {
-        this.mensajeList = mensajeList;
-    }
-    
-    public Integer getTipo() {
+	public Integer getTipo() {
 		return tipo;
 	}
 
@@ -127,7 +102,7 @@ public class Curso implements Serializable {
         this.cursoAperturadoList = cursoAperturadoList;
     }
 
-    public Integer getEstado() {
+	public Integer getEstado() {
 		return estado;
 	}
 
@@ -135,12 +110,5 @@ public class Curso implements Serializable {
 		this.estado = estado;
 	}
 
-	public String getTipoValue() {
-		return tipoValue;
-	}
-
-	public void setTipoValue(String tipoValue) {
-		this.tipoValue = tipoValue;
-	}
     
 }

@@ -5,7 +5,8 @@
 package com.platacad.business;
 
 import com.platacad.dao.UsuarioDAO;
-import com.platacad.entities.Usuario;
+import com.platacad.model.entities.Usuario;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

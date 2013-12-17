@@ -6,7 +6,7 @@ package com.platacad.to;
 
 import java.io.Serializable;
 
-import com.platacad.entities.Auditoria;
+import com.platacad.model.entities.Auditoria;
 
 /**
  *

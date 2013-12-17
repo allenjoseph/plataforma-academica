@@ -4,7 +4,7 @@
  */
 package com.platacad.services;
 
-import com.platacad.entities.Usuario;
+import com.platacad.model.entities.Usuario;
 import com.platacad.to.UsuarioTO;
 
 /**

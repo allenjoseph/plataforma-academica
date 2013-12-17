@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.platacad.entities.Ciclo;
-import com.platacad.entities.Parametros;
+import com.platacad.model.entities.Ciclo;
+import com.platacad.model.entities.Parametros;
 
 public interface CicloRepository extends JpaRepository<Ciclo, Integer>{
 

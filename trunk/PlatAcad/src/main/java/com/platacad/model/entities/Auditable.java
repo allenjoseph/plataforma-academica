@@ -1,4 +1,4 @@
-package com.platacad.entities;
+package com.platacad.model.entities;
 
 public interface Auditable {
 	

@@ -2,14 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.platacad.entities;
+package com.platacad.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -17,10 +15,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,18 +28,18 @@ import javax.persistence.TemporalType;
  * @author allen
  */
 @Entity
-@Table(name = "ciclo", catalog = "platacad", schema = "")
-public class Ciclo implements Serializable {
+@Table(name = "examen", catalog = "platacad", schema = "")
+public class Examen implements Serializable {
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_ciclo_pk", nullable = false)
-    private Integer idCicloPk;
+    @Column(name = "id_examen", nullable = false)
+    private Integer idExamen;
     
-    @Column(name = "anio")
-    private Integer anio;
+    @Column(name = "fecha_examen")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaExamen;
     
     @Embedded
     private Auditoria auditoria;
@@ -52,32 +50,37 @@ public class Ciclo implements Serializable {
     @Column(name = "estado_param")
     private Integer estado;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCicloFk")
-    private List<CursoAperturado> cursoAperturadoList;
+    @Lob
+    @Column(name = "descripcion", length = 65535)
+    private String descripcion;
+    
+    @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado_pk", nullable = false)
+    @ManyToOne(optional = false)
+    private CursoAperturado idCursoAperturadoFk;
 
-    public Ciclo() {
+    public Examen() {
     }
 
-    public Ciclo(Integer idCicloPk) {
-        this.idCicloPk = idCicloPk;
+    public Examen(Integer idExamen) {
+        this.idExamen = idExamen;
     }
 
-    public Integer getIdCicloPk() {
-        return idCicloPk;
+    public Integer getIdExamen() {
+        return idExamen;
     }
 
-    public void setIdCicloPk(Integer idCicloPk) {
-        this.idCicloPk = idCicloPk;
+    public void setIdExamen(Integer idExamen) {
+        this.idExamen = idExamen;
     }
 
-    public Integer getAnio() {
-        return anio;
+    public Date getFechaExamen() {
+        return fechaExamen;
     }
 
-    public void setAnio(Integer anio) {
-        this.anio = anio;
+    public void setFechaExamen(Date fechaExamen) {
+        this.fechaExamen = fechaExamen;
     }
-
+    
     public Auditoria getAuditoria() {
 		return auditoria;
 	}
@@ -94,13 +97,21 @@ public class Ciclo implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public List<CursoAperturado> getCursoAperturadoList() {
-        return cursoAperturadoList;
+	public CursoAperturado getIdCursoAperturadoFk() {
+        return idCursoAperturadoFk;
     }
 
-    public void setCursoAperturadoList(List<CursoAperturado> cursoAperturadoList) {
-        this.cursoAperturadoList = cursoAperturadoList;
+    public void setIdCursoAperturadoFk(CursoAperturado idCursoAperturadoFk) {
+        this.idCursoAperturadoFk = idCursoAperturadoFk;
     }
+
+    public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
 	public Integer getEstado() {
 		return estado;

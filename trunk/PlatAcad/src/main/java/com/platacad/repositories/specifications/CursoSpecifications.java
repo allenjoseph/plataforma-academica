@@ -7,7 +7,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.platacad.entities.Curso;
+import com.platacad.model.entities.Curso;
 
 public class CursoSpecifications {
 	

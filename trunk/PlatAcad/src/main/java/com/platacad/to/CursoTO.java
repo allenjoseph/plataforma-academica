@@ -6,8 +6,8 @@ package com.platacad.to;
 
 import java.io.Serializable;
 
-import com.platacad.entities.Auditoria;
-import com.platacad.entities.enums.TipoCursoEnum;
+import com.platacad.model.entities.Auditoria;
+import com.platacad.model.enums.TipoCursoEnum;
 
 /**
  *
