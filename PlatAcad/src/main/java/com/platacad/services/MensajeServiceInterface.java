@@ -1,7 +1,8 @@
 package com.platacad.services;
 
-import com.platacad.entities.Mensaje;
+import com.platacad.model.entities.Mensaje;
 import com.platacad.to.MensajeTO;
+
 import java.util.List;
 
 public interface MensajeServiceInterface {

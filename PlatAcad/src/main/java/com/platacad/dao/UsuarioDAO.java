@@ -6,8 +6,8 @@ package com.platacad.dao;
 
 import javax.annotation.Resource;
 
-import com.platacad.entities.Usuario;
 import com.platacad.helpers.KeyWords;
+import com.platacad.model.entities.Usuario;
 import com.platacad.repositories.UsuarioRepository;
 
 import org.springframework.stereotype.Repository;

@@ -1,11 +1,14 @@
 package com.platacad.business;
 
 import com.platacad.dao.MensajeDAO;
-import com.platacad.entities.Mensaje;
+
 import org.springframework.stereotype.Component;
 
+import com.platacad.model.entities.Mensaje;
 import com.platacad.to.MensajeTO;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Component

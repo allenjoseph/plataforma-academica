@@ -5,8 +5,9 @@
 package com.platacad.services;
 
 import com.platacad.business.UsuarioBusiness;
-import com.platacad.entities.Usuario;
+import com.platacad.model.entities.Usuario;
 import com.platacad.to.UsuarioTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

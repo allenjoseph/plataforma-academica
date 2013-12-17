@@ -1,4 +1,4 @@
-package com.platacad.entities.enums;
+package com.platacad.model.enums;
 
 import java.util.ArrayList;
 import java.util.HashMap;

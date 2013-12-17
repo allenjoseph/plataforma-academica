@@ -1,4 +1,4 @@
-package com.platacad.entities;
+package com.platacad.model.entities;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;

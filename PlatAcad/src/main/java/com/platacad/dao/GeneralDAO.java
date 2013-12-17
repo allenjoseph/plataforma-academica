@@ -4,12 +4,12 @@
  */
 package com.platacad.dao;
 
-import com.platacad.entities.Curso;
-import com.platacad.entities.CursoAperturado;
-import com.platacad.entities.Matricula;
-import com.platacad.entities.Usuario;
-import com.platacad.entities.enums.TipoCursoEnum;
 import com.platacad.helpers.KeyWords;
+import com.platacad.model.entities.Curso;
+import com.platacad.model.entities.CursoAperturado;
+import com.platacad.model.entities.Matricula;
+import com.platacad.model.entities.Usuario;
+import com.platacad.model.enums.TipoCursoEnum;
 import com.platacad.repositories.CursoAperturadoRepository;
 import com.platacad.repositories.MatriculaRepository;
 

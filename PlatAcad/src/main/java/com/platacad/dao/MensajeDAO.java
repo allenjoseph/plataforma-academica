@@ -4,7 +4,7 @@
  */
 package com.platacad.dao;
 
-import com.platacad.entities.Mensaje;
+import com.platacad.model.entities.Mensaje;
 import com.platacad.to.MensajeTO;
 
 import java.util.ArrayList;

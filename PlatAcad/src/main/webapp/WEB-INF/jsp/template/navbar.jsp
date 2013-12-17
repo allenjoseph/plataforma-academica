@@ -17,7 +17,7 @@
                 <a href="<c:url value="/logout.html"/>"><t:message code="nav.info.logout"/></a>                        
             </li>
             <li>
-                <a href="<c:url value="/grabar-aporte.html"/>"><t:message code="nav.info.aportar"/></a>                        
+                <a href="<c:url value="/aporte.html"/>"><t:message code="nav.info.aportar"/></a>                        
             </li>
             <li>
                 <a href="#"><t:message code="nav.info.academica"/></a>                        

@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.platacad.business.MensajeBusiness;
-import com.platacad.entities.Mensaje;
+import com.platacad.model.entities.Mensaje;
 import com.platacad.to.MensajeTO;
+
 import java.util.List;
 
 @Service

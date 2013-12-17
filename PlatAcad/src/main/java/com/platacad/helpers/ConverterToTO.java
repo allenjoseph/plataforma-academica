@@ -4,10 +4,11 @@
  */
 package com.platacad.helpers;
 
-import com.platacad.entities.Curso;
-import com.platacad.entities.Usuario;
+import com.platacad.model.entities.Curso;
+import com.platacad.model.entities.Usuario;
 import com.platacad.to.CursoTO;
 import com.platacad.to.UsuarioTO;
+
 import java.util.ArrayList;
 import java.util.List;
 

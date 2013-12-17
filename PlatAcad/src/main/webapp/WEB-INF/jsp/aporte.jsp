@@ -20,12 +20,15 @@
                                         <i class="icon-envelope"></i>
                                     </h1>       
                                 </div>                                
-                                <f:form  id="form-aporte" method="post" action="grabarAporte.html" commandName="aporte" >
+                                <f:form  id="form-aporte" method="post" action="grabar-aporte.html" commandName="aporte" >
                                     <div class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <label for="selectCurso" class="col-lg-2 control-label">Curso</label>
                                             <div class="col-lg-10">
                                             	<f:hidden path="idUsuarioFk"/>
+                                            	<f:select path="idCursoAperturadoFk.idCursoAperturado" cssClass="form-control">
+                                            		<f:options items="${cursos}" itemValue="idCursoAperturado" itemLabel="idCursoFk.nombre"/>
+                                            	</f:select>
                                             </div>
                                         </div>
                                         <div class="form-group">

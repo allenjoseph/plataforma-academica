@@ -4,11 +4,11 @@
  */
 package com.platacad.services;
 
-import com.platacad.entities.Ciclo;
-import com.platacad.entities.CursoAperturado;
-import com.platacad.entities.Matricula;
-import com.platacad.entities.Usuario;
-import com.platacad.entities.enums.TipoPeriodoEnum;
+import com.platacad.model.entities.Ciclo;
+import com.platacad.model.entities.CursoAperturado;
+import com.platacad.model.entities.Matricula;
+import com.platacad.model.entities.Usuario;
+import com.platacad.model.enums.TipoPeriodoEnum;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
 

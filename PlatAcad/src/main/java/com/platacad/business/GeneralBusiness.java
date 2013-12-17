@@ -5,14 +5,14 @@
 package com.platacad.business;
 
 import com.platacad.dao.GeneralDAO;
-import com.platacad.entities.Ciclo;
-import com.platacad.entities.Curso;
-import com.platacad.entities.CursoAperturado;
-import com.platacad.entities.Matricula;
-import com.platacad.entities.Parametros;
-import com.platacad.entities.Usuario;
-import com.platacad.entities.enums.TipoPeriodoEnum;
 import com.platacad.helpers.ConverterToTO;
+import com.platacad.model.entities.Ciclo;
+import com.platacad.model.entities.Curso;
+import com.platacad.model.entities.CursoAperturado;
+import com.platacad.model.entities.Matricula;
+import com.platacad.model.entities.Parametros;
+import com.platacad.model.entities.Usuario;
+import com.platacad.model.enums.TipoPeriodoEnum;
 import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
