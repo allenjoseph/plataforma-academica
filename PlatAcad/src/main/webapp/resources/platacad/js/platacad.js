@@ -32,6 +32,19 @@ $(function(){
 	   FormularioRegistro(container_examen, $(this));
 	});	
 	
+	/* - - - - - - - - -  - - - - - - - - - - - - - - - - - - */
+	// "myAwesomeDropzone" is the camelized version of the HTML element's ID
+	Dropzone.options.myAwesomeDropzone = {
+	  paramName: "file", // The name that will be used to transfer the file
+	  maxFilesize: 2, // MB
+	  uploadMultiple: false,
+	  accept: function(file, done) {
+	    if (file.name == "justinbieber.jpg") {
+	      done("Naha, you don't.");
+	    }
+	    else { done(); }
+	  }
+	};
 });
 
 function FormularioRegistro(contenedor,formulario){
@@ -58,7 +71,7 @@ function mostrarDialogo(dialogo){
 	dialogo.show();
 }
 
-/* Inicialización en español para la extensión 'UI date picker' para jQuery. */
+/* Inicializacion en español para la extension 'UI date picker' para jQuery. */
 jQuery(function($){
         $.datepicker.regional['es'] = {
                 closeText: 'Cerrar',
@@ -69,8 +82,8 @@ jQuery(function($){
                 'julio','agosto','septiembre','octubre','noviembre','diciembre'],
                 monthNamesShort: ['ene','feb','mar','abr','may','jun',
                 'jul','ogo','sep','oct','nov','dic'],
-                dayNames: ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],
-                dayNamesShort: ['dom','lun','mar','mié','juv','vie','sáb'],
+                dayNames: ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'],
+                dayNamesShort: ['dom','lun','mar','mie','juv','vie','sab'],
                 dayNamesMin: ['D','L','M','X','J','V','S'],
                 weekHeader: 'Sm',
                 dateFormat: 'dd/mm/yy',
