@@ -46,7 +46,7 @@
                                         <div class="form-group">
                                             <label for="inputAdjunto" class="col-lg-2 control-label">Adjuntar Archivo</label>
                                             <div class="col-lg-10">
-                                            	<f:input path="idArchivoFk" cssClass="form-control" id="inputAsunto" placeholder="Asunto"/>
+                                            	
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -57,6 +57,7 @@
                                         </div>
                                     </div>
                                 </f:form>
+                                <form action="file-aporte.html" class="dropzone" id="inputAdjunto" enctype="multipart/form-data"></form>
                             </div>
                         </div>
                     </div>
