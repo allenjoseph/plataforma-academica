@@ -44,20 +44,21 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputAdjunto" class="col-lg-2 control-label">Adjuntar Archivo</label>
-                                            <div class="col-lg-10">
-                                            	
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">                                            
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                                <button type="button" class="btn btn-default pull-right">Limpiar</button>
+                                            <div class="col-lg-offset-2 col-lg-10">   
+                                            	<button type="button" class="btn btn-default">Limpiar</button>                                         
+                                                <button type="submit" class="btn btn-primary pull-right">Aportar</button>                                                
                                             </div>
                                         </div>
                                     </div>
                                 </f:form>
-                                <form action="file-aporte.html" class="dropzone" id="inputAdjunto" enctype="multipart/form-data"></form>
+                                <div class="form-horizontal" role="form">
+									<div class="form-group">
+									    <label class="col-lg-2 control-label">Añadir Archivo</label>
+									    <div class="col-lg-10">
+									  		<form action="file-aporte.html" class="dropzone" id="inputAdjunto" enctype="multipart/form-data"></form>  	
+									    </div>
+									</div>
+                                </div>                                
                             </div>
                         </div>
                     </div>

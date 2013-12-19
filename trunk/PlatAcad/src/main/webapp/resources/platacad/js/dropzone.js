@@ -434,34 +434,34 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
       url: null,
       method: "post",
       withCredentials: false,
-      parallelUploads: 2,
+      parallelUploads: 1,
       uploadMultiple: false,
-      maxFilesize: 256,
+      maxFilesize: 2,
       paramName: "file",
       createImageThumbnails: true,
-      maxThumbnailFilesize: 10,
-      thumbnailWidth: 100,
-      thumbnailHeight: 100,
-      maxFiles: null,
+      maxThumbnailFilesize: 1,
+      thumbnailWidth: 50,
+      thumbnailHeight: 50,
+      maxFiles: 1,
       params: {},
       clickable: true,
       ignoreHiddenFiles: true,
-      acceptedFiles: null,
+      acceptedFiles: "application/pdf",
       acceptedMimeTypes: null,
       autoProcessQueue: true,
-      addRemoveLinks: false,
+      addRemoveLinks: true,
       previewsContainer: null,
-      dictDefaultMessage: "Drop files here to upload",
-      dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
-      dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
-      dictFileTooBig: "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
-      dictInvalidFileType: "You can't upload files of this type.",
-      dictResponseError: "Server responded with {{statusCode}} code.",
-      dictCancelUpload: "Cancel upload",
-      dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
-      dictRemoveFile: "Remove file",
+      dictDefaultMessage: "Arrastra y suelta el archivo aqui.",
+      dictFallbackMessage: "Su navegador no soporta la carga de archivos de arrastrar y soltar.",
+      dictFallbackText: "Utilice el formulario de reserva de abajo para subir tus archivos, como en los viejos tiempos.",
+      dictFileTooBig: "Archivo muy grande ({{filesize}}MiB). Tamaño max: {{maxFilesize}}MiB.",
+      dictInvalidFileType: "No puedes cargar archivos de este tipo.",
+      dictResponseError: "Servidor a respondido con {{statusCode}}.",
+      dictCancelUpload: "Cancelar Proceso",
+      dictCancelUploadConfirmation: "Esta seguro de cancelar el proceso?",
+      dictRemoveFile: "Remover Archivo",
       dictRemoveFileConfirmation: null,
-      dictMaxFilesExceeded: "You can not upload any more files.",
+      dictMaxFilesExceeded: "No puedes cargar mas archivos.",
       accept: function(file, done) {
         return done();
       },
@@ -654,7 +654,7 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
       },
       successmultiple: noop,
       canceled: function(file) {
-        return this.emit("error", file, "Upload canceled.");
+        return this.emit("error", file, "Proceso cancelado.");
       },
       canceledmultiple: noop,
       complete: function(file) {
@@ -693,10 +693,10 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
         this.element = document.querySelector(this.element);
       }
       if (!(this.element && (this.element.nodeType != null))) {
-        throw new Error("Invalid dropzone element.");
+        throw new Error("Elemento invalido.");
       }
       if (this.element.dropzone) {
-        throw new Error("Dropzone already attached.");
+        throw new Error("Ya conectado.");
       }
       Dropzone.instances.push(this);
       this.element.dropzone = this;
@@ -709,7 +709,7 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
         this.options.url = this.element.getAttribute("action");
       }
       if (!this.options.url) {
-        throw new Error("No URL provided.");
+        throw new Error("URL no porporcionada.");
       }
       if (this.options.acceptedFiles && this.options.acceptedMimeTypes) {
         throw new Error("You can't provide both 'acceptedFiles' and 'acceptedMimeTypes'. 'acceptedMimeTypes' is deprecated.");
@@ -1226,7 +1226,7 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
           }), 0);
         }
       } else {
-        throw new Error("This file can't be queued because it has already been processed or was rejected.");
+        throw new Error("Este archivo no se puede poner en cola debido a que ya ha sido procesado o se ha rechazado.");
       }
     };
 
