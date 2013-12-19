@@ -33,18 +33,6 @@ $(function(){
 	});	
 	
 	/* - - - - - - - - -  - - - - - - - - - - - - - - - - - - */
-	// "myAwesomeDropzone" is the camelized version of the HTML element's ID
-	Dropzone.options.myAwesomeDropzone = {
-	  paramName: "file", // The name that will be used to transfer the file
-	  maxFilesize: 2, // MB
-	  uploadMultiple: false,
-	  accept: function(file, done) {
-	    if (file.name == "justinbieber.jpg") {
-	      done("Naha, you don't.");
-	    }
-	    else { done(); }
-	  }
-	};
 });
 
 function FormularioRegistro(contenedor,formulario){
