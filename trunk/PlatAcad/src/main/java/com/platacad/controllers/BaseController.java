@@ -52,7 +52,7 @@ public class BaseController {
     @RequestMapping("inicio-docente.html")
     public ModelAndView homeDocente(){
         ModelAndView model = new ModelAndView("homeDocente");
-        model.addObject("user",  userInfo.getUser().getIdUsuarioPk());
+        model.addObject("user",  userInfo.getUser());
         //model.addObject("cursos_asignados", generalService.getCursosAsignados("45653716"));
         return model;
     }
@@ -60,7 +60,7 @@ public class BaseController {
     @RequestMapping("examen.html")
     public ModelAndView articulo(){
         ModelAndView model = new ModelAndView("examen");
-        model.addObject("user", userInfo.getUser().getIdUsuarioPk());
+        model.addObject("user", userInfo.getUser());
         model.addObject("examen", new Examen());
         //model.addObject("tipos_examen",generalService.getTipos("EXAMEN"));
         return model;

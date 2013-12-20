@@ -52,15 +52,16 @@ public class AporteController {
     @RequestMapping(value="file-aporte.html", method=RequestMethod.POST)
     @ResponseBody
     public String handleFormUpload(@RequestParam("file") MultipartFile file) {
-        if (!file.isEmpty()) {
-            try {
-            	archivoAporte.setContenido(file.getBytes());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-           return "true";
-       } else {
-           return "false";
-       }
+        try{
+        	if (!file.isEmpty()) {
+        		archivoAporte.setContenido(file.getBytes());
+        		return "true";
+           }        	
+        }catch (IOException e) {
+			return e.getMessage();
+		}catch(Exception ex){
+			return ex.getMessage();
+        }
+        return "false";    	
     }
 }

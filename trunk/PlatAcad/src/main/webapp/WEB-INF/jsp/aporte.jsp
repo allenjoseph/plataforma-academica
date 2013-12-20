@@ -23,7 +23,7 @@
                                 <f:form  id="form-aporte" method="post" action="grabar-aporte.html" commandName="aporte" >
                                     <div class="form-horizontal" role="form">
                                         <div class="form-group">
-                                            <label for="selectCurso" class="col-lg-2 control-label">Curso</label>
+                                            <label class="col-lg-2 control-label">Curso</label>
                                             <div class="col-lg-10">
                                             	<f:hidden path="idUsuarioFk"/>
                                             	<f:select path="idCursoAperturadoFk.idCursoAperturado" cssClass="form-control">
@@ -32,15 +32,20 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputTitulo" class="col-lg-2 control-label">Titulo</label>
+                                            <label class="col-lg-2 control-label">Titulo</label>
                                             <div class="col-lg-10">
                                             	<f:input path="titulo" cssClass="form-control" id="inputTitulo" placeholder="Ingrese el titulo del aporte"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputAsunto" class="col-lg-2 control-label">Aporte</label>
+                                            <label class="col-lg-2 control-label">Aporte</label>
                                             <div class="col-lg-10">
-                                            	<f:textarea cssClass="form-control" path="contenido" id="inputAsunto" placeholder="Mensaje" rows="3"/>                                            	
+                                            	<f:textarea cssClass="form-control" path="contenido" id="inputContenido" placeholder="Mensaje" rows="3"/>                                            	
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10" >
+                                            	<div class="alert alert-warning"></div>                                            	
                                             </div>
                                         </div>
                                         <div class="form-group">
