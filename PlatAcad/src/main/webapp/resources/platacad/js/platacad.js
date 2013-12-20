@@ -19,10 +19,10 @@ $(function(){
 	
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 		
-	$.datepicker.setDefaults($.datepicker.regional['es']);  
+	/*$.datepicker.setDefaults($.datepicker.regional['es']);  
 	$('.datepicker').datepicker({
 	   dateFormat: 'DD, d MM yy'
-	});  
+	});*/
 	
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	
@@ -33,6 +33,18 @@ $(function(){
 	});	
 	
 	/* - - - - - - - - -  - - - - - - - - - - - - - - - - - - */
+	
+	$('#form-aporte').on('submit', function(e){
+		e.preventDefault();
+		if($(this).find('#inputTitulo').val() == ''){
+			$(this).find('div.alert').html('El Aporte debe tener un Titulo');
+			return;
+		}
+		if($(this).find('#inputContenido').val() == ''){
+			$(this).find('div.alert').html('El Aporte debe tener un Contenido');
+			return;
+		}
+	});
 });
 
 function FormularioRegistro(contenedor,formulario){
@@ -60,6 +72,7 @@ function mostrarDialogo(dialogo){
 }
 
 /* Inicializacion en español para la extension 'UI date picker' para jQuery. */
+/*
 jQuery(function($){
         $.datepicker.regional['es'] = {
                 closeText: 'Cerrar',
@@ -80,4 +93,4 @@ jQuery(function($){
                 showMonthAfterYear: false,
                 yearSuffix: ''};
         $.datepicker.setDefaults($.datepicker.regional['es']);
-});
+});*/
