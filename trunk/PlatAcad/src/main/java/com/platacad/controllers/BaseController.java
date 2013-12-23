@@ -9,6 +9,7 @@ import com.platacad.model.entities.CursoAperturado;
 import com.platacad.model.entities.Examen;
 import com.platacad.model.entities.Matricula;
 import com.platacad.model.entities.TrabajoEncargado;
+import com.platacad.model.enums.TipoExamenEnum;
 import com.platacad.services.GeneralService;
 
 import java.util.ArrayList;
@@ -31,21 +32,12 @@ public class BaseController {
     
     @Autowired
     UserInfo userInfo;
-    
-    static List<CursoAperturado> cursos;
    
     @RequestMapping("inicio.html")
     public ModelAndView home(){
         ModelAndView model = new ModelAndView("home");
-        
-        List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(1, userInfo.getUser().getIdUsuarioPk());        
-        cursos = new ArrayList<CursoAperturado>();
-        for(Matricula matricula : cursosMatriculados){
-        	cursos.add(matricula.getIdCursoAperturadoFk());
-        }
-
         model.addObject("user", userInfo.getUser());
-        model.addObject("cursos", cursos);
+        model.addObject("cursos", userInfo.getCursos());
         return model;
     }
     
@@ -61,15 +53,17 @@ public class BaseController {
     public ModelAndView articulo(){
         ModelAndView model = new ModelAndView("examen");
         model.addObject("user", userInfo.getUser());
+        model.addObject("cursos", userInfo.getCursos());        
+        model.addObject("tipos_examen",TipoExamenEnum.list);
         model.addObject("examen", new Examen());
-        //model.addObject("tipos_examen",generalService.getTipos("EXAMEN"));
         return model;
     }
     
     @RequestMapping("trabajo.html")
     public ModelAndView trabajoEncargado(){
         ModelAndView model = new ModelAndView("trabajoEncargado");
-        model.addObject("user",  userInfo.getUser().getIdUsuarioPk());
+        model.addObject("user",  userInfo.getUser());
+        model.addObject("cursos", userInfo.getCursos());
         model.addObject("trabajo", new TrabajoEncargado());
         return model;
     }

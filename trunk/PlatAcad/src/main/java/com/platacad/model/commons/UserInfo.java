@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.platacad.model.entities.CursoAperturado;
 import com.platacad.model.entities.Usuario;
 
 @Component
@@ -22,9 +23,12 @@ public class UserInfo implements Serializable{
 	
 	private List<String> enlacesVisitados;
 	
+	private List<CursoAperturado> cursos;
+	
 	public UserInfo() {
 		user = new Usuario();
 		enlacesVisitados = new ArrayList<String>();
+		cursos = new ArrayList<CursoAperturado>();
 	}
 
 	public Usuario getUser() {
@@ -57,6 +61,14 @@ public class UserInfo implements Serializable{
 
 	public void setEnlacesVisitados(List<String> enlacesVisitados) {
 		this.enlacesVisitados = enlacesVisitados;
+	}
+
+	public List<CursoAperturado> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<CursoAperturado> cursos) {
+		this.cursos = cursos;
 	}
 
 	public void closeSession() {

@@ -23,12 +23,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="listarMensaje.html">
-                        <span class="badge pull-right">0</span>
-                        Listar Mensajes
-                    </a>
-                </li>
-                <li>
                     <a href="examen.html">
                         <span class="badge pull-right">0</span>
                         <t:message code="tab.actividad.docente.examen"/>

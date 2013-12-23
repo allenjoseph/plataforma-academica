@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.platacad.model.commons.UserInfo;
 import com.platacad.model.entities.Mensaje;
 import com.platacad.model.entities.Usuario;
 import com.platacad.services.MensajeService;
@@ -27,15 +28,17 @@ public class MensajeController {
 	
     @Autowired
     MensajeService mensajeService;
+    
+    @Autowired
+    UserInfo userInfo;
 	
 	@RequestMapping("mensaje.html")
     public ModelAndView mensaje(){
         ModelAndView model = new ModelAndView("mensaje");
-        Mensaje m = new Mensaje();
-        Usuario user = usuarioService.getUsuario("0512013001");
-        m.setIdUsuarioFk(user);
-        model.addObject("user", user);
-        model.addObject("mensaje", m);
+        model.addObject("user", userInfo.getUser());
+        Mensaje mensaje = new Mensaje();
+        mensaje.setIdUsuarioFk(userInfo.getUser());
+        model.addObject("mensaje", mensaje);
         return model;
     }	
 	 

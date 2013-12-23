@@ -6,7 +6,7 @@
 <html lang="es">
     <jsp:include page="template/head.jsp"/>
     <body>
-        <div class="container">
+        <div class="container" id="container-aporte">
             <jsp:include page="template/navbar.jsp"/>            
             <div class="row">
                 <div class="col-md-8" id="main">
@@ -16,14 +16,16 @@
                             <div class="panel-body">
                                 <div class="page-header">
                                     <h1>
-                                        <t:message code="page.aporte.titulo"/>
+                                        <t:message code="page.aportar.titulo"/>
                                         <i class="icon-envelope"></i>
                                     </h1>       
                                 </div>                                
                                 <f:form  id="form-aporte" method="post" action="grabar-aporte.html" commandName="aporte" >
                                     <div class="form-horizontal" role="form">
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Curso</label>
+                                            <label class="col-lg-2 control-label">
+                                            	<t:message code="page.aportar.label.curso"/>
+                                            </label>
                                             <div class="col-lg-10">
                                             	<f:hidden path="idUsuarioFk"/>
                                             	<f:select path="idCursoAperturadoFk.idCursoAperturado" cssClass="form-control">
@@ -32,15 +34,23 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Titulo</label>
-                                            <div class="col-lg-10">
-                                            	<f:input path="titulo" cssClass="form-control" id="inputTitulo" placeholder="Ingrese el titulo del aporte"/>
+                                            <label class="col-lg-2 control-label">
+                                            	<t:message code="page.aportar.label.titulo"/>
+                                            </label>
+                                            <div class="col-lg-10">    
+                                            	<t:message code="page.aportar.placeholder.titulo" var="placeholder_titulo"/>                                        	
+                                            	<f:input path="titulo" cssClass="form-control" id="inputTitulo" 
+                                            	placeholder="${placeholder_titulo}"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Aporte</label>
+                                            <label class="col-lg-2 control-label">
+                                            	<t:message code="page.aportar.label.contenido"/>
+                                            </label>
                                             <div class="col-lg-10">
-                                            	<f:textarea cssClass="form-control" path="contenido" id="inputContenido" placeholder="Mensaje" rows="3"/>                                            	
+                                            	<t:message code="page.aportar.placeholder.contenido" var="placeholder_contenido"/>
+                                            	<f:textarea cssClass="form-control" path="contenido" id="inputContenido" 
+                                            	placeholder="${placeholder_contenido}" rows="3"/>                                            	
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -50,15 +60,21 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-offset-2 col-lg-10">   
-                                            	<button type="button" class="btn btn-default">Limpiar</button>                                         
-                                                <button type="submit" class="btn btn-primary pull-right">Aportar</button>                                                
+                                            	<button type="button" class="btn btn-default">
+                                            		<t:message code="btn.default.limpiar"/>
+                                            	</button>                                         
+                                                <button type="submit" class="btn btn-primary pull-right">
+                                                	<t:message code="page.aportar.btn.aportar"/>
+                                                </button>                                                
                                             </div>
                                         </div>
                                     </div>
                                 </f:form>
                                 <div class="form-horizontal" role="form">
 									<div class="form-group">
-									    <label class="col-lg-2 control-label">Añadir Archivo</label>
+									    <label class="col-lg-2 control-label">
+								    		<t:message code="page.aportar.label.upload"/>
+								    	</label>
 									    <div class="col-lg-10">
 									  		<form action="file-aporte.html" class="dropzone" id="inputAdjunto" enctype="multipart/form-data"></form>  	
 									    </div>
