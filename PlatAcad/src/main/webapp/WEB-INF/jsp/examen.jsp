@@ -1,7 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="t" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -23,34 +22,54 @@
                                 </div>                                
                                 <f:form id="form-registro" method="post" action="registrar-examen.html" commandName="examen" >
                                     <div class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label for="inputFecha" class="col-lg-2 control-label">Fecha</label>
+                                    	<div class="form-group">
+                                            <label for="inputFecha" class="col-lg-2 control-label">
+                                            	<t:message code="page.examen.label.curso"/>
+                                            </label>
                                             <div class="col-lg-10">
-                                            	<f:hidden path="fechaExamen" class="hidden-date"/>
-                                            	<input class="form-control datepicker" id="inputFecha" placeholder="Fecha de examen"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputTipo" class="col-lg-2 control-label">Tipo</label>
-                                            <div class="col-lg-10">
-                                            	<f:select path="tipoExamen" cssClass="form-control ">
-                                            		<f:options items="${tipos_examen}" itemValue="id" itemLabel="descripcion"/>
+                                            	<f:select path="idCursoAperturadoFk.idCursoAperturado" cssClass="form-control">
+                                            		<f:options items="${cursos}" itemValue="idCursoAperturado" itemLabel="idCursoFk.nombre"/>
                                             	</f:select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputDescripcion" class="col-lg-2 control-label">Descripcion</label>
+                                            <label for="inputFecha" class="col-lg-2 control-label">
+                                            	<t:message code="page.examen.label.fecha"/>
+                                            </label>
                                             <div class="col-lg-10">
-                                            	<f:textarea path="descripcion" cssClass="form-control" id="inputDescripcion" placeholder="Descripcion de los temas a tomar." rows="3"/>
+                                            	<f:hidden path="fechaExamen" class="hidden-date"/>
+                                            	<t:message code="page.examen.placeholder.fecha" var="placeholder_fecha"/>
+                                            	<input class="form-control datepicker" id="inputFecha" 
+                                            	placeholder="${placeholder_fecha}"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">                                            
-                                                <button type="submit" class="btn btn-primary">
-                                                	<t:message code="btn.registar" />
+                                            <label for="inputTipo" class="col-lg-2 control-label">
+                                            	<t:message code="page.examen.label.tipo"/>
+                                            </label>
+                                            <div class="col-lg-10">
+                                            	<f:select path="tipo" cssClass="form-control ">
+                                            		<f:options items="${tipos_examen}" itemValue="codigo" itemLabel="descripcion"/>
+                                            	</f:select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputDescripcion" class="col-lg-2 control-label">
+                                            	<t:message code="page.examen.label.descripcion"/>
+                                            </label>
+                                            <div class="col-lg-10">
+                                            	<t:message code="page.examen.placeholder.descripcion" var="placeholder_descripcion"/>
+                                            	<f:textarea path="descripcion" cssClass="form-control" id="inputDescripcion" 
+                                            	placeholder="${placeholder_descripcion}" rows="3"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10"> 
+                                                <button type="button" class="btn btn-default">
+                                                	<t:message code="btn.default.limpiar" />
                                                	</button>
-                                                <button type="button" class="btn btn-default pull-right">
-                                                	<t:message code="btn.limpiar" />
+                                               	<button type="submit" class="btn btn-primary pull-right">
+                                                	<t:message code="btn.default.registar" />
                                                	</button>
                                             </div>
                                         </div>

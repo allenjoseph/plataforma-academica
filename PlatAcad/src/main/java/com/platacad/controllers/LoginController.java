@@ -1,6 +1,8 @@
 package com.platacad.controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -13,7 +15,10 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.platacad.model.commons.UserInfo;
+import com.platacad.model.entities.CursoAperturado;
+import com.platacad.model.entities.Matricula;
 import com.platacad.model.enums.TipoRolEnum;
+import com.platacad.services.GeneralService;
 import com.platacad.services.UsuarioService;
 
 @Controller
@@ -22,6 +27,9 @@ public class LoginController {
 	
 	@Autowired
     UsuarioService usuarioService;
+	
+	@Autowired
+    GeneralService generalService;
 	
 	@Autowired
     UserInfo userInfo;
@@ -69,6 +77,13 @@ public class LoginController {
 	    	}
 	    	userInfo.setUser(usuarioService.getUsuario(userName));
 	    	userInfo.setInicioSesion(new Date());
+	    	
+	    	List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(1, userName);        
+	        List<CursoAperturado> cursos = new ArrayList<CursoAperturado>();
+	        for(Matricula matricula : cursosMatriculados){
+	        	cursos.add(matricula.getIdCursoAperturadoFk());
+	        }
+	        userInfo.setCursos(cursos);
 		}
 	}
 }

@@ -1,57 +1,61 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="t" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="t" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="es">
-    <jsp:include page="template/head.jsp"/>
-    <body>
-        <div class="container">            
-            <jsp:include page="template/navbar.jsp"/>            
-            <div class="row">
-                <div class="col-md-8" id="main">
-                    <div>                        
-                        <jsp:include page="template/user.jsp"/>
-                        <c:forEach items="${cursos}" var="curso">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="page-header">
-                                        <h1>
-                                            <a href="#!"><c:out value="${curso.idCursoFk.nombre}"/></a>
-                                            <i class="icon-folder-close"></i>
-                                        </h1>                                  
-                                    </div>
-                                    <p>
-                                    	<span class="input-title">
-											<t:message code="page.home.curso.docente" />
-										</span>
-										<c:out value="${curso.docenteValue}"/>
-									</p>
-                                    <p>
-                                    	<span class="input-title">
-                                    		<t:message code="page.home.curso.articulos" />
-                                    	</span>
-                                  	</p>                                   
-                                </div>
-                                <div class="panel-footer">
-                                	<div class="footer-curso-info">
-                                		<small><i class="icon-star"></i><c:out value="${curso.idCursoFk.creditos}"/></small>
-                                		<small><i class="icon-book"></i><c:out value="${curso.idCursoFk.tipoValue}"/></small>
-                                	</div>
-                                    <div class="footer-date-info">
-                                        <small>
-                                        	<t:message code="page.home.curso.fecha" />
-										</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-                <jsp:include page="template/sidemain.jsp"/>     
-            </div>
-            <jsp:include page="template/footer.jsp"/>
-        </div>
-    </body>
+<jsp:include page="template/head.jsp" />
+<body>
+	<div class="container">
+		<jsp:include page="template/navbar.jsp" />
+		<div class="row">
+			<div class="col-md-12"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-8" id="main">
+				<div>
+					<jsp:include page="template/user.jsp" />
+					<c:forEach items="${cursos}" var="curso">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="page-header">
+									<h1>
+										<a href="#!"><c:out value="${curso.idCursoFk.nombre}" /></a> <i
+											class="icon-folder-close"></i>
+									</h1>
+								</div>
+								<p>
+									<span class="input-title"> <t:message
+											code="page.home.curso.docente" />
+									</span>
+									<c:out value="${curso.docenteValue}" />
+								</p>
+								<p>
+									<span class="input-title"> <t:message
+											code="page.home.curso.articulos" />
+									</span>
+								</p>
+							</div>
+							<div class="panel-footer">
+								<div class="footer-curso-info">
+									<small><i class="icon-star"></i>
+									<c:out value="${curso.idCursoFk.creditos}" /></small> <small><i
+										class="icon-book"></i>
+									<c:out value="${curso.idCursoFk.tipoValue}" /></small>
+								</div>
+								<div class="footer-date-info">
+									<small> <t:message code="page.home.curso.fecha" />
+									</small>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<jsp:include page="template/sidemain.jsp" />
+		</div>
+		<jsp:include page="template/footer.jsp" />
+	</div>
+</body>
 </html>

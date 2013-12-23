@@ -25,7 +25,6 @@ public class AporteController {
     UsuarioService usuarioService;
 	
 	@Autowired
-    @Qualifier("userInfo")
     UserInfo userInfo;
 	
 	private Archivo archivoAporte;
@@ -35,7 +34,7 @@ public class AporteController {
     	ModelAndView model = new ModelAndView("aporte");
     	model.addObject("aporte", new Articulo());
     	model.addObject("user", userInfo.getUser());
-    	model.addObject("cursos", BaseController.cursos);
+    	model.addObject("cursos", userInfo.getCursos());
     	archivoAporte = new Archivo();
     	archivoAporte.setIdUsuarioFk(userInfo.getUser());
     	return model;

@@ -23,34 +23,52 @@
                                 <f:form  id="form-mensaje" method="post" action="enviarMensaje.html" commandName="mensaje" >
                                     <div class="form-horizontal" role="form">
                                         <div class="form-group">
-                                            <label for="inputUsuario" class="col-lg-2 control-label">De:</label>
+                                            <label for="inputUsuario" class="col-lg-2 control-label">
+                                            	<t:message code="page.mensaje.label.de"/>
+                                            </label>
                                             <div class="col-lg-10">
                                             	<f:hidden path="idUsuarioFk.idUsuarioPk"/>
                                                 <f:input path="idUsuarioFk.fullName" cssClass="form-control" readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputDestinatario" class="col-lg-2 control-label">Para</label>
+                                            <label for="inputDestinatario" class="col-lg-2 control-label">
+                                            	<t:message code="page.mensaje.label.para"/>
+                                            </label>
                                             <div class="col-lg-10">
-                                            	<f:input path="idUsuarioDestinoFk.idUsuarioPk" cssClass="form-control" id="inputDestinatario" placeholder="Usuarios o Cursos separados por comas"/>
+                                            	<t:message code="page.mensaje.placeholder.para" var="placeholder_para"/>
+                                            	<f:input path="idUsuarioDestinoFk.idUsuarioPk" cssClass="form-control" 
+                                            	id="inputDestinatario" placeholder="${placeholder_para}"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputAsunto" class="col-lg-2 control-label">Asunto</label>
+                                            <label for="inputAsunto" class="col-lg-2 control-label">
+                                            	<t:message code="page.mensaje.label.asunto"/>
+                                            </label>
                                             <div class="col-lg-10">
-                                            	<f:input path="asunto" cssClass="form-control" id="inputAsunto" placeholder="Asunto"/>
+                                            	<t:message code="page.mensaje.placeholder.asunto" var="placeholder_asunto"/>
+                                            	<f:input path="asunto" cssClass="form-control" 
+                                            	id="inputAsunto" placeholder="${placeholder_asunto}"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputMensaje" class="col-lg-2 control-label">Mensaje</label>
+                                            <label for="inputMensaje" class="col-lg-2 control-label">
+                                            	<t:message code="page.mensaje.label.mensaje"/>
+                                            </label>
                                             <div class="col-lg-10">
-                                            	<f:textarea cssClass="form-control" path="mensaje" id="inputMensaje" placeholder="Mensaje" rows="3"/>
+                                            	<t:message code="page.mensaje.placeholder.mensaje" var="placeholder_mensaje"/>
+                                            	<f:textarea cssClass="form-control" path="mensaje" 
+                                            	id="inputMensaje" placeholder="${placeholder_mensaje}" rows="3"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-offset-2 col-lg-10">                                            
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                                <button type="button" class="btn btn-default pull-right">Limpiar</button>
+                                                <button type="submit" class="btn btn-primary">
+                                                	<t:message code="page.mensaje.btn.enviar"/>
+                                                </button>
+                                                <button type="button" class="btn btn-default pull-right">
+                                                	<t:message code="btn.default.limpiar"/>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
