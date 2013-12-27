@@ -37,6 +37,10 @@ public class GeneralService implements GeneralServiceInterface{
 	public List<CursoMatriculadoTO> getCursosMatriculadosTO(Integer ciclo, String usuario) {		
 		return generalBusiness.getCursosMatriculadosTO(ciclo, usuario);
 	}
+
+	public List<CursoAperturado> getCursosACargo(Integer ciclo, String usuario) {
+		return generalBusiness.getCursosACargo(ciclo, usuario);
+	}
     
     
     

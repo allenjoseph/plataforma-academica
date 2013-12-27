@@ -7,11 +7,15 @@
     <jsp:include page="template/head.jsp"/>
     <body>
         <div class="container">
-            <jsp:include page="template/navbar.jsp"/>            
+            <jsp:include page="template/navbar.jsp"/>   
+            <div class="row">
+				<div class="col-md-12">
+					<jsp:include page="template/user.jsp" />
+				</div>
+			</div>         
             <div class="row">
                 <div class="col-md-8" id="main">
                     <div>
-                        <jsp:include page="template/user.jsp"/>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="page-header">
@@ -62,12 +66,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">                                            
-                                                <button type="submit" class="btn btn-primary">
-                                                	<t:message code="page.mensaje.btn.enviar"/>
-                                                </button>
-                                                <button type="button" class="btn btn-default pull-right">
+                                            <div class="col-lg-offset-2 col-lg-10">   
+                                                <button type="button" class="btn btn-default">
                                                 	<t:message code="btn.default.limpiar"/>
+                                                </button>
+                                                <button type="submit" class="btn btn-primary pull-right">
+                                                	<t:message code="page.mensaje.btn.enviar"/>
                                                 </button>
                                             </div>
                                         </div>

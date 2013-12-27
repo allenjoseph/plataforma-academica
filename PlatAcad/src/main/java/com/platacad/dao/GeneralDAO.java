@@ -46,10 +46,32 @@ public class GeneralDAO {
 												.concat(docente.getApellidoMaterno()));
 				Curso curso = cursoAperturado.getIdCursoFk();
 				curso.setTipoValue(TipoCursoEnum.get(curso.getTipo()).getDescripcion());
+				cursoAperturado.setTotalArticulos(cursoAperturadoRepository.getTotalArticulos(cursoAperturado.getIdCursoAperturado()));
 			}
 		}
     	return matricula;
     }
+
+	public List<CursoAperturado> getCursosACargo(Integer ciclo, String usuario) {
+		List<CursoAperturado> cursoAperturados = cursoAperturadoRepository.findByIdCicloFkAndIdDocenteFk(ciclo, new Usuario(usuario));
+		for(CursoAperturado curso : cursoAperturados){
+			Usuario docente = curso.getIdDocenteFk();
+			curso.setDocenteValue(docente.getNombres()
+											.concat(KeyWords.BLANK_SPACE)
+											.concat(docente.getApellidoPaterno())
+											.concat(KeyWords.BLANK_SPACE)
+											.concat(docente.getApellidoMaterno()));
+			
+			Curso cursoACargo = curso.getIdCursoFk();
+			cursoACargo.setTipoValue(TipoCursoEnum.get(cursoACargo.getTipo()).getDescripcion());
+			
+			curso.setTotalAlumnos(cursoAperturadoRepository.getTotalMatriculados(curso.getIdCursoAperturado()));
+			curso.setTotalArticulos(cursoAperturadoRepository.getTotalArticulos(curso.getIdCursoAperturado()));
+			curso.setTotalExamenes(cursoAperturadoRepository.getTotalExamenes(curso.getIdCursoAperturado()));
+			curso.setTotalTrabajos(cursoAperturadoRepository.getTotalTrabajos(curso.getIdCursoAperturado()));
+		}
+		return cursoAperturados;
+	}
 	
 	
 	

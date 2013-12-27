@@ -35,17 +35,18 @@ public class BaseController {
    
     @RequestMapping("inicio.html")
     public ModelAndView home(){
-        ModelAndView model = new ModelAndView("home");
+    	String inicio = "logon";
+    	if(userInfo.getUser().getIsAlumno()){
+    		inicio = "home";
+    	}else if(userInfo.getUser().getIsDocente()){
+    		inicio = "homeDocente";
+    	}else if(userInfo.getUser().getIsAdministrativo()){
+    		inicio = "homeAdministrativo";
+    	}
+    	
+    	ModelAndView model = new ModelAndView(inicio);
         model.addObject("user", userInfo.getUser());
         model.addObject("cursos", userInfo.getCursos());
-        return model;
-    }
-    
-    @RequestMapping("inicio-docente.html")
-    public ModelAndView homeDocente(){
-        ModelAndView model = new ModelAndView("homeDocente");
-        model.addObject("user",  userInfo.getUser());
-        //model.addObject("cursos_asignados", generalService.getCursosAsignados("45653716"));
         return model;
     }
     

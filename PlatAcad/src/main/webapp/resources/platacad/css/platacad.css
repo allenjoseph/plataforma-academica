@@ -10,8 +10,7 @@ footer{
     color: #ccc;
 }
 #logon-main {
-	padding: 20px;
-	margin: 0 auto;
+	padding: 30px;
 }
 #logon-main .panel{
 	-webkit-box-shadow: 0px 5px 30px rgba(50, 50, 50, 0.5);
@@ -38,12 +37,23 @@ footer{
 	color: #ffffff;
 	background-color: transparent;
 }
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus{
+	color: #ffffff;
+	background-color: transparent;
+}
+
 #side-main .nav>li>a:hover,
 #side-main .nav>li>a:focus {
 	text-decoration: none;
 	background-color: #0492d4;
 	color: #ffffff;
 	
+}
+.label-light-center{
+	text-align: center;
+	color: #cdcdcd;
 }
 #side-main .nav-pills>li>a {
 	border-radius: 0;
@@ -140,12 +150,10 @@ footer{
 .sensitive-search-result{
 	padding-top: 10px;
 }
-#main{
-    padding-top: 70px;    
+#main{    
     min-height: 500px;
 }
 #side-main{
-    padding-top: 70px;
 }
 #side-main .tab-content{
     background-color: #ffffff;
@@ -155,7 +163,7 @@ footer{
     border-right: 1px solid #ddd;
     
     box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 1px 0px;
-    min-height: 300px;
+    min-height: 100px;
 }
 #side-main .tab-content .tab-pane{
     padding: 10px;
@@ -171,3 +179,24 @@ footer{
 .panel-default {
 	border-color: #ccc;
 }*/
+
+#panel-timeline{
+	margin-top: 70px;
+}
+#panel-timeline .timeline{
+	padding-top: 10px;
+}
+#list-user-details{
+	padding-top: 12px;
+}
+#list-user-details li{
+	margin: 0;
+	padding: 0;
+	border-color: #ffffff;
+}
+#list-user-details li span.badge{
+	width: 30px;
+	margin-right: 5px;
+	padding: 2px 7px;
+	border-radius: 3px;
+}

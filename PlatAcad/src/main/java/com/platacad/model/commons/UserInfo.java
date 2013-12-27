@@ -75,6 +75,7 @@ public class UserInfo implements Serializable{
 		// se persiste todo el tracking de la aplicacion para la auditoria
 		
 		this.setUser(new Usuario());
+		this.setCursos(new ArrayList<CursoAperturado>());
 		this.setEnlacesVisitados(new ArrayList<String>());
 	}
 }

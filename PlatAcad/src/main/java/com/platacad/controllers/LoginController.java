@@ -1,11 +1,13 @@
 package com.platacad.controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -42,12 +44,7 @@ public class LoginController {
     @RequestMapping("success-login.html")  
     public View successLogin() {  
     	loadUserInfo();
-    	if(userInfo.getUser().getRol().equals(TipoRolEnum.ALUMNO.getCodigo())){
-    		return new RedirectView("inicio.html");  
-    	}else if(userInfo.getUser().getRol().equals(TipoRolEnum.DOCENTE.getCodigo())){
-    		return new RedirectView("inicio-docente.html");
-    	}
-        return new RedirectView("login.html");
+    	return new RedirectView("inicio.html");
     } 
 
     @RequestMapping("process-login.html")  
@@ -62,10 +59,10 @@ public class LoginController {
         return modelAndView;  
     }
     
-    @RequestMapping("logout.html")
-    public String logout(){    	
+    @RequestMapping("success-logout.html")
+    public View logoutOk(){    	
     	userInfo.closeSession();
-    	return "logon";
+    	return new RedirectView("login.html");  
     }
     
 	public void loadUserInfo() {
@@ -78,12 +75,26 @@ public class LoginController {
 	    	userInfo.setUser(usuarioService.getUsuario(userName));
 	    	userInfo.setInicioSesion(new Date());
 	    	
-	    	List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(1, userName);        
-	        List<CursoAperturado> cursos = new ArrayList<CursoAperturado>();
-	        for(Matricula matricula : cursosMatriculados){
-	        	cursos.add(matricula.getIdCursoAperturadoFk());
+	    	List<CursoAperturado> cursosAperturados = new ArrayList<CursoAperturado>();
+	    	
+	    	Collection<? extends GrantedAuthority> authorities = ((UserDetails) user).getAuthorities();
+	        for (GrantedAuthority grantedAuthority : authorities) {
+	            if (grantedAuthority.getAuthority().equals(TipoRolEnum.ALUMNO.getDescripcion())) {
+	            	userInfo.getUser().setIsAlumno(Boolean.TRUE);
+	            	List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(1, userName);
+	            	cursosAperturados = new ArrayList<CursoAperturado>();
+	    	        for(Matricula matricula : cursosMatriculados){
+	    	        	cursosAperturados.add(matricula.getIdCursoAperturadoFk());
+	    	        }
+	            } else if (grantedAuthority.getAuthority().equals(TipoRolEnum.DOCENTE.getDescripcion())) {
+	            	userInfo.getUser().setIsDocente(Boolean.TRUE);
+	            	cursosAperturados = generalService.getCursosACargo(1, userName);
+	            } else if (grantedAuthority.getAuthority().equals(TipoRolEnum.ADMIN.getDescripcion())){
+	            	userInfo.getUser().setIsAdministrativo(Boolean.TRUE);
+	            }
+	            break;
 	        }
-	        userInfo.setCursos(cursos);
+	        userInfo.setCursos(cursosAperturados);
 		}
 	}
 }

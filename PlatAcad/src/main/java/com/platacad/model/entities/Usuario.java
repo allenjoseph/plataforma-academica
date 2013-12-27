@@ -29,6 +29,10 @@ import javax.persistence.Transient;
  *
  * @author allen
  */
+/**
+ * @author Allen
+ *
+ */
 @Entity
 @Table(name = "usuario", catalog = "platacad", schema = "")
 public class Usuario implements Serializable {
@@ -80,6 +84,15 @@ public class Usuario implements Serializable {
     
     @Transient
     private String fullName;
+    
+    @Transient
+    private Boolean isAlumno;
+    
+    @Transient
+    private Boolean isDocente;
+    
+    @Transient
+    private Boolean isAdministrativo;
                  
     public Usuario() {
     }
@@ -206,6 +219,36 @@ public class Usuario implements Serializable {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public Boolean getIsAlumno() {
+		return isAlumno;
+	}
+
+	public void setIsAlumno(Boolean isAlumno) {
+		this.isDocente = Boolean.FALSE;
+		this.isAdministrativo = Boolean.FALSE;
+		this.isAlumno = isAlumno;
+	}
+
+	public Boolean getIsDocente() {
+		return isDocente;
+	}
+
+	public void setIsDocente(Boolean isDocente) {
+		this.isAlumno = Boolean.FALSE;
+		this.isAdministrativo = Boolean.FALSE;
+		this.isDocente = isDocente;
+	}
+
+	public Boolean getIsAdministrativo() {
+		return isAdministrativo;
+	}
+
+	public void setIsAdministrativo(Boolean isAdministrativo) {
+		this.isAlumno = Boolean.FALSE;
+		this.isDocente = Boolean.FALSE;
+		this.isAdministrativo = isAdministrativo;
 	}
     
 }

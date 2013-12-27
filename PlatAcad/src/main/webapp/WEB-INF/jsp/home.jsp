@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -10,12 +9,13 @@
 	<div class="container">
 		<jsp:include page="template/navbar.jsp" />
 		<div class="row">
-			<div class="col-md-12"></div>
+			<div class="col-md-12">
+				<jsp:include page="template/user.jsp" />
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-8" id="main">
-				<div>
-					<jsp:include page="template/user.jsp" />
+				<div>					
 					<c:forEach items="${cursos}" var="curso">
 						<div class="panel panel-default">
 							<div class="panel-body">
@@ -35,14 +35,17 @@
 									<span class="input-title"> <t:message
 											code="page.home.curso.articulos" />
 									</span>
+									<c:out value="${curso.totalArticulos}"/>
 								</p>
 							</div>
 							<div class="panel-footer">
 								<div class="footer-curso-info">
-									<small><i class="icon-star"></i>
-									<c:out value="${curso.idCursoFk.creditos}" /></small> <small><i
-										class="icon-book"></i>
-									<c:out value="${curso.idCursoFk.tipoValue}" /></small>
+									<small>
+										<i class="icon-star"></i><c:out value="${curso.idCursoFk.creditos}" />
+									</small>
+									<small>
+										<i class="icon-book"></i><c:out value="${curso.idCursoFk.tipoValue}" />
+									</small>
 								</div>
 								<div class="footer-date-info">
 									<small> <t:message code="page.home.curso.fecha" />
