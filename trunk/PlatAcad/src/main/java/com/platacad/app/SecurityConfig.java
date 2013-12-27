@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.*;
 
+import com.platacad.model.enums.TipoRolEnum;
+
 @Configuration
 @EnableWebSecurity
 @Import({ DataBaseConfig.class })
@@ -38,7 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.anyRequest().hasAnyAuthority("ALUMNO","DOCENTE","ADMIN")
+				.anyRequest().hasAnyAuthority(TipoRolEnum.ALUMNO.getDescripcion(),
+						TipoRolEnum.DOCENTE.getDescripcion(),
+						TipoRolEnum.ADMIN.getDescripcion())
 				.and()
 			.formLogin()
 				.loginPage("/login.html")
@@ -50,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .permitAll() 
 	            .and()
 	        .logout()
-	            .logoutSuccessUrl("/logout.html")
+	            .logoutSuccessUrl("/success-logout.html")
 	            .logoutUrl("/logout.html")
 	            .permitAll()
 	            .and()

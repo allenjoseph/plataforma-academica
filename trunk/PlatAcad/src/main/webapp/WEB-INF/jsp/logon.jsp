@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6" id="logon-main">
+			<div class="col-md-6 col-md-offset-3" id="logon-main">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
@@ -48,10 +48,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<c:if test="${error == true}">
+								<c:if test="${not empty error}">
 						            <div class="alert alert-danger">
 						                <a class="close" data-dismiss="alert" href="#">×</a>
-						                <p><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /></p>
+						                <p><c:out value="${error}" /></p>
 						            </div>
 						        </c:if>
 							</div>

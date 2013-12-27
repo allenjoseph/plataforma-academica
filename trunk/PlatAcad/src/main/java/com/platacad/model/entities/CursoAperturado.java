@@ -5,7 +5,6 @@
 package com.platacad.model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -18,13 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.IndexColumn;
 
 /**
  *
@@ -69,13 +66,25 @@ public class CursoAperturado implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
     private List<Examen> examenList;   
-    
+     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCursoAperturadoFk")
-    private List<Matricula> matriculaList;  
+    private List<Matricula> matriculaList;
     
     @Transient
     private String docenteValue;
         
+    @Transient
+    private Integer totalAlumnos;
+    
+    @Transient
+    private Integer totalArticulos;
+    
+    @Transient
+    private Integer totalExamenes;
+    
+    @Transient
+    private Integer totalTrabajos;
+    
     public CursoAperturado() {
     }
 
@@ -169,6 +178,38 @@ public class CursoAperturado implements Serializable {
 
 	public void setDocenteValue(String docenteValue) {
 		this.docenteValue = docenteValue;
+	}
+
+	public Integer getTotalAlumnos() {
+		return totalAlumnos;
+	}
+
+	public void setTotalAlumnos(Integer totalAlumnos) {
+		this.totalAlumnos = totalAlumnos;
+	}
+
+	public Integer getTotalArticulos() {
+		return totalArticulos;
+	}
+
+	public void setTotalArticulos(Integer totalArticulos) {
+		this.totalArticulos = totalArticulos;
+	}
+
+	public Integer getTotalExamenes() {
+		return totalExamenes;
+	}
+
+	public void setTotalExamenes(Integer totalExamenes) {
+		this.totalExamenes = totalExamenes;
+	}
+
+	public Integer getTotalTrabajos() {
+		return totalTrabajos;
+	}
+
+	public void setTotalTrabajos(Integer totalTrabajos) {
+		this.totalTrabajos = totalTrabajos;
 	}
     
 }

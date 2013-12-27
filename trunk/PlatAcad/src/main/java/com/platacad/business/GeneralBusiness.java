@@ -39,8 +39,11 @@ public class GeneralBusiness {
 	}
 
 	public List<CursoMatriculadoTO> getCursosMatriculadosTO(Integer ciclo, String usuario) {
-
 		return null;
+	}
+
+	public List<CursoAperturado> getCursosACargo(Integer ciclo, String usuario) {
+		return generalDAO.getCursosACargo(ciclo, usuario);
 	}
     
     

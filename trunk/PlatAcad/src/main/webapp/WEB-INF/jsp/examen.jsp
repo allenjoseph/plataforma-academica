@@ -7,16 +7,20 @@
 	<jsp:include page="template/head.jsp"/>
     <body>
         <div class="container" id="container-examen">            
-            <jsp:include page="template/navbar.jsp"/>            
+            <jsp:include page="template/navbar.jsp"/> 
+            <div class="row">
+				<div class="col-md-12">
+					<jsp:include page="template/user.jsp" />
+				</div>
+			</div>            
             <div class="row">
                 <div class="col-md-8" id="main">
                     <div>                        
-                        <jsp:include page="template/user.jsp"/>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="page-header">
                                     <h1>
-                                        <t:message code="page.examen.registar.titulo"/>
+                                        <t:message code="page.examen.titulo"/>
                                         <i class="icon-envelope"></i>
                                     </h1>       
                                 </div>                                
