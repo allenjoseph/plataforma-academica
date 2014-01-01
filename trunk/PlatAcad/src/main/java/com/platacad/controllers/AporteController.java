@@ -1,9 +1,9 @@
 package com.platacad.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +16,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.platacad.model.commons.UserInfo;
 import com.platacad.model.entities.Archivo;
 import com.platacad.model.entities.Articulo;
-import com.platacad.services.UsuarioService;
+import com.platacad.services.AporteServiceInterface;
+import com.platacad.services.UsuarioServiceInterface;
 
 @Controller
 public class AporteController {
 	
 	@Autowired
-    UsuarioService usuarioService;
+    UsuarioServiceInterface usuarioService;
+	
+	@Autowired
+	AporteServiceInterface aporteService;
 	
 	@Autowired
     UserInfo userInfo;
@@ -41,10 +45,22 @@ public class AporteController {
     }
     
     @RequestMapping("grabar-aporte.html")
-    public ModelAndView grabarAporte(@ModelAttribute("aporte") Articulo articulo){
+    public ModelAndView grabarAporte(@ModelAttribute("aporte") Articulo aporte){
     	ModelAndView model = new ModelAndView("aporte");
-    	articulo.setIdUsuarioFk(userInfo.getUser());
-    	articulo.setIdArchivoFk(archivoAporte);
+    	aporte.setIdUsuarioFk(userInfo.getUser());
+    	if(archivoAporte.getContenido() != null){
+    		aporte.setIdArchivoFk(archivoAporte);
+    	}    	
+    	aporteService.registrarAporte(aporte);
+    	return model;
+    }
+    
+    @RequestMapping("listar-aportes.html")
+    public ModelAndView listarAportes(@ModelAttribute("cursoId") Integer cursoId){
+    	ModelAndView model = new ModelAndView("listaAportes");
+    	List<Articulo> lista = aporteService.getAportes(cursoId);
+    	model.addObject("user", userInfo.getUser());
+    	model.addObject("aportes", lista);
     	return model;
     }
     

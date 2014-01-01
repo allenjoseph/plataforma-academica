@@ -9,6 +9,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.platacad.model.commons.UserInfo;
+
 @Embeddable
 public class Auditoria implements Serializable{
 	
@@ -64,6 +66,18 @@ public class Auditoria implements Serializable{
 
 	public void setModificacionUsuario(String modificacionUsuario) {
 		this.modificacionUsuario = modificacionUsuario;
+	}
+	
+	public void prePresist(){
+		setCreacionFecha(new Date());
+		setModificacionFecha(new Date());
+		setCreacionUsuario(UserInfo.userId);
+		setModificacionUsuario(UserInfo.userId);
+	}
+	
+	public void preUpdate() {
+		setModificacionFecha(new Date());
+		setModificacionUsuario(UserInfo.userId);		
 	}
 
 }

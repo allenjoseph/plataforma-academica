@@ -14,17 +14,17 @@
 				</div>
 			</div>          
             <div class="row">
-                <div class="col-md-8" id="main">
+                <div class="col-md-8 main-content">
                     <div>   
                     	<div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="page-header">
-                                    <h1>
+                                    <h1 class="page-header-main">
                                         <t:message code="page.trabajo.titulo"/>
                                         <i class="icon-envelope"></i>
                                     </h1>       
                                 </div>                                
-                                <f:form id="form-registro" method="post" action="registrar-trabajo.html" commandName="trabajo" >
+                                <f:form id="form-registro-trabajo" method="post" action="registrar-trabajo.html" commandName="trabajo" >
                                     <div class="form-horizontal" role="form">
                                     	<div class="form-group">
                                             <label for="inputFecha" class="col-lg-2 control-label">
@@ -37,16 +37,29 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputFecha" class="col-lg-2 control-label">
+                                            <label class="col-lg-2 control-label">
                                             	<t:message code="page.trabajo.label.fecha"/>
                                             </label>
                                             <div class="col-lg-10">
-                                            	<f:hidden path="fechaPresentacion" class="hidden-date"/>
-                                            	<t:message code="page.trabajo.placeholder.fecha" var="placeholder_fecha"/>
-                                            	<input class="form-control datepicker" id="inputFecha" 
-                                            	placeholder="${placeholder_fecha}"/>
+                                            	<f:hidden path="fechaPresentacion" id="fecha-presentacion-aporte" class="hidden-date"/>    
+                                            	<t:message code="page.trabajo.placeholder.fecha" var="placeholder_fecha"/>                                        	
+                                            	<div class="input-group date" id="dpPresentacionTrabajo" data-date-format="DD, d MM yy">
+													<input class="form-control" type="text" readonly="" placeholder="${placeholder_fecha}"/>
+													<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+												</div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+											<label class="col-lg-2 control-label"> 
+												<t:message code="page.trabajo.label.titulo" />
+											</label>
+											<div class="col-lg-10">
+												<t:message code="page.trabajo.placeholder.titulo"
+													var="placeholder_titulo" />
+												<f:input path="titulo" cssClass="form-control"
+													id="inputTitulo" placeholder="${placeholder_titulo}" />
+											</div>
+										</div>
                                         <div class="form-group">
                                             <label for="inputDescripcion" class="col-lg-2 control-label">
                                             	<t:message code="page.trabajo.label.descripcion"/>
@@ -77,5 +90,19 @@
             </div>
             <jsp:include page="template/footer.jsp"/>
         </div>
+        <script type="text/javascript">
+			$(function(){
+				$(".input-group.date").datepicker({ 
+					autoclose: true, 
+					todayHighlight: true,
+					language: 'es'
+				});
+
+				$("#form-registro-trabajo").on('submit', function(e){		
+					var date = $('#dpPresentacionTrabajo').datepicker('getDate');
+				 	$('#fecha-presentacion-aporte').val(date);
+				});
+			});
+        </script>
     </body>
 </html>

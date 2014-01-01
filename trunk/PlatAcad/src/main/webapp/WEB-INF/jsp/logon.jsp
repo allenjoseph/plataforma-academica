@@ -51,7 +51,9 @@
 								<c:if test="${not empty error}">
 						            <div class="alert alert-danger">
 						                <a class="close" data-dismiss="alert" href="#">×</a>
-						                <p><c:out value="${error}" /></p>
+						                <p>
+						                	<t:message code="login.message.error.login"/>
+						                </p>
 						            </div>
 						        </c:if>
 							</div>

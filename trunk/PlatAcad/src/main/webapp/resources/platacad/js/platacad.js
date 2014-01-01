@@ -18,11 +18,6 @@ $(function(){
 	});
 	
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-		
-	/*$.datepicker.setDefaults($.datepicker.regional['es']);  
-	$('.datepicker').datepicker({
-	   dateFormat: 'DD, d MM yy'
-	});*/
 	
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	
@@ -33,17 +28,26 @@ $(function(){
 	});	
 	
 	/* - - - - - - - - -  - - - - - - - - - - - - - - - - - - */
+	$('#alert-form-aporte').hide();
+	$('.alert').find('button.close').on('click',function(){
+		$(this).siblings('span').html('');
+		$(this).parent().hide();
+	});
 	
 	$('#form-aporte').on('submit', function(e){
-		e.preventDefault();
 		if($(this).find('#inputTitulo').val() == ''){
-			$(this).find('div.alert').html('El Aporte debe tener un Titulo');
-			return;
+			e.preventDefault();
+			$('#alert-form-aporte').find('span').html('El Aporte debe tener un Titulo').end().show();
+		}else if($(this).find('#editor').html().trim() == ''){
+			e.preventDefault();
+			$('#alert-form-aporte').find('span').html('El Aporte debe tener un Contenido').end().show();
+		}else{	
+			$('#input-contenido-aporte').val($('#editor').html());
 		}
-		if($(this).find('#inputContenido').val() == ''){
-			$(this).find('div.alert').html('El Aporte debe tener un Contenido');
-			return;
-		}
+	});
+	
+	$('#btn-submit-aporte').on('click', function(){
+		$('#form-aporte').submit();
 	});
 });
 
@@ -94,3 +98,11 @@ jQuery(function($){
                 yearSuffix: ''};
         $.datepicker.setDefaults($.datepicker.regional['es']);
 });*/
+
+String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+
+String.prototype.ltrim=function(){return this.replace(/^\s+/,'');};
+
+String.prototype.rtrim=function(){return this.replace(/\s+$/,'');};
+
+String.prototype.fulltrim=function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};

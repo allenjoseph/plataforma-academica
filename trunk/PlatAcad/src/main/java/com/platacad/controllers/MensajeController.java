@@ -17,17 +17,20 @@ import com.platacad.model.commons.UserInfo;
 import com.platacad.model.entities.Mensaje;
 import com.platacad.model.entities.Usuario;
 import com.platacad.services.MensajeService;
+import com.platacad.services.MensajeServiceInterface;
 import com.platacad.services.UsuarioService;
+import com.platacad.services.UsuarioServiceInterface;
 import com.platacad.to.MensajeTO;
+import com.platacad.to.UsuarioTO;
 
 @Controller
 public class MensajeController {
 
 	@Autowired
-    UsuarioService usuarioService;
+    UsuarioServiceInterface usuarioService;
 	
     @Autowired
-    MensajeService mensajeService;
+    MensajeServiceInterface mensajeService;
     
     @Autowired
     UserInfo userInfo;

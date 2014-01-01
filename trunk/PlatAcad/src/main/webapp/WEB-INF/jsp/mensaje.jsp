@@ -14,12 +14,12 @@
 				</div>
 			</div>         
             <div class="row">
-                <div class="col-md-8" id="main">
+                <div class="col-md-8 main-content" id="main-mensaje">
                     <div>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="page-header">
-                                    <h1>
+                                    <h1 class="page-header-main">
                                         <t:message code="page.mensaje.titulo"/>
                                         <i class="icon-envelope"></i>
                                     </h1>       
@@ -43,6 +43,8 @@
                                             	<t:message code="page.mensaje.placeholder.para" var="placeholder_para"/>
                                             	<f:input path="idUsuarioDestinoFk.idUsuarioPk" cssClass="form-control" 
                                             	id="inputDestinatario" placeholder="${placeholder_para}"/>
+                                            	<input type="text" id="inputAutocomplete" 
+                                            	data-url="<c:url value='get-usuarios.json'/>"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -85,5 +87,15 @@
             </div>
             <jsp:include page="template/footer.jsp"/>
         </div>
+        <script type="text/javascript">
+	        $(function(){		        
+	        	$('#inputAutocomplete').typeahead({                                
+	          	  name: 'user',                                                          
+	          	  prefetch: $('#inputAutocomplete').data("url"),                                         
+	          	  limit: 10                                                                   
+	          	});
+            });        
+        </script>
     </body>
 </html>
+

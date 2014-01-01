@@ -9,7 +9,7 @@
         <div class="container">
             <jsp:include page="template/navbar.jsp"/>            
             <div class="row">
-                <div class="col-md-8" id="main">
+                <div class="col-md-8 main-content" id="main-lista-mensajes">
                     <div>
                         <jsp:include page="template/user.jsp"/>
                         <div class="panel panel-default">

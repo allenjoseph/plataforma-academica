@@ -25,6 +25,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.platacad.helpers.KeyWords;
+import com.platacad.to.UsuarioTO;
+
 /**
  *
  * @author allen
@@ -93,7 +96,27 @@ public class Usuario implements Serializable {
     
     @Transient
     private Boolean isAdministrativo;
-                 
+    
+    @Transient
+    private Integer totalMensajes;
+    
+    @Transient
+    private Integer totalExamenes;
+    
+    @Transient
+    private Integer totalTrabajos;
+    
+    @PostLoad
+    public void loadTrasients() {
+    	StringBuffer buffer = new StringBuffer();
+		buffer.append(nombres);
+		buffer.append(KeyWords.BLANK_SPACE);
+		buffer.append(apellidoPaterno);
+		buffer.append(KeyWords.BLANK_SPACE);
+		buffer.append(apellidoMaterno);
+    	fullName = buffer.toString();
+    }
+    
     public Usuario() {
     }
 
@@ -213,7 +236,7 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 	}
 
-	public String getFullName() {
+	public String getFullName() {		
 		return fullName;
 	}
 
@@ -249,6 +272,30 @@ public class Usuario implements Serializable {
 		this.isAlumno = Boolean.FALSE;
 		this.isDocente = Boolean.FALSE;
 		this.isAdministrativo = isAdministrativo;
+	}
+
+	public Integer getTotalMensajes() {
+		return totalMensajes;
+	}
+
+	public void setTotalMensajes(Integer totalMensajes) {
+		this.totalMensajes = totalMensajes;
+	}
+
+	public Integer getTotalExamenes() {
+		return totalExamenes;
+	}
+
+	public void setTotalExamenes(Integer totalExamenes) {
+		this.totalExamenes = totalExamenes;
+	}
+
+	public Integer getTotalTrabajos() {
+		return totalTrabajos;
+	}
+
+	public void setTotalTrabajos(Integer totalTrabajos) {
+		this.totalTrabajos = totalTrabajos;
 	}
     
 }

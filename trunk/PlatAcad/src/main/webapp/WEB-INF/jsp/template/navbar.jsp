@@ -13,7 +13,7 @@
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right"> 
-        	<c:if test="${user.isDocente or user.isAdministrativo}">
+        	<c:if test="${user.isAdministrativo}">
 	        	<li>
 	                <a href="<c:url value="/evento.html"/>"><t:message code="nav.info.evento"/></a>                        
 	            </li>
