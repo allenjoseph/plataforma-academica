@@ -25,6 +25,8 @@ public class UserInfo implements Serializable{
 	
 	private List<CursoAperturado> cursos;
 	
+	public static String userId;
+	
 	public UserInfo() {
 		user = new Usuario();
 		enlacesVisitados = new ArrayList<String>();
@@ -75,6 +77,7 @@ public class UserInfo implements Serializable{
 		// se persiste todo el tracking de la aplicacion para la auditoria
 		
 		this.setUser(new Usuario());
+		this.userId = "";
 		this.setCursos(new ArrayList<CursoAperturado>());
 		this.setEnlacesVisitados(new ArrayList<String>());
 	}

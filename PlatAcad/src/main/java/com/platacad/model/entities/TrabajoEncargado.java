@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,13 +26,16 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.platacad.model.commons.UserInfo;
+
 /**
  *
  * @author allen
  */
 @Entity
+@EntityListeners(AuditLogger.class)
 @Table(name = "trabajo_encargado", catalog = "platacad", schema = "")
-public class TrabajoEncargado implements Serializable {
+public class TrabajoEncargado implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,10 +50,6 @@ public class TrabajoEncargado implements Serializable {
     @Column(name = "descripcion", length = 65535)
     private String descripcion;
     
-    @Column(name = "fecha_creacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaCreacion;
-    
     @Column(name = "fecha_presentacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPresentacion;
@@ -58,7 +58,7 @@ public class TrabajoEncargado implements Serializable {
     private Integer estado;
     
     @Embedded
-    private Auditoria auditoria;
+    private Auditoria auditoria = new Auditoria();
 
     @Column(name = "tipo_param")
     private Integer tipo;
@@ -99,14 +99,6 @@ public class TrabajoEncargado implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
     }
 
     public Date getFechaPresentacion() {
@@ -157,4 +149,11 @@ public class TrabajoEncargado implements Serializable {
         this.detalleTrabajoList = detalleTrabajoList;
     }
     
+    public void prePresist() {
+		this.auditoria.prePresist();
+	}
+
+	public void preUpdate() {
+		this.auditoria.preUpdate();		
+	}
 }

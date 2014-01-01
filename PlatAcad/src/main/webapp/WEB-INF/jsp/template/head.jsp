@@ -9,6 +9,7 @@
     <link href="<c:url value='resources/platacad/css/timeline.css'/>" rel="stylesheet">
     <link href="<c:url value='resources/platacad/css/bootstrap-wysiwyg.css'/>" rel="stylesheet">
     <link href="<c:url value='resources/platacad/css/font-awesome.min.css'/>" rel="stylesheet">
+    <link href="<c:url value='resources/platacad/css/datepicker.css'/>" rel="stylesheet">
     
     <script src="<c:url value='resources/platacad/js/jquery.min.js'/>" type="text/javascript"></script>    
     <script src="<c:url value='resources/bootstrap/js/bootstrap.min.js'/>" type="text/javascript"></script>
@@ -18,6 +19,10 @@
     <script src="<c:url value='resources/platacad/js/timeline.js'/>" type="text/javascript"></script>
     
     <script src="<c:url value='resources/platacad/js/jquery.hotkeys.js'/>" type="text/javascript"></script> 
-    <script src="<c:url value='resources/platacad/js/bootstrap-wysiwyg.js'/>" type="text/javascript"></script>   
-    <title><t:message code="page.home.titulo" /></title>
+    <script src="<c:url value='resources/platacad/js/bootstrap-wysiwyg.js'/>" type="text/javascript"></script>  
+    <script src="<c:url value='resources/platacad/js/typeahead.min.js'/>" type="text/javascript"></script>
+    <script src="<c:url value='resources/platacad/js/bootstrap-datepicker.js'/>" type="text/javascript"></script>
+    <script src="<c:url value='resources/platacad/js/locale/bootstrap-datepicker.es.js'/>" type="text/javascript"></script>
+     
+    <title><t:message code="app.titulo.largo" /></title>
 </head>

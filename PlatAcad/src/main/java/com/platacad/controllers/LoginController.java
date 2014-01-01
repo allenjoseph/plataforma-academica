@@ -21,17 +21,19 @@ import com.platacad.model.entities.CursoAperturado;
 import com.platacad.model.entities.Matricula;
 import com.platacad.model.enums.TipoRolEnum;
 import com.platacad.services.GeneralService;
+import com.platacad.services.GeneralServiceInterface;
 import com.platacad.services.UsuarioService;
+import com.platacad.services.UsuarioServiceInterface;
 
 @Controller
 @Scope("session")
 public class LoginController {
 	
 	@Autowired
-    UsuarioService usuarioService;
+    UsuarioServiceInterface usuarioService;
 	
 	@Autowired
-    GeneralService generalService;
+    GeneralServiceInterface generalService;
 	
 	@Autowired
     UserInfo userInfo;
@@ -68,29 +70,39 @@ public class LoginController {
 	public void loadUserInfo() {
 		if(userInfo.getUser().getIdUsuarioPk() == null){
 			Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    	String userName = user.toString();
+	    	UserInfo.userId = user.toString();
 	    	if(user instanceof UserDetails){
-	    		userName = ((UserDetails) user).getUsername();
+	    		UserInfo.userId = ((UserDetails) user).getUsername();
 	    	}
-	    	userInfo.setUser(usuarioService.getUsuario(userName));
+	    	userInfo.setUser(usuarioService.getUsuario(UserInfo.userId));
 	    	userInfo.setInicioSesion(new Date());
 	    	
 	    	List<CursoAperturado> cursosAperturados = new ArrayList<CursoAperturado>();
 	    	
 	    	Collection<? extends GrantedAuthority> authorities = ((UserDetails) user).getAuthorities();
 	        for (GrantedAuthority grantedAuthority : authorities) {
+	        	userInfo.getUser().setTotalMensajes(usuarioService.getTotalMensajes(UserInfo.userId, 1));
+	        	
 	            if (grantedAuthority.getAuthority().equals(TipoRolEnum.ALUMNO.getDescripcion())) {
-	            	userInfo.getUser().setIsAlumno(Boolean.TRUE);
-	            	List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(1, userName);
+	            		            	
+	            	List<Matricula> cursosMatriculados = generalService.getCursosMatriculados(1, UserInfo.userId);
 	            	cursosAperturados = new ArrayList<CursoAperturado>();
 	    	        for(Matricula matricula : cursosMatriculados){
 	    	        	cursosAperturados.add(matricula.getIdCursoAperturadoFk());
 	    	        }
+	    	        userInfo.getUser().setTotalExamenes(usuarioService.getTotalExamenes(UserInfo.userId, new Date()));
+	    	        userInfo.getUser().setTotalTrabajos(usuarioService.getTotalTrabajos(UserInfo.userId, 1));
+	    	        userInfo.getUser().setIsAlumno(Boolean.TRUE);
+	    	        
 	            } else if (grantedAuthority.getAuthority().equals(TipoRolEnum.DOCENTE.getDescripcion())) {
+	            	
 	            	userInfo.getUser().setIsDocente(Boolean.TRUE);
-	            	cursosAperturados = generalService.getCursosACargo(1, userName);
+	            	cursosAperturados = generalService.getCursosACargo(1, UserInfo.userId);
+	            	
 	            } else if (grantedAuthority.getAuthority().equals(TipoRolEnum.ADMIN.getDescripcion())){
+	            	
 	            	userInfo.getUser().setIsAdministrativo(Boolean.TRUE);
+	            	
 	            }
 	            break;
 	        }

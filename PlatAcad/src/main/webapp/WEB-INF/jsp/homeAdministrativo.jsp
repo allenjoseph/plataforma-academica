@@ -14,7 +14,7 @@
 				</div>
 			</div>         
             <div class="row">
-                <div class="col-md-8" id="main">
+                <div class="col-md-8 main-content" id="main-administrativo">
                     <div> 
                     	<div class="panel panel-default">
 							<div class="panel-body">
@@ -40,7 +40,7 @@
 								</p>               
 							</div>
 							<div class="panel-footer">
-								<div class="footer-curso-info">
+								<div class="panel-footer-info">
 								</div>
 						   		<div class="footer-date-info">
 						       		<small><t:message code="label.default.fecha" /><c:out value=""/></small>

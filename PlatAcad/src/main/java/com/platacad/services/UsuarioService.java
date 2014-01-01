@@ -4,6 +4,9 @@
  */
 package com.platacad.services;
 
+import java.util.Date;
+import java.util.List;
+
 import com.platacad.business.UsuarioBusiness;
 import com.platacad.model.entities.Usuario;
 import com.platacad.to.UsuarioTO;
@@ -29,4 +32,19 @@ public class UsuarioService implements UsuarioServiceInterface{
         return usuarioBussiness.buscarUsuario(usuarioId);
     }
     
+    public Integer getTotalMensajes(String usuarioId, Integer estado){
+    	return usuarioBussiness.getTotalMensajes(usuarioId, estado);
+    }
+    
+    public Integer getTotalExamenes(String usuarioId, Date fecha){
+    	return usuarioBussiness.getTotalExamenes(usuarioId, fecha);
+    }
+    
+    public Integer getTotalTrabajos(String usuarioId, Integer estado){
+    	return usuarioBussiness.getTotalTrabajos(usuarioId, estado);
+    }
+    
+	public List<UsuarioTO> getUsuarios(String text) {
+		return usuarioBussiness.getUsuarios(text);
+	}
 }

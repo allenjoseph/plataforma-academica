@@ -14,12 +14,12 @@
 				</div>
 			</div>            
             <div class="row">
-                <div class="col-md-8" id="main">
+                <div class="col-md-8 main-content" id="main-examen">
                     <div>                        
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="page-header">
-                                    <h1>
+                                    <h1 class="page-header-main">
                                         <t:message code="page.examen.titulo"/>
                                         <i class="icon-envelope"></i>
                                     </h1>       

@@ -11,6 +11,10 @@ import com.platacad.model.entities.Matricula;
 import com.platacad.model.entities.TrabajoEncargado;
 import com.platacad.model.enums.TipoExamenEnum;
 import com.platacad.services.GeneralService;
+import com.platacad.services.GeneralServiceInterface;
+import com.platacad.services.UsuarioService;
+import com.platacad.services.UsuarioServiceInterface;
+import com.platacad.to.UsuarioTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -28,7 +34,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class BaseController {
     
     @Autowired
-    GeneralService generalService;
+    GeneralServiceInterface generalService;
+    
+    @Autowired
+    UsuarioServiceInterface usuarioService;
     
     @Autowired
     UserInfo userInfo;
@@ -68,4 +77,10 @@ public class BaseController {
         model.addObject("trabajo", new TrabajoEncargado());
         return model;
     }
+    
+    @RequestMapping(value = "get-usuarios.json", method = RequestMethod.GET)
+   	public @ResponseBody  List<UsuarioTO> getUsuarios() {
+		List<UsuarioTO> lista = usuarioService.getUsuarios("a");        
+		return lista;
+	}
 }

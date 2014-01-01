@@ -11,22 +11,29 @@ $(function(){
     	<div class="col-md-3">
     		<div class="media">
 				<a class="pull-left" href="#">
-			  		<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQMY6VYDh6rRwU5pf0mhYsP4nKHzsAePs8-Rge6gQR0gix6iH3qig" 
-			  		alt="" class="media-object img-thumbnail img-circle">
+					<c:if test="${user.isAlumno}">
+						<img src="<c:url value='resources/platacad/images/alumno.jpg'/>" alt="" class="media-object img-thumbnail img-circle">
+					</c:if>
+					<c:if test="${user.isDocente}">
+						<img src="<c:url value='resources/platacad/images/docente.jpg'/>" alt="" class="media-object img-thumbnail img-circle">
+					</c:if>
+					<c:if test="${user.isAdministrativo}">
+						<img src="<c:url value='resources/platacad/images/administrativo.jpg'/>" alt="" class="media-object img-thumbnail img-circle">
+					</c:if>			  		
 				</a>
 				<div class="media-body">
 					<ul class="list-group" id="list-user-details">						
 					  	<li class="list-group-item">
-					    	<span class="badge pull-left">14</span>
+					    	<span class="badge pull-left"><c:out value="${user.totalMensajes}"/></span>
 					    	<a href="#"><t:message code="panel.timeline.user.mensajes"/></a>
 					  	</li>
 					  	<c:if test="${user.isAlumno}">
 					  		<li class="list-group-item">
-						    	<span class="badge pull-left">4</span>
+						    	<span class="badge pull-left"><c:out value="${user.totalExamenes}"/></span>
 								<a href="#"><t:message code="panel.timeline.user.examenes"/></a>
 						  	</li>
 						  	<li class="list-group-item">
-						    	<span class="badge pull-left">8</span>
+						    	<span class="badge pull-left"><c:out value="${user.totalTrabajos}"/></span>
 						    	<a href="#"><t:message code="panel.timeline.user.trabajos"/></a>
 						  	</li>
 					  	</c:if>					  	

@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,13 +26,16 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.platacad.model.commons.UserInfo;
+
 /**
  *
  * @author allen
  */
 @Entity
+@EntityListeners(AuditLogger.class)
 @Table(name = "articulo", catalog = "platacad", schema = "")
-public class Articulo implements Serializable {
+public class Articulo implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,17 +49,9 @@ public class Articulo implements Serializable {
     @Lob
     @Column(name = "contenido")
     private byte[] contenido;
-    
-    @Column(name = "fecha_creacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaCreacion;
-    
-    @Column(name = "fecha_modificacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaModificacion;
-    
+           
     @Embedded
-    private Auditoria auditoria;    
+    private Auditoria auditoria = new Auditoria();
     
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id_usuario_pk")
     @ManyToOne
@@ -104,22 +100,6 @@ public class Articulo implements Serializable {
 
     public void setContenido(byte[] contenido) {
         this.contenido = contenido;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
     
     public Auditoria getAuditoria() {
@@ -170,5 +150,12 @@ public class Articulo implements Serializable {
 		this.estado = estado;
 	}
 
+	public void prePresist() {
+		auditoria.prePresist();
+	}
+
+	public void preUpdate() {
+		auditoria.preUpdate();
+	}
     
 }

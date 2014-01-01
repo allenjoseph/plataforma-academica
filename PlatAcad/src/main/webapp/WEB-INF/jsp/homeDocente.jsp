@@ -14,7 +14,7 @@
 				</div>
 			</div>         
             <div class="row">
-                <div class="col-md-8" id="main">
+                <div class="col-md-8 main-content" id="main-docente">
                     <div>               
                         <c:forEach items="${cursos}" var="curso">
                             <div class="panel panel-default">
@@ -48,7 +48,7 @@
 									</p>                                    
                                 </div>
                                 <div class="panel-footer">
-                                	<div class="footer-curso-info">
+                                	<div class="panel-footer-info">
                                 		<small><i class="icon-star"></i><c:out value="${curso.idCursoFk.creditos}"/></small>
                                 		<small><i class="icon-book"></i><c:out value="${curso.idCursoFk.tipoValue}"/></small>
                                 	</div>

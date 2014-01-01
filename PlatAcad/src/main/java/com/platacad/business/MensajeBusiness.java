@@ -5,9 +5,13 @@ import com.platacad.dao.MensajeDAO;
 import org.springframework.stereotype.Component;
 
 import com.platacad.model.entities.Mensaje;
+import com.platacad.repositories.MensajeRepository;
 import com.platacad.to.MensajeTO;
+import com.platacad.to.UsuarioTO;
 
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +21,9 @@ public class MensajeBusiness {
     @Autowired
     MensajeDAO mensajeDAO;
 
+    @Resource
+    MensajeRepository mensajeRepository;
+    
    public boolean insertarActualizaMensaje(Mensaje t) {
        return mensajeDAO.insertarActualizaMensaje(t);
    }
