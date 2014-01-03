@@ -15,15 +15,36 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="tab-one">
-        	<ul class="nav nav-pills nav-stacked">
-                <li>
-                    <div class="label-light-center">Sin Novedades</div>
-                </li>
-            </ul>
-        	<hr/>
-            <ul class="nav nav-pills nav-stacked">
+        	<div class="list-group" id="list-novedades">
+				<a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">NUEVO MENSAJE</h4>
+					<p class="list-group-item-text">Daniel Chunga, Cuando vienes a clases???</p>
+					<p><small class="label-light pull-left">Albert Einsten</small> <small class="label-light pull-right">Hace 20 minutos</small></p>
+				</a>
+				<a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">GEOMETRIA ANALITICA</h4>
+					<p class="list-group-item-text">Se registro examen para el dia 16 de enero del 2013.</p>
+					<p><small class="label-light pull-left">Albert Einsten</small> <small class="label-light pull-right">Hace 10 horas</small></p>
+				</a>
+				<a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">MATEMATICA I</h4>
+					<p class="list-group-item-text">Daniela Silva Yesang realizo nuevo aporte.</p>
+					<p><small class="label-light pull-left">Albert Einsten</small> <small class="label-light pull-right">Ayer</small></p>
+				</a>
+				<a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">QUIMICA GENERAL</h4>
+					<p class="list-group-item-text">Se registro examen para el dia 18 de febrero del 2013.</p>
+					<p><small class="label-light pull-left">Albert Einsten</small> <small class="label-light pull-right">Hace 3 dias</small></p>
+				</a>
+				<a href="#" class="list-group-item">
+					<h4 class="list-group-item-heading">FACULTAD DE MECATRONICA</h4>
+					<p class="list-group-item-text">Se registro evento para el dia 25 de marzo del 2013.</p>
+					<p><small class="label-light pull-left">Facultad de Mecatronica</small> <small class="label-light pull-right">Hace 7 dias</small></p>
+				</a>
+			</div>
+            <ul class="nav nav-pills nav-stacked" id="nav-listar">
             	<li>
-                    <a href="listar-mensajes.html">
+                    <a href="mensajes.html">
                         <t:message code="tab.actividad.listar.mensaje"/>
                     </a>
                 </li>
@@ -34,17 +55,17 @@
                 </li>
             	<c:if test="${user.isDocente or user.isAlumno}">            		
 	                <li>
-	                    <a href="listar-examenes.html">
+	                    <a href="examenes.html">
 	                        <t:message code="tab.actividad.listar.examen"/>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="listar-aportes.html">
+	                    <a href="aportes.html">
 	                        <t:message code="tab.actividad.listar.aporte"/>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="listar-trabajos.html">
+	                    <a href="trabajos.html">
 	                        <t:message code="tab.actividad.listar.trabajo"/>
 	                    </a>
 	                </li>            	
@@ -52,9 +73,17 @@
             </ul>           
         </div>
         <div class="tab-pane" id="tab-two">
-        	<input type="text" class="form-control" placeholder="Ingresa tu busqueda">
+        	<div id="panel-busqueda-documento">
+        		<input type="text" class="form-control" placeholder="Ingresa tu busqueda"/>
+        	</div>        	
         	<div class="sensitive-search-result"></div>
         </div>
-        <div class="tab-pane" id="tab-three"> tres </div>
+        <div class="tab-pane" id="tab-three">
+        	<ul class="nav nav-pills nav-stacked">
+                <li>
+                    <div class="label-light-center">En Implementacion</div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

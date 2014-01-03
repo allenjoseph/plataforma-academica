@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,14 +23,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
  * @author allen
  */
 @Entity
+@EntityListeners(AuditLogger.class)
 @Table(name = "examen", catalog = "platacad", schema = "")
-public class Examen implements Serializable {
+public class Examen implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +45,7 @@ public class Examen implements Serializable {
     private Date fechaExamen;
     
     @Embedded
-    private Auditoria auditoria;
+    private Auditoria auditoria = new Auditoria();
     
     @Column(name = "tipo_param")
     private Integer tipo;
@@ -57,6 +60,9 @@ public class Examen implements Serializable {
     @JoinColumn(name = "id_curso_aperturado_fk", referencedColumnName = "id_curso_aperturado_pk", nullable = false)
     @ManyToOne(optional = false)
     private CursoAperturado idCursoAperturadoFk;
+    
+    @Transient
+    private String tipoExamenValue;
 
     public Examen() {
     }
@@ -121,5 +127,20 @@ public class Examen implements Serializable {
 		this.estado = estado;
 	}
 
+	public String getTipoExamenValue() {
+		return tipoExamenValue;
+	}
+
+	public void setTipoExamenValue(String tipoExamenValue) {
+		this.tipoExamenValue = tipoExamenValue;
+	}
+
+	public void prePresist() {
+		auditoria.prePresist();
+	}
+
+	public void preUpdate() {
+		auditoria.preUpdate();
+	}
     
 }

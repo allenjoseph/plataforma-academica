@@ -14,12 +14,16 @@ public class AporteService implements AporteServiceInterface {
 	@Autowired
 	AporteBusiness aporteBusiness;
 
-	public void registrarAporte(Articulo aporte) {
-		aporteBusiness.registrarAporte(aporte);
+	public Articulo registrarAporte(Articulo aporte) {
+		return aporteBusiness.registrarAporte(aporte);
 	}
 
 	public List<Articulo> getAportes(Integer cursoId) {		
 		return aporteBusiness.getAportes(cursoId);
+	}
+
+	public List<Articulo> obtenerAportes() {		
+		return aporteBusiness.obtenerAportes();
 	}
 
 }

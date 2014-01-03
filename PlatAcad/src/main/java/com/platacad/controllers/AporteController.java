@@ -12,10 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.platacad.helpers.SystemMessage;
+import com.platacad.helpers.Util;
 import com.platacad.model.commons.UserInfo;
 import com.platacad.model.entities.Archivo;
 import com.platacad.model.entities.Articulo;
+import com.platacad.model.entities.CursoAperturado;
+import com.platacad.model.entities.TrabajoEncargado;
 import com.platacad.services.AporteServiceInterface;
 import com.platacad.services.UsuarioServiceInterface;
 
@@ -45,22 +51,39 @@ public class AporteController {
     }
     
     @RequestMapping("grabar-aporte.html")
-    public ModelAndView grabarAporte(@ModelAttribute("aporte") Articulo aporte){
-    	ModelAndView model = new ModelAndView("aporte");
-    	aporte.setIdUsuarioFk(userInfo.getUser());
-    	if(archivoAporte.getContenido() != null){
-    		aporte.setIdArchivoFk(archivoAporte);
-    	}    	
-    	aporteService.registrarAporte(aporte);
+    public View grabarAporte(@ModelAttribute("aporte") Articulo aporte){
+    	//try{
+    		aporte.setIdUsuarioFk(userInfo.getUser());
+        	if(archivoAporte.getContenido() != null){
+        		aporte.setIdArchivoFk(archivoAporte);
+        		Articulo articulo = aporteService.registrarAporte(aporte);
+        		Util.mensaje = "Se registro Aporte N° "+articulo.getIdArticuloPk()+" satisfactoriamente.";	
+        	}else{
+        		Util.error = SystemMessage.PROCESS_ERROR;
+        	}			
+		//}catch(Exception ex){
+			//Util.error = SystemMessage.PROCESS_ERROR;
+		//}		
+		return new RedirectView("aportes.html");
+    }
+    
+    @RequestMapping("aportes.html")
+    public ModelAndView listarTodosAportes(){
+    	ModelAndView model = Util.buildModel("listaAportes");
+    	List<Articulo> lista = aporteService.obtenerAportes();
+    	model.addObject("user", userInfo.getUser());
+    	model.addObject("aportes", lista);
+    	model.addObject("curso", new CursoAperturado());
+    	model.addObject("cursos", userInfo.getCursos());
     	return model;
     }
     
     @RequestMapping("listar-aportes.html")
     public ModelAndView listarAportes(@ModelAttribute("cursoId") Integer cursoId){
-    	ModelAndView model = new ModelAndView("listaAportes");
+    	ModelAndView model = new ModelAndView("listaAportesByCurso");
     	List<Articulo> lista = aporteService.getAportes(cursoId);
     	model.addObject("user", userInfo.getUser());
-    	model.addObject("aportes", lista);
+    	model.addObject("aportes", lista);    	
     	return model;
     }
     

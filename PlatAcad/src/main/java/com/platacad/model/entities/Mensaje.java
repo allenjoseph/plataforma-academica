@@ -67,6 +67,10 @@ public class Mensaje implements Serializable, Auditable {
 
     public Mensaje() {
     }
+    
+    public Mensaje(Usuario idUsuarioFk) {
+    	this.idUsuarioFk = idUsuarioFk;
+    }
 
     public Mensaje(Integer idMensajePk) {
         this.idMensajePk = idMensajePk;

@@ -1,7 +1,11 @@
 package com.platacad.business;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 
 import com.platacad.model.entities.TrabajoEncargado;
@@ -14,9 +18,13 @@ public class TrabajoBusiness {
 	@Resource
 	TrabajoRepository trabajoRepository;
 
-	public void registrarTrabajo(TrabajoEncargado trabajoEncargado) {
+	public TrabajoEncargado registrarTrabajo(TrabajoEncargado trabajoEncargado) {
 		trabajoEncargado.setEstado(EstadoEntidad.ACTIVO.getCodigo());
-		trabajoRepository.save(trabajoEncargado);
+		return trabajoRepository.save(trabajoEncargado);
+	}
+	
+	public List<TrabajoEncargado> obtenerTrabajos(){
+		return trabajoRepository.findAll(new Sort(Direction.ASC,"fechaPresentacion"));
 	}
 
 }

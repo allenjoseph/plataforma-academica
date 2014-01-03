@@ -24,7 +24,7 @@
                                         <i class="icon-envelope"></i>
                                     </h1>       
                                 </div>                                
-                                <f:form id="form-registro" method="post" action="registrar-examen.html" commandName="examen" >
+                                <f:form id="form-registro-examen" method="post" action="registrar-examen.html" commandName="examen" >
                                     <div class="form-horizontal" role="form">
                                     	<div class="form-group">
                                             <label for="inputFecha" class="col-lg-2 control-label">
@@ -37,17 +37,6 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputFecha" class="col-lg-2 control-label">
-                                            	<t:message code="page.examen.label.fecha"/>
-                                            </label>
-                                            <div class="col-lg-10">
-                                            	<f:hidden path="fechaExamen" class="hidden-date"/>
-                                            	<t:message code="page.examen.placeholder.fecha" var="placeholder_fecha"/>
-                                            	<input class="form-control datepicker" id="inputFecha" 
-                                            	placeholder="${placeholder_fecha}"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="inputTipo" class="col-lg-2 control-label">
                                             	<t:message code="page.examen.label.tipo"/>
                                             </label>
@@ -57,6 +46,19 @@
                                             	</f:select>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="inputFecha" class="col-lg-2 control-label">
+                                            	<t:message code="page.examen.label.fecha"/>
+                                            </label>
+                                            <div class="col-lg-10">
+                                            	<f:hidden path="fechaExamen" id="fecha-examen" />  
+                                            	<t:message code="page.examen.placeholder.fecha" var="placeholder_fecha"/>                                        	
+                                            	<div class="input-group date" id="dpFechaExamen" data-date-format="DD, d MM yy">
+													<input class="form-control" type="text" readonly="" placeholder="${placeholder_fecha}"/>
+													<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+												</div>
+                                            </div>
+                                        </div>                                        
                                         <div class="form-group">
                                             <label for="inputDescripcion" class="col-lg-2 control-label">
                                             	<t:message code="page.examen.label.descripcion"/>
@@ -88,5 +90,19 @@
             <jsp:include page="template/footer.jsp"/>
         </div>
         <jsp:include page="template/dialogoConfirmacion.jsp"/>
+        <script type="text/javascript">
+			$(function(){
+				$(".input-group.date").datepicker({ 
+					autoclose: true, 
+					todayHighlight: true,
+					language: 'es'
+				});
+
+				$("#form-registro-examen").on('submit', function(e){		
+					var date = $('#dpFechaExamen').datepicker('getDate');
+				 	$('#fecha-examen').val(date);
+				});
+			});
+        </script>
     </body>
 </html>
