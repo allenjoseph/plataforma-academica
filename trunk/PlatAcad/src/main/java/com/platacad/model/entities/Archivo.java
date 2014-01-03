@@ -12,6 +12,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -28,11 +31,12 @@ import javax.persistence.TemporalType;
  * @author allen
  */
 @Entity
+@EntityListeners(AuditLogger.class)
 @Table(name = "archivo", catalog = "platacad", schema = "")
-public class Archivo implements Serializable {
+public class Archivo implements Serializable, Auditable {
     private static final long serialVersionUID = 1L;
-    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_archivo_pk", nullable = false)
     private Integer idArchivoPk;
@@ -55,7 +59,7 @@ public class Archivo implements Serializable {
     private List<DetalleTrabajo> detalleTrabajoList;
     
     @Embedded
-    private Auditoria auditoria;
+    private Auditoria auditoria = new Auditoria();
     
     @Column(name = "estado_param")
     private Integer estado;
@@ -130,7 +134,14 @@ public class Archivo implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+    
+    public void prePresist() {
+		this.auditoria.prePresist();
+	}
 
+	public void preUpdate() {
+		this.auditoria.preUpdate();		
+	}
 
     
 }

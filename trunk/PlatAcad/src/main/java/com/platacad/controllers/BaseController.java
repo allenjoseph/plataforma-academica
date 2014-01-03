@@ -59,25 +59,6 @@ public class BaseController {
         return model;
     }
     
-    @RequestMapping("examen.html")
-    public ModelAndView articulo(){
-        ModelAndView model = new ModelAndView("examen");
-        model.addObject("user", userInfo.getUser());
-        model.addObject("cursos", userInfo.getCursos());        
-        model.addObject("tipos_examen",TipoExamenEnum.list);
-        model.addObject("examen", new Examen());
-        return model;
-    }
-    
-    @RequestMapping("trabajo.html")
-    public ModelAndView trabajoEncargado(){
-        ModelAndView model = new ModelAndView("trabajoEncargado");
-        model.addObject("user",  userInfo.getUser());
-        model.addObject("cursos", userInfo.getCursos());
-        model.addObject("trabajo", new TrabajoEncargado());
-        return model;
-    }
-    
     @RequestMapping(value = "get-usuarios.json", method = RequestMethod.GET)
    	public @ResponseBody  List<UsuarioTO> getUsuarios() {
 		List<UsuarioTO> lista = usuarioService.getUsuarios("a");        

@@ -5,6 +5,7 @@ import com.platacad.dao.MensajeDAO;
 import org.springframework.stereotype.Component;
 
 import com.platacad.model.entities.Mensaje;
+import com.platacad.model.entities.Usuario;
 import com.platacad.repositories.MensajeRepository;
 import com.platacad.to.MensajeTO;
 import com.platacad.to.UsuarioTO;
@@ -39,5 +40,9 @@ public class MensajeBusiness {
     public List<MensajeTO> getListaMensaje(String cod) {
         return mensajeDAO.getListaMensaje(cod);
     }
+
+	public List<Mensaje> obtenerMensajes(Usuario user) {		
+		return mensajeRepository.findByIdUsuarioDestinoFk(user);
+	}
 
 }

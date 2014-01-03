@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.platacad.business.MensajeBusiness;
 import com.platacad.model.entities.Mensaje;
+import com.platacad.model.entities.Usuario;
 import com.platacad.to.MensajeTO;
 import com.platacad.to.UsuarioTO;
 
@@ -30,6 +31,10 @@ public class MensajeService implements MensajeServiceInterface{
         
         public List<MensajeTO> listarMensaje(String cod) {
 		return mensajeBusiness.getListaMensaje(cod);
+	}
+
+	public List<Mensaje> obtenerMensajes(Usuario user) {
+		return mensajeBusiness.obtenerMensajes(user);
 	}  
 
 }

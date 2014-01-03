@@ -43,8 +43,6 @@
                                             	<t:message code="page.mensaje.placeholder.para" var="placeholder_para"/>
                                             	<f:input path="idUsuarioDestinoFk.idUsuarioPk" cssClass="form-control" 
                                             	id="inputDestinatario" placeholder="${placeholder_para}"/>
-                                            	<input type="text" id="inputAutocomplete" 
-                                            	data-url="<c:url value='get-usuarios.json'/>"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -87,14 +85,7 @@
             </div>
             <jsp:include page="template/footer.jsp"/>
         </div>
-        <script type="text/javascript">
-	        $(function(){		        
-	        	$('#inputAutocomplete').typeahead({                                
-	          	  name: 'user',                                                          
-	          	  prefetch: $('#inputAutocomplete').data("url"),                                         
-	          	  limit: 10                                                                   
-	          	});
-            });        
+        <script type="text/javascript">     
         </script>
     </body>
 </html>

@@ -29,8 +29,8 @@
 				</c:if>
 				<div>
 					<div>
-						<f:form id="form-lista-aportes" method="post"
-								action="filtrar-aportes.html" commandName="curso">
+						<f:form id="form-lista-trabajos" method="post"
+								action="filtrar-trabajos.html" commandName="curso">
 							<div class="form-horizontal" role="form">
 								<div class="form-group">
 	                                <div class="col-lg-12">
@@ -54,11 +54,11 @@
 						</f:form>
 					</div>
 					<div class="list-group">			
-						<c:forEach items="${aportes}" var="aporte">						
+						<c:forEach items="${trabajos}" var="trabajo">						
 							<a href="#" class="list-group-item">
-								<h3>${aporte.titulo}</h3>								
+								<h3>${trabajo.titulo}</h3>								
 								<p class="label-light">
-									${aporte.idCursoAperturadoFk.idCursoFk.nombre}
+									${trabajo.idCursoAperturadoFk.idCursoFk.nombre}
 									<span class="label label-success pull-right">PENDIENTE</span>
 								</p>
 							</a>
