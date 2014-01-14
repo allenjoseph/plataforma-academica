@@ -29,7 +29,7 @@ var Timeline = function (container, date) {
         var eventList = this.container.find("ul");
         var eventItems = eventList.find("li");
         for (var i = 0; i < eventItems.length; i++) {
-            var date = new Date(eventItems[i].getAttribute("title"));
+            var date = new Date(Number(eventItems[i].getAttribute("title")));
             if (date == "Invalid Date")
                 continue;
             this.events[i] = {
@@ -38,6 +38,7 @@ var Timeline = function (container, date) {
                 day: date.getDate(),
                 month: date.getMonth(),
                 year: date.getFullYear(),
+                referencia: jQuery(eventItems[i]).data("referencia"),
                 content: jQuery(eventItems[i]).text()
             };
         }
@@ -81,8 +82,13 @@ var Timeline = function (container, date) {
         var cssClass = "";
         cssClass += (this.isToday(data.number)) ? "today" : "";
         cssClass += (data.events.length) ? " event" : "";
-        topRow.append("<li><div class=\"" + cssClass + "\">" + data.name + "</div></li>");
-        bottomRow.append("<li><div class=\"" + cssClass + "\">" + data.number + "</div></li>");
+        var contenido="",titulo="";
+        if(data.events.length > 0){
+        	contenido = "<span>"+data.events[0].content+": </span>"+data.events[0].referencia;
+        	titulo = "Tienes " + data.events.length + " Evento";
+        }        
+        topRow.append("<li><div class=\"date-item-top " + cssClass + "\">" + data.name + "</div></li>");
+        bottomRow.append("<li><div class=\"date-item-bottom " + cssClass + "\" data-title=\"" + titulo + "\" data-placement=\"bottom\" data-html=\"true\" data-content=\""+ contenido +"\">" + data.number + "</div></li>");
         nameEl = topRow.find("div:last");
         numbEl = bottomRow.find("div:last");
         if (data.events.length == 0)
@@ -94,10 +100,10 @@ var Timeline = function (container, date) {
         var leaveClosure = function (e) {
             self.onMouseLeave(e);
         };
-        nameEl.bind("mouseenter", data, enterClosure);
+        /*nameEl.bind("mouseenter", data, enterClosure);
         numbEl.bind("mouseenter", data, enterClosure);
         nameEl.bind("mouseleave", data, leaveClosure);
-        numbEl.bind("mouseleave", data, leaveClosure);
+        numbEl.bind("mouseleave", data, leaveClosure);*/
     }
     this.setupArrows = function () {
         var dateString = this.monthsOfYear[this.date.getMonth()] + " " + this.date.getFullYear();
@@ -181,7 +187,8 @@ var Timeline = function (container, date) {
     }, this.isToday = function (dayNumber) {
         var today = new Date();
         return (today.getDate() == dayNumber && today.getFullYear() == this.date.getFullYear() && today.getMonth() == this.date.getMonth());
-    }, this.onMouseEnter = function (event) {        
+    },
+    this.onMouseEnter = function (event) {        
         var left = $(event.target).offset().left;
         var width = $(event.target).outerWidth();
         this.bubble.setContent(event.data.events);

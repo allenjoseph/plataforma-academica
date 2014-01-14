@@ -34,7 +34,9 @@
 							<div class="form-horizontal" role="form">
 								<div class="form-group">
 	                                <div class="col-lg-12">
+	                                	<t:message code="label.default.cursos" var="todos_cursos"/>
 	                                	<f:select path="idCursoAperturado" cssClass="form-control">
+	                                		<f:option value="0" label="${todos_cursos}"/>
 											<f:options items="${cursos}" itemValue="idCursoAperturado"
 												itemLabel="idCursoFk.nombre" />
 										</f:select>

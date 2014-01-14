@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +53,7 @@ public class AporteController {
     
     @RequestMapping("grabar-aporte.html")
     public View grabarAporte(@ModelAttribute("aporte") Articulo aporte){
-    	//try{
+    	try{
     		aporte.setIdUsuarioFk(userInfo.getUser());
         	if(archivoAporte.getContenido() != null){
         		aporte.setIdArchivoFk(archivoAporte);
@@ -61,10 +62,20 @@ public class AporteController {
         	}else{
         		Util.error = SystemMessage.PROCESS_ERROR;
         	}			
-		//}catch(Exception ex){
-			//Util.error = SystemMessage.PROCESS_ERROR;
-		//}		
+		}catch(Exception ex){
+			Util.error = SystemMessage.PROCESS_ERROR;
+		}		
 		return new RedirectView("aportes.html");
+    }
+    
+    @RequestMapping(value = "ver-aporte.html")
+    public ModelAndView verAporte(@ModelAttribute("aporteSelected") Articulo articulo){
+    	ModelAndView model = new ModelAndView("aporteView");
+    	Articulo aporte = aporteService.getAporte(articulo.getIdArticuloPk());
+    	aporte.setContenidoValue(new String(aporte.getContenido()));
+    	model.addObject("aporte", aporte);
+    	model.addObject("user", userInfo.getUser());
+    	return model;
     }
     
     @RequestMapping("aportes.html")
@@ -83,7 +94,8 @@ public class AporteController {
     	ModelAndView model = new ModelAndView("listaAportesByCurso");
     	List<Articulo> lista = aporteService.getAportes(cursoId);
     	model.addObject("user", userInfo.getUser());
-    	model.addObject("aportes", lista);    	
+    	model.addObject("aportes", lista);  
+    	model.addObject("aporteSelected", new Articulo());
     	return model;
     }
     

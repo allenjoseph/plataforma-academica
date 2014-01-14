@@ -141,14 +141,11 @@ public class Mensaje implements Serializable, Auditable {
 	}
 
 	public void prePresist() {
-		auditoria.setCreacionFecha(new Date());
-		auditoria.setCreacionUsuario("0512013000");
-		
+		auditoria.prePresist();
 	}
 
 	public void preUpdate() {
-		auditoria.setModificacionFecha(new Date());
-		auditoria.setModificacionUsuario("0512013000");		
+		auditoria.preUpdate();	
 	}
     
 }

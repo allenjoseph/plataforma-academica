@@ -25,9 +25,14 @@ public class MensajeBusiness {
     @Resource
     MensajeRepository mensajeRepository;
     
-   public boolean insertarActualizaMensaje(Mensaje t) {
-       return mensajeDAO.insertarActualizaMensaje(t);
+   public Mensaje enviarMensaje(Mensaje mensaje) {
+       return mensajeRepository.save(mensaje);
    }
+   
+   
+   
+   
+   
    
     public boolean eliminarMensaje(int cod) {
         return mensajeDAO.eliminarMensaje(cod);

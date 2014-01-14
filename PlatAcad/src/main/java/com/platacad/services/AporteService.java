@@ -26,4 +26,8 @@ public class AporteService implements AporteServiceInterface {
 		return aporteBusiness.obtenerAportes();
 	}
 
+	public Articulo getAporte(Integer aporteId) {
+		return aporteBusiness.getAporte(aporteId);
+	}
+
 }

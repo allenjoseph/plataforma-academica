@@ -26,6 +26,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.platacad.model.commons.UserInfo;
 
@@ -71,6 +72,9 @@ public class Articulo implements Serializable, Auditable {
 
     @Column(name = "estado_param")
     private Integer estado;
+    
+    @Transient
+    private String contenidoValue;
     
     public Articulo() {
     }
@@ -157,6 +161,14 @@ public class Articulo implements Serializable, Auditable {
 
 	public void preUpdate() {
 		auditoria.preUpdate();
+	}
+
+	public String getContenidoValue() {
+		return contenidoValue;
+	}
+
+	public void setContenidoValue(String contenidoValue) {
+		this.contenidoValue = contenidoValue;
 	}
     
 }

@@ -3,7 +3,19 @@
 
 <script type="text/javascript">
 $(function(){
-	var timeline = new Timeline("timeline", new Date());
+	$.getJSON( "get-timelime.json", function( data ) {
+		var items = [];
+		$.each( data, function( key, val ) {
+			items.push( "<li title='" + val.fecha +"' data-referencia='"+val.referencia+"'>" + val.titulo + "</li>" );
+		});
+		 
+		$("<ul/>", {
+			"class": "timeline-list",
+			html: items.join( "" )
+		}).appendTo("#timeline");
+		var timeline = new Timeline("timeline", new Date());
+		$('#timeline .timeline_bottom .event').popover({trigger: 'hover','placement': 'bottom'});
+	});	
 });
 </script>
 <div id="panel-timeline" class="panel panel-default">
@@ -25,16 +37,16 @@ $(function(){
 					<ul class="list-group" id="list-user-details">						
 					  	<li class="list-group-item">
 					    	<span class="badge pull-left"><c:out value="${user.totalMensajes}"/></span>
-					    	<a href="#"><t:message code="panel.timeline.user.mensajes"/></a>
+					    	<a href="mensajes.html"><t:message code="panel.timeline.user.mensajes"/></a>
 					  	</li>
 					  	<c:if test="${user.isAlumno}">
 					  		<li class="list-group-item">
 						    	<span class="badge pull-left"><c:out value="${user.totalExamenes}"/></span>
-								<a href="#"><t:message code="panel.timeline.user.examenes"/></a>
+								<a href="examenes.html"><t:message code="panel.timeline.user.examenes"/></a>
 						  	</li>
 						  	<li class="list-group-item">
 						    	<span class="badge pull-left"><c:out value="${user.totalTrabajos}"/></span>
-						    	<a href="#"><t:message code="panel.timeline.user.trabajos"/></a>
+						    	<a href="trabajos.html"><t:message code="panel.timeline.user.trabajos"/></a>
 						  	</li>
 					  	</c:if>					  	
 					</ul>

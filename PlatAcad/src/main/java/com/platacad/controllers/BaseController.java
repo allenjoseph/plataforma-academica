@@ -4,19 +4,14 @@
  */
 package com.platacad.controllers;
 
+import com.platacad.helpers.Util;
 import com.platacad.model.commons.UserInfo;
-import com.platacad.model.entities.CursoAperturado;
-import com.platacad.model.entities.Examen;
-import com.platacad.model.entities.Matricula;
-import com.platacad.model.entities.TrabajoEncargado;
-import com.platacad.model.enums.TipoExamenEnum;
-import com.platacad.services.GeneralService;
+import com.platacad.model.entities.Usuario;
 import com.platacad.services.GeneralServiceInterface;
-import com.platacad.services.UsuarioService;
 import com.platacad.services.UsuarioServiceInterface;
 import com.platacad.to.UsuarioTO;
+import com.platacad.to.TimelineItemTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +36,7 @@ public class BaseController {
     
     @Autowired
     UserInfo userInfo;
-   
+
     @RequestMapping("inicio.html")
     public ModelAndView home(){
     	String inicio = "logon";
@@ -64,4 +59,19 @@ public class BaseController {
 		List<UsuarioTO> lista = usuarioService.getUsuarios("a");        
 		return lista;
 	}
+    
+    @RequestMapping(value = "get-timelime.json", method = RequestMethod.GET)
+   	public @ResponseBody  List<TimelineItemTO> getTimeLine() {
+    	Usuario user = userInfo.getUser();
+    	user.setCursoAperturadoList(userInfo.getCursos());
+		List<TimelineItemTO> lista = generalService.getTimeline(user);        
+		return lista;
+	}
+    
+    @RequestMapping("eventos.html")
+    public ModelAndView listarEventos(){
+    	ModelAndView model = Util.buildModel("listaEventos");
+    	model.addObject("user", userInfo.getUser());
+    	return model;
+    }
 }

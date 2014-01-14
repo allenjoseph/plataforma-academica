@@ -13,9 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.platacad.helpers.SystemMessage;
 import com.platacad.helpers.Util;
 import com.platacad.model.commons.UserInfo;
 import com.platacad.model.entities.Mensaje;
+import com.platacad.model.entities.TrabajoEncargado;
 import com.platacad.model.entities.Usuario;
 import com.platacad.services.MensajeService;
 import com.platacad.services.MensajeServiceInterface;
@@ -52,19 +54,32 @@ public class MensajeController {
         return model;
     }
 	
-	
-	
-	
-	
-	
-	
-	
-	 
-    @RequestMapping("enviarMensaje.html")
-    public View enviarMensaje(@ModelAttribute("mensaje") Mensaje mensaje){
-        mensajeService.enviarMensaje(mensaje);    	
-        return new RedirectView("listarMensaje.html");        
+    @RequestMapping("enviar-mensaje.html")
+    public View enviarMensaje(@ModelAttribute("mensaje") Mensaje m){
+    	try{
+			Mensaje mensaje = mensajeService.enviarMensaje(m);  
+			Util.mensaje = "Se envio el mensaje a "+mensaje.getIdUsuarioDestinoFk().getFullName()+" satisfactoriamente.";	
+		}catch(Exception ex){
+			Util.error = SystemMessage.PROCESS_ERROR;
+		}
+        return new RedirectView("mensajes.html");        
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     @RequestMapping("listarMensaje.html")
     public ModelAndView listarMensaje(){

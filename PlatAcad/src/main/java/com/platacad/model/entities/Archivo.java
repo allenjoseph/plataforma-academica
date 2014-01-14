@@ -141,7 +141,5 @@ public class Archivo implements Serializable, Auditable {
 
 	public void preUpdate() {
 		this.auditoria.preUpdate();		
-	}
-
-    
+	}    
 }

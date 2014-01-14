@@ -8,7 +8,12 @@ import java.util.List;
 
 public interface MensajeServiceInterface {
 	
-	public boolean enviarMensaje(Mensaje mensaje);
+	public Mensaje enviarMensaje(Mensaje mensaje);
+	
+	public List<Mensaje> obtenerMensajes(Usuario user);
+	
+	
+	
 
         public boolean eliminarMensaje(int cod) ;
         
@@ -16,5 +21,5 @@ public interface MensajeServiceInterface {
         
         public List<MensajeTO> listarMensaje(String cod);
 
-		public List<Mensaje> obtenerMensajes(Usuario user);
+		
 }

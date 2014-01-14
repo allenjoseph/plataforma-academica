@@ -32,21 +32,6 @@ public class MensajeDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	public boolean insertarActualizaMensaje(Mensaje t) {
-		boolean b = false;
-		try {
-			if(t.getIdMensajePk() == null){
-				em.persist(t);
-			}else{
-				em.merge(t);
-			}			
-			b = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return b;
-	}
-
 	public boolean eliminarMensaje(int cod) {
 		boolean b = false;
 		try {
