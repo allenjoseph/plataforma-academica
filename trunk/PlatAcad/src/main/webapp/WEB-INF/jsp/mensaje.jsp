@@ -24,7 +24,7 @@
                                         <i class="icon-envelope"></i>
                                     </h1>       
                                 </div>                                
-                                <f:form  id="form-mensaje" method="post" action="enviarMensaje.html" commandName="mensaje" >
+                                <f:form  id="form-mensaje" method="post" action="enviar-mensaje.html" commandName="mensaje" >
                                     <div class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <label for="inputUsuario" class="col-lg-2 control-label">

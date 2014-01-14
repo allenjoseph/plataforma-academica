@@ -11,4 +11,6 @@ public interface AporteServiceInterface {
 	public List<Articulo> getAportes(Integer cursoId);
 
 	public List<Articulo> obtenerAportes();
+
+	public Articulo getAporte(Integer aporteId);
 }

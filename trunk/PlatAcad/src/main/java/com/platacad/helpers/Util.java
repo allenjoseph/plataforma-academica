@@ -11,6 +11,8 @@ public class Util {
 		ModelAndView model = new ModelAndView(vista);
 		model.addObject("error", error);
 		model.addObject("mensaje", mensaje);
+		error = "";
+		mensaje = "";
 		return model;
 	}
 

@@ -624,7 +624,8 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           node = _ref[_i];
-          _results.push(node.textContent = message);
+          _results.push(node.textContent = 'Error al validar el archivo');
+          //_results.push(node.textContent = message);
         }
         return _results;
       },

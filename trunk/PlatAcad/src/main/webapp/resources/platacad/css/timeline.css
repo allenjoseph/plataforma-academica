@@ -16,7 +16,7 @@
     float: right;
 }
 
-.timeline_arrows div {
+.timeline_arrows div{
     float: left;
 }
 
@@ -104,40 +104,47 @@
     padding: 0px 2px 3px 2px !important;
 }
 
-.timeline_top li div, 
-.timeline_bottom li div {
+.timeline_top li div.date-item-top, 
+.timeline_bottom li div.date-item-bottom {
     text-transform: uppercase;
     text-align: center;
     width: 20px;
     color: #333;
 }
 
-.timeline_top div {
+.timeline_top div.date-item-top {
     background: url(../images/normal.gif) no-repeat left top;
     padding: 3px 0px 5px 0px !important;
 } 
 
-.timeline_bottom div {
+.timeline_bottom div.date-item-bottom {
     background: url(../images/normal.gif) no-repeat left bottom;
     padding: 5px 0px 3px 0px !important;
 }
 
-.timeline_top .today {
+.timeline_top div.date-item-top.today {
     background: url(../images/today.gif) no-repeat left top;
     padding: 3px 0px 5px 0px !important;
     color: #fff;
 } 
 
-.timeline_bottom .today {
+.timeline_bottom div.date-item-bottom.today {
     background: url(../images/today.gif) no-repeat left bottom;
     padding: 5px 0px 3px 0px !important;
     color: #fff;
 }
 
-.timeline_top .event, 
-.timeline_bottom .event {
-    color: #C1E20D;
+.timeline_top div.date-item-top.event{
     cursor: pointer;
+    background: url(../images/evento.gif) no-repeat left top;
+    padding: 3px 0px 5px 0px !important;
+    color: #fff;
+}
+.timeline_bottom div.date-item-bottom.event {
+    cursor: pointer;
+    background: url(../images/evento.gif) no-repeat left bottom;
+    padding: 5px 0px 3px 0px !important;
+    color: #fff;
 }
 
 .timeline_bubble {
@@ -198,4 +205,18 @@
     color: #fff;
     font-weight: normal;
     margin: 3px 0px 0px 0px;
+}
+
+.timeline_bottom .popover{
+	color : #333;
+}
+.timeline_bottom .popover .popover-title{
+	font-size:11px;
+	text-align: left;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	font-weight:bold; 
+}
+.timeline_bottom .popover .popover-content span{
+	font-weight:bold; 
 }

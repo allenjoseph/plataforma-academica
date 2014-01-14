@@ -1,6 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" uri="http://www.springframework.org/tags" %>
 
+<script type="text/javascript">
+$(function(){
+	$("#input-filtrar-documento").on("keypress",function(){		
+		var input_text = $(this).val().trim();
+			if(input_text != ''){
+				$.getJSON("get-documentos.json",{texto : input_text})
+				.done(function( data ) {
+					$("#sensitive-search-result").html("");
+					var items = [];
+					$.each( data, function( key, val ) {
+						items.push( "<a href=\"#!\" class=\"list-group-item\">" + val.titulo + "</a>" );
+					});
+					 
+					$("<div/>", {
+						"class": "list-group",
+						html: items.join( "" )
+					}).appendTo("#sensitive-search-result");
+			});	
+		} else{
+			$("#sensitive-search-result").html("");
+		}
+	});
+});
+</script>
 <div class="col-md-4" id="side-main">
     <ul class="nav nav-tabs nav-justified" id="nav-tab-main">
         <li class="active">
@@ -49,7 +73,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="listar-mensajes.html">
+                    <a href="eventos.html">
                         <t:message code="tab.actividad.listar.evento"/>
                     </a>
                 </li>
@@ -74,9 +98,14 @@
         </div>
         <div class="tab-pane" id="tab-two">
         	<div id="panel-busqueda-documento">
-        		<input type="text" class="form-control" placeholder="Ingresa tu busqueda"/>
+        		<input type="text" class="form-control" placeholder="Ingresa tu busqueda" id="input-filtrar-documento"/>
         	</div>        	
-        	<div class="sensitive-search-result"></div>
+        	<div id="sensitive-search-result"></div>
+        	<ul class="nav nav-pills nav-stacked">
+                <li>
+                    <div class="label-light-center"><a href="documentos.html">Todos los Documentos</a></div>
+                </li>
+            </ul>
         </div>
         <div class="tab-pane" id="tab-three">
         	<ul class="nav nav-pills nav-stacked">

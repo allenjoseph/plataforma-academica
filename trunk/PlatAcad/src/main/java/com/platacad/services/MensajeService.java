@@ -17,9 +17,20 @@ public class MensajeService implements MensajeServiceInterface{
 	@Autowired
 	private MensajeBusiness mensajeBusiness;
 
-	public boolean enviarMensaje(Mensaje mensaje) {
-		return mensajeBusiness.insertarActualizaMensaje(mensaje);
+	public Mensaje enviarMensaje(Mensaje mensaje) {
+		return mensajeBusiness.enviarMensaje(mensaje);
 	}
+	
+	public List<Mensaje> obtenerMensajes(Usuario user) {
+		return mensajeBusiness.obtenerMensajes(user);
+	} 
+	
+	
+	
+	
+	
+	
+	
         
         public boolean eliminarMensaje(int cod) {
 		return mensajeBusiness.eliminarMensaje(cod);
@@ -33,8 +44,6 @@ public class MensajeService implements MensajeServiceInterface{
 		return mensajeBusiness.getListaMensaje(cod);
 	}
 
-	public List<Mensaje> obtenerMensajes(Usuario user) {
-		return mensajeBusiness.obtenerMensajes(user);
-	}  
+	 
 
 }

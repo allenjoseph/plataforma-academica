@@ -21,8 +21,9 @@
 							<div class="panel-body">
 								<div class="page-header">
 									<h1>
-										<a href="#!"><c:out value="${aporte.titulo}" /></a> <i
-											class="icon-folder-close"></i>
+										<a href="#!" class="enlace-ver-aporte" data-id="<c:out value="${aporte.idArticuloPk}"/>">
+											<c:out value="${aporte.titulo}" />
+										</a> <i class="icon-folder-close"></i>
 									</h1>
 								</div>
 								<p>
@@ -44,10 +45,22 @@
 						</div>
 					</c:forEach>
 				</div>
+				<f:form id="form-ver-aporte" method="post" action="ver-aporte.html" commandName="aporteSelected">
+					<f:hidden path="idArticuloPk" id="form-ver-aporte-id"/>
+				</f:form>
 			</div>
 			<jsp:include page="template/sidemain.jsp" />
 		</div>
 		<jsp:include page="template/footer.jsp" />
 	</div>
+	<script type="text/javascript">
+		$(function(){
+			$("a.enlace-ver-aporte").on("click",function(){
+				var id = $(this).data("id");
+				$("#form-ver-aporte-id").val(id);
+				$("#form-ver-aporte").submit();
+			});
+		});
+	</script>
 </body>
 </html>

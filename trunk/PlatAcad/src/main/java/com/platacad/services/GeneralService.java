@@ -14,6 +14,7 @@ import com.platacad.to.CursoAsignadoTO;
 import com.platacad.to.CursoMatriculadoTO;
 import com.platacad.to.CursoTO;
 import com.platacad.to.TipoTO;
+import com.platacad.to.TimelineItemTO;
 
 import java.util.List;
 
@@ -40,6 +41,10 @@ public class GeneralService implements GeneralServiceInterface{
 
 	public List<CursoAperturado> getCursosACargo(Integer ciclo, String usuario) {
 		return generalBusiness.getCursosACargo(ciclo, usuario);
+	}
+
+	public List<TimelineItemTO> getTimeline(Usuario user) {
+		return generalBusiness.getTimeline(user);
 	}
     
     

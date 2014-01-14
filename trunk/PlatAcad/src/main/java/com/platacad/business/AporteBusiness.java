@@ -44,4 +44,8 @@ public class AporteBusiness {
 	public List<Articulo> obtenerAportes() {
 		return aporteRepository.findAll(new Sort(Direction.DESC, "idArticuloPk"));
 	}
+
+	public Articulo getAporte(Integer aporteId) {
+		return aporteRepository.findOne(aporteId);
+	}
 }
